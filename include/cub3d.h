@@ -1,5 +1,5 @@
-#ifndef PROJECT_H
-# define PROJECT_H
+#ifndef CUB3D_H
+# define CUB3D_H
 
 #include "ft_printf.h"
 #include "get_next_line.h"

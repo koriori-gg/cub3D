@@ -1,35 +1,44 @@
-NAME = project
-
-CC = cc
-
-CFLAGS = -I include -I libft/include -Wall -Wextra -Werror
-
-RM = rm -f
-
-SRCS = src/main.c
+NAME = cub3D
 
 LIBFT_DIR = libft
-
 LIBFT_OBJ = $(LIBFT_DIR)/libft.a
 
-OBJS = $(SRCS:.c=.o)
+MLX_DIR = minilibx-linux
+MLX_OBJ = $(MLX_DIR)/libmlx.a
 
-.c.o:
-	$(CC) $(CFLAGS)  $(INCLUDE)-c $< -o $(<:.c=.o)
+SRC = src/main.c \
 
-$(NAME): $(OBJS) $(LIBFT_OBJ)
-	$(CC) $(CFLAGS) -o $(NAME) -L. $(LIBFT_OBJ) $(OBJS) 
+OBJ = $(SRC:.c=.o)
+
+CC = gcc
+CFLAGS = -I minilibx-linux -I include -I libft/include -I /opt/X11/include -Wall -Wextra -Werror
+
+ifeq ($(shell uname), Darwin)
+XFLAGS = -L/usr/X11R6/lib -lX11 -lXext -framework OpenGL -framework AppKit
+else
+XFLAGS = -Lmlx -Llibft -L/usr/X1R6/lib -lXext -lX11 -lm
+endif
+
+all: $(NAME)
+
+$(NAME): $(OBJ) $(LIBFT_OBJ) $(MLX_OBJ)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(LIBFT_OBJ) $(MLX_OBJ) $(XFLAGS)
 
 $(LIBFT_OBJ):
 	make -C $(LIBFT_DIR)
 
-all: $(NAME)
+$(MLX_OBJ):
+	make -C $(MLX_DIR)
+
 
 clean:
-	$(RM) $(OBJS)
+	$(RM) $(OBJ)
 	make fclean -C $(LIBFT_DIR)
+	make clean -C $(MLX_DIR)
 
 fclean: clean
 	$(RM) $(NAME)
 
 re: fclean all
+
+.PONEY: all clean fclean re
