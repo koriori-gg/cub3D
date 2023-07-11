@@ -53,13 +53,9 @@ B_SRC = src/ft_lstnew_bonus.c \
 			src/ft_lstiter_bonus.c \
 			src/ft_lstmap_bonus.c
 
-PRINTF_SRC = ft_printf/src/ft_printf.c \
-	ft_printf/src/ft_printf_utils1.c \
-	ft_printf/src/ft_printf_utils2.c
-
 GNL_SRC = get_next_line/get_next_line.c
 
-SRC = $(M_SRC) $(B_SRC) $(PRINTF_SRC) $(GNL_SRC)
+SRC = $(M_SRC) $(B_SRC) $(GNL_SRC)
 
 OBJDIR = obj
 

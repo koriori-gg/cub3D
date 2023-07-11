@@ -1,6 +1,8 @@
 #include "cub3d.h"
 
-int main(void)
+int main(int argc, char **argv)
 {
-	ft_printf("test\n");
+	(void)argc;
+	(void)argv;
+	printf("hoge\n");
 }
