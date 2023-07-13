@@ -4,19 +4,21 @@ LIBFT_DIR = libft
 LIBFT_OBJ = $(LIBFT_DIR)/libft.a
 
 MLX_DIR = minilibx-linux
-MLX_OBJ = $(MLX_DIR)/libmlx.a
+MLX_OBJ = $(MLX_DIR)/libmlx_Darwin.a
 
 SRC = src/main.c \
 
 OBJ = $(SRC:.c=.o)
 
 CC = gcc
-CFLAGS = -I minilibx-linux -I include -I libft/include -I /opt/X11/include -Wall -Wextra -Werror
+CFLAGS = -I minilibx-linux -I include -I libft/include -I /opt/X11/include
 
 ifeq ($(shell uname), Darwin)
 XFLAGS = -L/usr/X11R6/lib -lX11 -lXext -framework OpenGL -framework AppKit
+MLX_OBJ = $(MLX_DIR)/libmlx_Darwin.a
 else
 XFLAGS = -Lmlx -Llibft -L/usr/X1R6/lib -lXext -lX11 -lm
+MLX_OBJ = $(MLX_DIR)/libmlx.a #TODO:check必要
 endif
 
 all: $(NAME)
