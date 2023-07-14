@@ -4,8 +4,8 @@
 # include "ft_printf.h"
 # include "get_next_line.h"
 # include "libft.h"
-# include "../minilibx-linux/mlx_int.h"
-# include "../minilibx-linux/mlx.h"
+# include "mlx_int.h"
+# include "mlx.h"
 
 # define KEY_PRESS		2
 # define RED_CLOSS		17
