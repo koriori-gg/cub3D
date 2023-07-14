@@ -13,12 +13,28 @@ void	init_struct(t_game *game)
 	game->win = mlx_new_window(game->mlx, 1000, 1000, "cub3D");
 }
 
+int input_key(int keycode, t_game *game)
+{
+	if (keycode == KEY_ESC)
+		close_game(game);
+	else if (keycode == KEY_UP || keycode == KEY_W)
+		printf("up\n");
+	else if (keycode == KEY_LEFT || keycode == KEY_A)
+		printf("left\n");
+	else if (keycode == KEY_DOWN || keycode == KEY_S)
+		printf("down\n");
+	else if (keycode == KEY_RIGHT || keycode == KEY_D)
+		printf("right\n");
+	return (0);
+}
+
 int main(void)
 {
 	t_game	game;
 
+	printf("hoge\n");
 	init_struct(&game);
-	// mlx_key_hook(game->win, input_key, &game);
+	mlx_key_hook(game.win, input_key, &game);
 	mlx_hook(game.win, RED_CLOSS, 0, &close_game, &game);
 	mlx_loop(game.mlx);
 }
