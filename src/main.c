@@ -40,11 +40,12 @@ int input_key(int keycode, t_game *game)
 
 // }
 
-int main(void)
+int main(int argc, char **argv)
 {
 	t_game	game;
 
-	printf("hgoe\n");
+	printf("%d\n", argc);
+	validate_map(argc, argv);
 	init_struct(&game);
 	mlx_key_hook(game.win, input_key, &game);
 	mlx_hook(game.win, RED_CLOSS, 0, &close_game, &game);
