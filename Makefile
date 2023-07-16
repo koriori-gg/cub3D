@@ -11,7 +11,7 @@ SRC = src/main.c \
 OBJ = $(SRC:.c=.o)
 
 CC = gcc
-CFLAGS = -I minilibx-linux -I include -I libft/include -I /opt/X11/include
+CFLAGS = -I minilibx-linux -I include -I libft/include -I /opt/X11/include #-Wall -Wextra -Werror
 
 ifeq ($(shell uname), Darwin)
 XFLAGS = -L/usr/X11R6/lib -lX11 -lXext -framework OpenGL -framework AppKit
