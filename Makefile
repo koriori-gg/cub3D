@@ -7,11 +7,14 @@ MLX_DIR = minilibx-linux
 MLX_OBJ = $(MLX_DIR)/libmlx_Darwin.a
 
 SRC = src/main.c \
-	src/validate_map.c \
+	src/validate_argument.c \
 	src/error/error.c \
 	src/error/print_error.c \
 	src/error/print_error_utils1.c \
 	src/error/print_error_utils2.c \
+	src/map/map.c \
+	src/map/get_map.c \
+	src/utils/print_debug.c \
 
 
 OBJ = $(SRC:.c=.o)

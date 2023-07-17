@@ -16,9 +16,19 @@ static void	validate_file(char *arg)
 	close(fd);
 }
 
-void	validate_map(int argc, char **argv)
+static void	validate_map(char **argv)
+{
+	t_map	*map;
+
+	get_map(&map, argv);
+	print_map(map);
+	ft_free_map(map);
+}
+
+void	validate_argument(int argc, char **argv)
 {
 	if (argc < 2)
 		error_exit(AGUMENT_ERROR);
 	validate_file(argv[1]);//TODO: change 複数map対応
+	validate_map(argv);
 }

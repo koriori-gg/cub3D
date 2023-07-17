@@ -1,5 +1,11 @@
 #include "cub3d.h"
 
+// __attribute__((destructor))
+// void    destructor(void)
+// {
+//     system("leaks cub3d");
+// }
+
 int	close_game(t_game *game)
 {
 	mlx_destroy_window(game->mlx, game->win);
@@ -45,7 +51,7 @@ int main(int argc, char **argv)
 	t_game	game;
 
 	printf("%d\n", argc);
-	validate_map(argc, argv);
+	validate_argument(argc, argv);
 	init_struct(&game);
 	mlx_key_hook(game.win, input_key, &game);
 	mlx_hook(game.win, RED_CLOSS, 0, &close_game, &game);

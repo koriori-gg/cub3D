@@ -35,6 +35,12 @@ enum e_message
 	MLX_ERROR
 };
 
+typedef struct s_map {
+	char			*row;
+	struct s_map	*next;
+	struct s_map	*prev;
+}				t_map;
+
 typedef struct s_player {
 	double	position_x;//現在いる座標
 	double	position_y;
@@ -48,12 +54,13 @@ typedef struct s_game {
 	void		*mlx;
 	void		*win;
 	t_player	*player;
+	t_map		*map;
 	long		time;
 	long		oldtime;
 }				t_game;
 
-//validate_map
-void	validate_map(int argc, char **argv);
+//validate_argument
+void	validate_argument(int argc, char **argv);
 //error
 void	error_exit(int signal);
 int		print_error(const char *format, ...);
@@ -63,7 +70,15 @@ ssize_t	ft_putnbr_stderr(int n);
 ssize_t	ft_nbrdigits(int nbr, int n);
 ssize_t	utoa_stderr(unsigned long nbr, unsigned long n, char *asc);
 ssize_t	ft_putvoid_stderr(void *s);
-
+//map
+t_map	*ft_mapnew(char *str);
+int		ft_mapsize(t_map *map);
+void	ft_mapadd_back(t_map **map, t_map *new);
+void	ft_free_map(t_map *map);
+void	get_map(t_map **map, char **argv);
+//utils
+void	print_argv(char **argv);
+void	print_map(t_map *map);
 
 //練習用
 // #define mapWidth 24
