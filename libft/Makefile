@@ -41,7 +41,7 @@ M_SRC = src/ft_atoi.c \
 	src/ft_putstr_fd.c \
 	src/ft_putendl_fd.c \
 	src/ft_putnbr_fd.c \
-	src/ft_striteri.c
+	src/ft_striteri.c \
 
 B_SRC = src/ft_lstnew_bonus.c \
 			src/ft_lstadd_front_bonus.c \
@@ -53,9 +53,11 @@ B_SRC = src/ft_lstnew_bonus.c \
 			src/ft_lstiter_bonus.c \
 			src/ft_lstmap_bonus.c
 
+ADD_SRC = src/free_double_pointer.c \
+
 GNL_SRC = get_next_line/get_next_line.c
 
-SRC = $(M_SRC) $(B_SRC) $(GNL_SRC)
+SRC = $(M_SRC) $(B_SRC) $(ADD_SRC) $(GNL_SRC)
 
 OBJDIR = obj
 
