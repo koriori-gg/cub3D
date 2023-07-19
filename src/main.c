@@ -50,7 +50,7 @@ int main(int argc, char **argv)
 {
 	t_game	game;
 
-	printf("%d\n", argc);
+	printf("argc : %d\n", argc);
 	validate_argument(argc, argv);
 	init_struct(&game);
 	mlx_key_hook(game.win, input_key, &game);

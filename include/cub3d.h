@@ -1,11 +1,11 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# include "ft_printf.h"
 # include "get_next_line.h"
 # include "libft.h"
 # include "mlx.h"
 # include "mlx_int.h"
+#include <stdbool.h>
 
 # define KEY_PRESS		2
 # define RED_CLOSS		17
@@ -32,7 +32,8 @@ enum e_message
 	RECTANGLE_ERROR,
 	UNABLETOGOAL_ERROR,
 	IMAGE_ERROR,
-	MLX_ERROR
+	MLX_ERROR,
+	MALLOC_ERROR
 };
 
 typedef struct s_map {
@@ -40,6 +41,22 @@ typedef struct s_map {
 	struct s_map	*next;
 	struct s_map	*prev;
 }				t_map;
+
+typedef struct s_rgb {
+	int	red;
+	int	green;
+	int	blue;
+}				t_rgb;
+
+typedef struct s_mapinfo {
+	char	*north_texture;
+	char	*south_texture;
+	char	*west_texture;
+	char	*east_texture;
+	t_rgb	*floor_color;
+	t_rgb	*ceiling_color;
+	t_map	*map;
+}				t_mapinfo;
 
 typedef struct s_player {
 	double	position_x;//現在いる座標
@@ -54,31 +71,29 @@ typedef struct s_game {
 	void		*mlx;
 	void		*win;
 	t_player	*player;
-	t_map		*map;
+	t_mapinfo	*map_info;
 	long		time;
 	long		oldtime;
 }				t_game;
 
-//validate_argument
+//validate_argument and map
 void	validate_argument(int argc, char **argv);
+void	validate_map(char **argv);
 //error
 void	error_exit(int signal);
-int		print_error(const char *format, ...);
-ssize_t	ft_putchar_stderr(char c);
-ssize_t	ft_putstr_stderr(char *s);
-ssize_t	ft_putnbr_stderr(int n);
-ssize_t	ft_nbrdigits(int nbr, int n);
-ssize_t	utoa_stderr(unsigned long nbr, unsigned long n, char *asc);
-ssize_t	ft_putvoid_stderr(void *s);
+void	print_error(char *str);
 //map
 t_map	*ft_mapnew(char *str);
 int		ft_mapsize(t_map *map);
 void	ft_mapadd_back(t_map **map, t_map *new);
 void	ft_free_map(t_map *map);
-void	get_map(t_map **map, char **argv);
+t_map	*mapdup(t_map *map);
+void	get_map_info(t_mapinfo **map_info, char **argv);
+void	free_map_info(t_mapinfo *map_info);
 //utils
 void	print_argv(char **argv);
 void	print_map(t_map *map);
+void	print_map_info(t_mapinfo *map_info);
 
 //練習用
 // #define mapWidth 24

@@ -16,15 +16,6 @@ static void	validate_file(char *arg)
 	close(fd);
 }
 
-static void	validate_map(char **argv)
-{
-	t_map	*map;
-
-	get_map(&map, argv);
-	print_map(map);
-	ft_free_map(map);
-}
-
 void	validate_argument(int argc, char **argv)
 {
 	if (argc < 2)

@@ -33,3 +33,15 @@ void	print_map(t_map *map)
 		i++;
 	}
 }
+
+void	print_map_info(t_mapinfo *map_info)
+{
+	printf("== map info ==\n");
+	printf("NO: %s\n", map_info->north_texture);
+	printf("SO: %s\n", map_info->south_texture);
+	printf("WE: %s\n", map_info->west_texture);
+	printf("EA: %s\n", map_info->east_texture);
+	// printf("F :r %d, g %d, b %d\n", map_info->floor_color->red, map_info->floor_color->green, map_info->floor_color->blue);
+	// printf("C :r %d, g %d, b %d\n", map_info->ceiling_color->red, map_info->ceiling_color->green, map_info->ceiling_color->blue);
+	print_map(map_info->map);
+}

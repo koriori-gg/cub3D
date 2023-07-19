@@ -61,3 +61,22 @@ void	ft_free_map(t_map *map)
 		free(ptr);
 	}
 }
+
+t_map	*mapdup(t_map *map)
+{
+	t_map	*ret;
+	size_t	i;
+
+	i = 0;
+	while (map != NULL)
+	{
+		if (i == 0)
+			ret = ft_mapnew(ft_strdup(map->row));
+		else
+			ft_mapadd_back(&ret, ft_mapnew(ft_strdup(map->row)));
+		i++;
+		map = map->next;
+	}
+	return (ret);
+}
+
