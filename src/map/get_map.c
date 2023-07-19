@@ -17,27 +17,20 @@ static bool	is_elements_info(char *str)//TODO:mapにNOとかが入ってるパ�
 	return (false);
 }
 
-// void	set_rgb(t_rgb **color, char *str)
-// {
-// 	char **rgb;
+t_rgb	*set_rgb(char *str)
+{
+	t_rgb *color;
+	char **rgb;
 
-// 	rgb = ft_split(&str[2],',');//スペースの数に上限がないならspaceでsplitしてsplit
-// 	//TODO: check split len
-// 	print_argv(rgb);
-// 	printf("rgb %s %s %s\n", rgb[0], rgb[1], rgb[2]);
-// 	printf("%d\n", ft_atoi(rgb[0]));
-// 	(*color)->red = ft_atoi(rgb[0]);
-// 	printf("rgb %s %s %s\n", rgb[0], rgb[1], rgb[2]);
-// 	if (!(*color)->red)
-// 		error_exit(MALLOC_ERROR);//add free
-// 	(*color)->green =ft_atoi(rgb[1]);
-// 	if (!(*color)->green)
-// 		error_exit(MALLOC_ERROR);//add free
-// 	(*color)->blue = ft_atoi(rgb[2]);
-// 	if (!(*color)->blue)
-// 		error_exit(MALLOC_ERROR);//add free
-// 	free_double_pointer(rgb);
-// }
+	color = (t_rgb *)ft_calloc(sizeof(t_rgb), 1);
+	rgb = ft_split(&str[2],',');//スペースの数に上限がないからspaceでsplitしてsplit
+	//TODO: check split len
+	color->red = ft_atoi(rgb[0]);
+	color->green =ft_atoi(rgb[1]);
+	color->blue = ft_atoi(rgb[2]);
+	free_double_pointer(rgb);
+	return (color);
+}
 
 static char	*join_line_feed(char *str)
 {
@@ -48,46 +41,42 @@ static char	*join_line_feed(char *str)
 	return (new);
 }
 
-void	add_mapinfo(t_mapinfo **map_info, char *str)
+void	add_mapinfo(t_mapinfo *map_info, char *str)
 {
-	printf("add %s\n", str);
 	if (ft_strncmp(str,"NO", 2) == 0)
-		(*map_info)->north_texture = str;
+		map_info->north_texture = str;
 	if (ft_strncmp(str,"SO", 2) == 0)
-		(*map_info)->south_texture = str;
+		map_info->south_texture = str;
 	if (ft_strncmp(str,"WE", 2) == 0)
-		(*map_info)->west_texture = str;
+		map_info->west_texture = str;
 	if (ft_strncmp(str,"EA", 2) == 0)
-		(*map_info)->east_texture = str;
+		map_info->east_texture = str;
 	if (ft_strncmp(str,"F", 1) == 0)
-		// set_rgb(&(*map_info)->floor_color, str);
-		return ;
+		map_info->floor_color = set_rgb(str);
 	if (ft_strncmp(str,"C", 1) == 0)
-		// set_rgb(&(*map_info)->ceiling_color, str);
-		return ;
+		map_info->ceiling_color = set_rgb(str);
 }
 
-void	add_map(t_mapinfo **map_info, char *str, size_t i)
+void	add_map(t_mapinfo *map_info, char *str, size_t i)
 {
 	t_map *map;
 
-	map = (*map_info)->map;
+	map = map_info->map;
 	if (!ft_strchr(str, '\n'))
 		str = join_line_feed(str);
-	printf("map %s\n", str);
-	if (i == 1)
-		map = ft_mapnew(str);
-	else
-		ft_mapadd_back(&map, ft_mapnew(str));
+	ft_mapadd_back(&map, ft_mapnew(str));
 }
 
 //TODO: check leak
-void	get_map_info(t_mapinfo **map_info, char **argv)
+t_mapinfo	*get_map_info(char **argv)
 {
-	int		fd;
-	char	*str;
-	size_t	i;
+	t_mapinfo	*map_info;
+	int			fd;
+	char		*str;
+	size_t		i;
 
+	map_info = (t_mapinfo *)ft_calloc(sizeof(t_mapinfo), 1);
+	map_info->map = (t_map *)ft_calloc(sizeof(t_map), 1);
 	i = 1;
 	fd = open(argv[1], O_RDONLY);
 	str = get_next_line(fd);
@@ -97,13 +86,13 @@ void	get_map_info(t_mapinfo **map_info, char **argv)
 	{
 		if (is_elements_info(str))
 			add_mapinfo(map_info, str);
-		// else
-		// {
-		// 	printf("Hoge\n");
-		// 	add_map(map_info, str, i);//strをポインタで渡した方がいい?
-		// 	i++;
-		// }
+		else
+		{
+			add_map(map_info, str, i);//strをポインタで渡した方がいい?
+			i++;
+		}
 		str = get_next_line(fd);
 	}
 	close(fd);
+	return (map_info);
 }
