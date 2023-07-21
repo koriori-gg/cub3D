@@ -99,5 +99,5 @@ void	validate_map(char **argv)
 	// contains_unnecessary(map, " 01NSEW\n");
 	// check_surrounded(map);
 	// able_to_goal(map);
-	free_map_info(&map_info);
+	free_map_info(map_info);
 }
