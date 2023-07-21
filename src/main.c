@@ -13,7 +13,7 @@ int	close_game(t_game *game)
 	exit(0);
 }
 
-void	init_struct(t_game *game)
+void	init_struct(t_game *game, char **argv)
 {
 	// game->player->position_x = 22;
 	// game->player->position_y = 12;
@@ -23,6 +23,7 @@ void	init_struct(t_game *game)
 	// game->player->plane_y = 2;
 	game->time = 0;
 	game->oldtime = 0;
+	game->map_info = init_mapinfo(argv);
 	game->mlx = mlx_init();
 	game->win = mlx_new_window(game->mlx, 1000, 1000, "cub3D");
 }
@@ -52,7 +53,7 @@ int main(int argc, char **argv)
 
 	printf("argc : %d\n", argc);
 	validate_argument(argc, argv);
-	init_struct(&game);
+	init_struct(&game, argv);
 	mlx_key_hook(game.win, input_key, &game);
 	mlx_hook(game.win, RED_CLOSS, 0, &close_game, &game);
 	// mlx_loop_hook(game.mlx, main_loop, &game);

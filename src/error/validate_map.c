@@ -93,11 +93,11 @@ void	validate_map(char **argv)
 {
 	t_mapinfo	*map_info;
 
-	map_info = init_map_info(argv);
+	map_info = init_mapinfo(argv);
 	print_map_info(map_info);
 	exists_a_player(map_info->map);
 	contains_unnecessary(map_info->map, " 01NSEW\n");
-	// check_surrounded(map);
-	// able_to_goal(map);
+	// check_surrounded(map_info->map);
+	// able_to_goal(map_info->map,);
 	free_map_info(map_info);
 }

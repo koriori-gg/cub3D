@@ -1,22 +1,5 @@
 #include "cub3d.h"
 
-static bool	is_elements_info(char *str)//TODO:mapにNOとかが入ってるパターンを考慮
-{
-	if (ft_strncmp(str,"NO", 2) == 0)
-		return (true);
-	if (ft_strncmp(str,"SO", 2) == 0)
-		return (true);
-	if (ft_strncmp(str,"WE", 2) == 0)
-		return (true);
-	if (ft_strncmp(str,"EA", 2) == 0)
-		return (true);
-	if (ft_strncmp(str,"F", 1) == 0)
-		return (true);
-	if (ft_strncmp(str,"C", 1) == 0)
-		return (true);
-	return (false);
-}
-
 t_rgb	*set_rgb(char *str)
 {
 	t_rgb *color;
@@ -68,7 +51,7 @@ void	add_map(t_mapinfo *map_info, char *str, size_t i)
 }
 
 //TODO: check leak
-t_mapinfo	*init_map_info(char **argv)
+t_mapinfo	*init_mapinfo(char **argv)
 {
 	t_mapinfo	*map_info;
 	int			fd;
