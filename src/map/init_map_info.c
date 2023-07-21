@@ -68,7 +68,7 @@ void	add_map(t_mapinfo *map_info, char *str, size_t i)
 }
 
 //TODO: check leak
-t_mapinfo	*get_map_info(char **argv)
+t_mapinfo	*init_map_info(char **argv)
 {
 	t_mapinfo	*map_info;
 	int			fd;

@@ -88,7 +88,7 @@ int		ft_mapsize(t_map *map);
 void	ft_mapadd_back(t_map **map, t_map *new);
 void	ft_free_map(t_map *map);
 t_map	*mapdup(t_map *map);
-t_mapinfo	*get_map_info(char **argv);
+t_mapinfo	*init_map_info(char **argv);
 void	free_map_info(t_mapinfo *map_info);
 //utils
 void	print_argv(char **argv);

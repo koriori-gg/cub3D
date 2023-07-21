@@ -93,7 +93,7 @@ void	validate_map(char **argv)
 {
 	t_mapinfo	*map_info;
 
-	map_info = get_map_info(argv);
+	map_info = init_map_info(argv);
 	print_map_info(map_info);
 	exists_a_player(map_info->map);
 	contains_unnecessary(map_info->map, " 01NSEW\n");

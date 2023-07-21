@@ -12,7 +12,7 @@ SRC = src/main.c \
 	src/error/able_to_goal.c \
 	src/error/error.c \
 	src/map/map.c \
-	src/map/get_map.c \
+	src/map/init_map_info.c \
 	src/map/map_info.c \
 	src/utils/print_debug.c \
 
