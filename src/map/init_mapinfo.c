@@ -42,12 +42,12 @@ void	add_mapinfo(t_mapinfo *map_info, char *str)
 
 void	add_map(t_mapinfo *map_info, char *str, size_t i)
 {
-	t_map *map;
-
-	map = map_info->map;
 	if (!ft_strchr(str, '\n'))
 		str = join_line_feed(str);
-	ft_mapadd_back(&map, ft_mapnew(str));
+	if (i == 1)
+			map_info->map = ft_mapnew(str);
+		else
+			ft_mapadd_back(&(map_info->map), ft_mapnew(str));
 }
 
 //TODO: check leak
@@ -59,7 +59,6 @@ t_mapinfo	*init_mapinfo(char **argv)
 	size_t		i;
 
 	map_info = (t_mapinfo *)ft_calloc(sizeof(t_mapinfo), 1);
-	map_info->map = (t_map *)ft_calloc(sizeof(t_map), 1);
 	i = 1;
 	fd = open(argv[1], O_RDONLY);
 	str = get_next_line(fd);
@@ -70,10 +69,7 @@ t_mapinfo	*init_mapinfo(char **argv)
 		if (is_elements_info(str))
 			add_mapinfo(map_info, str);
 		else
-		{
-			add_map(map_info, str, i);//strをポインタで渡した方がいい?
-			i++;
-		}
+			add_map(map_info, str, i++);//strをポインタで渡した方がいい?
 		str = get_next_line(fd);
 	}
 	close(fd);
