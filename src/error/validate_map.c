@@ -51,7 +51,7 @@ static void	contains_unnecessary(t_map *map, char *chars)
 	{
 		i = 0;
 		str = map->row;
-		while (str[i])
+		while (str && str[i])
 		{
 			if (!ft_strchr(chars, str[i]))
 			{
@@ -95,8 +95,8 @@ void	validate_map(char **argv)
 
 	map_info = get_map_info(argv);
 	print_map_info(map_info);
-	// exists_a_player(map_info->map);
-	// contains_unnecessary(map, " 01NSEW\n");
+	exists_a_player(map_info->map);
+	contains_unnecessary(map_info->map, " 01NSEW\n");
 	// check_surrounded(map);
 	// able_to_goal(map);
 	free_map_info(map_info);
