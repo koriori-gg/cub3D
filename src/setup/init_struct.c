@@ -5,7 +5,7 @@ static void	init_player(t_game *game)
 	game->player = (t_player *)ft_calloc(1, sizeof(t_player));
 	if (!game->player)
 		error_exit(MALLOC_ERROR);
-	game->player->position_x = 12;
+	game->player->position_x = 12;//本来はmapから読み取る必要あり
 	game->player->position_y = 5;
 	game->player->direction_x = -1;
 	game->player->direction_y = 0;

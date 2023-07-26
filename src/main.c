@@ -28,10 +28,11 @@ int input_key(int keycode, t_game *game)
 	return (0);
 }
 
-// int	main_loop(t_game *game)
-// {
-// 	return (0);
-// }
+int	main_loop(t_game *game)
+{
+	calculate(game);
+	return (0);
+}
 
 int main(int argc, char **argv)
 {

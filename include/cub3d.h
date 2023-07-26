@@ -97,6 +97,8 @@ void		print_map(t_map *map);
 void		print_map_info(t_mapinfo *map_info);
 //setup
 void		init_struct(t_game *game, char **argv);
+//calculate
+void		calculate(t_game *game);
 
 //練習用
 // #define mapWidth 24
