@@ -6,7 +6,7 @@ LIBFT_OBJ = $(LIBFT_DIR)/libft.a
 MLX_DIR = ../minilibx-linux
 MLX_OBJ = $(MLX_DIR)/libmlx_Darwin.a
 
-SRC = ../01/main.c \
+SRC = main.c \
 
 OBJ = $(SRC:.c=.o)
 
