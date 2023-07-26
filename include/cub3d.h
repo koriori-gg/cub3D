@@ -65,6 +65,8 @@ typedef struct s_player {
 	double	direction_y;
 	double	plane_x;//カメラ
 	double	plane_y;
+	double	move_speed;
+	double	rot_speed;
 }				t_player;
 
 typedef struct s_game {
@@ -72,29 +74,29 @@ typedef struct s_game {
 	void		*win;
 	t_player	*player;
 	t_mapinfo	*map_info;
-	long		time;
-	long		oldtime;
 }				t_game;
 
 //validate_argument and map
-void	validate_argument(int argc, char **argv);
-void	validate_map(char **argv);
+void		validate_argument(int argc, char **argv);
+void		validate_map(char **argv);
 //error
-void	error_exit(int signal);
-void	print_error(char *str);
+void		error_exit(int signal);
+void		print_error(char *str);
 //map
-t_map	*ft_mapnew(char *str);
-int		ft_mapsize(t_map *map);
-void	ft_mapadd_back(t_map **map, t_map *new);
-void	ft_free_map(t_map *map);
-t_map	*mapdup(t_map *map);
+t_map		*ft_mapnew(char *str);
+int			ft_mapsize(t_map *map);
+void		ft_mapadd_back(t_map **map, t_map *new);
+void		ft_free_map(t_map *map);
+t_map		*mapdup(t_map *map);
 t_mapinfo	*init_mapinfo(char **argv);
-void	free_map_info(t_mapinfo *map_info);
-bool	is_elements_info(char *str);
+void		free_map_info(t_mapinfo *map_info);
+bool		is_elements_info(char *str);
 //utils
-void	print_argv(char **argv);
-void	print_map(t_map *map);
-void	print_map_info(t_mapinfo *map_info);
+void		print_argv(char **argv);
+void		print_map(t_map *map);
+void		print_map_info(t_mapinfo *map_info);
+//setup
+void		init_struct(t_game *game, char **argv);
 
 //練習用
 // #define mapWidth 24

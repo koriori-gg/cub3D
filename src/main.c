@@ -13,21 +13,6 @@ int	close_game(t_game *game)
 	exit(0);
 }
 
-void	init_struct(t_game *game, char **argv)
-{
-	// game->player->position_x = 22;
-	// game->player->position_y = 12;
-	// game->player->direction_x = -1;
-	// game->player->direction_y = 0;
-	// game->player->plane_x = 0;
-	// game->player->plane_y = 2;
-	game->time = 0;
-	game->oldtime = 0;
-	game->map_info = init_mapinfo(argv);
-	game->mlx = mlx_init();
-	game->win = mlx_new_window(game->mlx, 1000, 1000, "cub3D");
-}
-
 int input_key(int keycode, t_game *game)
 {
 	if (keycode == KEY_ESC)
@@ -44,7 +29,8 @@ int input_key(int keycode, t_game *game)
 }
 
 // int	main_loop(t_game *game)
-
+// {
+// 	return (0);
 // }
 
 int main(int argc, char **argv)

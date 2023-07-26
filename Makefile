@@ -15,6 +15,7 @@ SRC = src/main.c \
 	src/map/init_mapinfo.c \
 	src/map/mapinfo_operator.c \
 	src/utils/print_debug.c \
+	src/setup/init_struct.c \
 
 
 OBJ = $(SRC:.c=.o)
