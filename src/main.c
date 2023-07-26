@@ -42,6 +42,6 @@ int main(int argc, char **argv)
 	init_struct(&game, argv);
 	mlx_key_hook(game.win, input_key, &game);
 	mlx_hook(game.win, RED_CLOSS, 0, &close_game, &game);
-	// mlx_loop_hook(game.mlx, main_loop, &game);
+	mlx_loop_hook(game.mlx, main_loop, &game);
 	mlx_loop(game.mlx);
 }

@@ -18,7 +18,7 @@ static void	init_player(t_game *game)
 void	init_struct(t_game *game, char **argv)
 {
 	init_player(game);
-	game->map_info = init_mapinfo(argv);
+	game->map_info = init_mapinfo(argv);//initのやり方統一した方がいい??
 	game->mlx = mlx_init();
 	game->win = mlx_new_window(game->mlx, 1000, 1000, "cub3D");
 }

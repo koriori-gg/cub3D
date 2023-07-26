@@ -59,6 +59,8 @@ t_mapinfo	*init_mapinfo(char **argv)
 	size_t		i;
 
 	map_info = (t_mapinfo *)ft_calloc(sizeof(t_mapinfo), 1);
+	if (!map_info)
+		error_exit(MALLOC_ERROR);
 	i = 1;
 	fd = open(argv[1], O_RDONLY);
 	str = get_next_line(fd);

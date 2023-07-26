@@ -21,7 +21,7 @@ void	print_map(t_map *map)
 
 	i = 0;
 	printf("--map--\n");
-	map = map->next;
+	map = map->next;//変更する
 	while (map)
 	{
 		if (i < 10)
