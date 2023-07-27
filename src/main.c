@@ -39,7 +39,7 @@ int main(int argc, char **argv)
 	t_game	game;
 
 	printf("argc : %d\n", argc);
-	validate_argument(argc, argv);
+	// validate_argument(argc, argv);
 	init_struct(&game, argv);
 	mlx_key_hook(game.win, input_key, &game);
 	mlx_hook(game.win, RED_CLOSS, 0, &close_game, &game);
