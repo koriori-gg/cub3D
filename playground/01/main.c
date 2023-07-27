@@ -170,6 +170,13 @@ int	key_press(int key, t_info *info)
 	return (0);
 }
 
+int	close_game(t_info *info)
+{
+	mlx_destroy_window(info->mlx, info->win);
+	//TODO: add free
+	exit(0);
+}
+
 int	main(void)
 {
 	t_info info;
@@ -187,6 +194,7 @@ int	main(void)
 	info.win = mlx_new_window(info.mlx, width, height, "mlx");
 
 	mlx_loop_hook(info.mlx, &main_loop, &info);
-	mlx_hook(info.win, X_EVENT_KEY_PRESS, 0, &key_press, &info);
+	mlx_hook(info.win, X_EVENT_KEY_PRESS, 1L<<0, &key_press, &info);
+	mlx_hook(info.win, RED_CLOSS, 0, &close_game, &info);
 	mlx_loop(info.mlx);
 }
