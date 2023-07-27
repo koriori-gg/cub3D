@@ -15,23 +15,38 @@ void	print_argv(char **argv)
 	}
 }
 
+// void	print_map(t_map *map)
+// {
+// 	int	i;
+
+// 	i = 0;
+// 	printf("--map--\n");
+// 	map = map->next;//変更する
+// 	while (map)
+// 	{
+// 		if (i < 10)
+// 			printf("[  %d] %s",i, map->row);
+// 		else if (i < 100)
+// 			printf("[ %d] %s",i, map->row);
+// 		else if (i < 1000)
+// 			printf("[%d] %s",i, map->row);
+// 		map = map->next;
+// 		i++;
+// 	}
+// }
+
 void	print_map(t_map *map)
 {
-	int	i;
-
-	i = 0;
 	printf("--map--\n");
-	map = map->next;//変更する
 	while (map)
 	{
-		if (i < 10)
-			printf("[  %d] %s",i, map->row);
-		else if (i < 100)
-			printf("[ %d] %s",i, map->row);
-		else if (i < 1000)
-			printf("[%d] %s",i, map->row);
+		if (map->y < 10)
+			printf("[  %zu] %s", map->y, map->row);
+		else if (map->y < 100)
+			printf("[ %zu] %s", map->y, map->row);
+		else if (map->y < 1000)
+			printf("[%zu] %s", map->y, map->row);
 		map = map->next;
-		i++;
 	}
 }
 

@@ -24,7 +24,7 @@ static char	*join_line_feed(char *str)
 	return (new);
 }
 
-void	add_mapinfo(t_mapinfo *map_info, char *str)
+static void	add_mapinfo(t_mapinfo *map_info, char *str)
 {
 	if (ft_strncmp(str,"NO", 2) == 0)
 		map_info->north_texture = str;
@@ -40,14 +40,14 @@ void	add_mapinfo(t_mapinfo *map_info, char *str)
 		map_info->ceiling_color = set_rgb(str);
 }
 
-void	add_map(t_mapinfo *map_info, char *str, size_t i)
+static void	add_map(t_mapinfo *map_info, char *str, size_t y)
 {
 	if (!ft_strchr(str, '\n'))
 		str = join_line_feed(str);
-	if (i == 1)
-			map_info->map = ft_mapnew(str);
+	if (y == 0)
+			map_info->map = ft_mapnew(str, y);//もしかしたらadd_backのみでok??
 		else
-			ft_mapadd_back(&(map_info->map), ft_mapnew(str));
+			ft_mapadd_back(&(map_info->map), ft_mapnew(str, y));
 }
 
 //TODO: check leak
@@ -56,12 +56,12 @@ t_mapinfo	*init_mapinfo(char **argv)
 	t_mapinfo	*map_info;
 	int			fd;
 	char		*str;
-	size_t		i;
+	size_t		y;
 
 	map_info = (t_mapinfo *)ft_calloc(sizeof(t_mapinfo), 1);
 	if (!map_info)
 		error_exit(MALLOC_ERROR);
-	i = 1;
+	y = 0;
 	fd = open(argv[1], O_RDONLY);
 	str = get_next_line(fd);
 	if (!str)
@@ -70,8 +70,10 @@ t_mapinfo	*init_mapinfo(char **argv)
 	{
 		if (is_elements_info(str))
 			add_mapinfo(map_info, str);
+		else if (strncmp(str, "\n", 1) == 0)//一旦入れるけど実装としてはよくない
+			free(str);
 		else
-			add_map(map_info, str, i++);//strをポインタで渡した方がいい?
+			add_map(map_info, str, y++);//strをポインタで渡した方がいい?
 		str = get_next_line(fd);
 	}
 	close(fd);

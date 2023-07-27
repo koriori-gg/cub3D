@@ -1,6 +1,6 @@
 #include "cub3d.h"
 
-t_map	*ft_mapnew(char *str)
+t_map	*ft_mapnew(char *str, size_t y)
 {
 	t_map	*ret;
 
@@ -8,6 +8,7 @@ t_map	*ft_mapnew(char *str)
 	if (!ret)
 		return (NULL);
 	ret->row = str;
+	ret->y = y;
 	ret->next = NULL;
 	ret->prev = NULL;
 	return (ret);
@@ -65,16 +66,16 @@ void	ft_free_map(t_map *map)
 t_map	*mapdup(t_map *map)
 {
 	t_map	*ret;
-	size_t	i;
+	size_t	y;
 
-	i = 0;
+	y = 0;
 	while (map != NULL)
 	{
-		if (i == 0)
-			ret = ft_mapnew(ft_strdup(map->row));
+		if (y == 0)
+			ret = ft_mapnew(ft_strdup(map->row), y);
 		else
-			ft_mapadd_back(&ret, ft_mapnew(ft_strdup(map->row)));
-		i++;
+			ft_mapadd_back(&ret, ft_mapnew(ft_strdup(map->row), y));
+		y++;
 		map = map->next;
 	}
 	return (ret);
