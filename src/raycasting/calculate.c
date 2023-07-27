@@ -24,9 +24,9 @@ static t_map	*move_map(t_map *map, int num)
 void	calculate(t_game *game)
 {
 	int	x;
-	// t_map *map;
+	t_map *map;
 
-	// map = game->map_info->map;
+	map = game->map_info->map;
 	x = 0;
 	while (x < width)
 	{
@@ -89,10 +89,10 @@ void	calculate(t_game *game)
 				map_y += step_y;
 				side = 1;
 			}
-			// map = move_map(map, map_y);
+			map = move_map(map, map_y);
 			//Check if ray has hit a wall
-			if (worldMap[map_x][map_y] > 0)
-			// if (map->row[map_x] > 0)
+			// if (worldMap[map_x][map_y] > 0)
+			if (map->row[map_x] > 0)
 				hit = 1;
 		}
 		if (side == 0)
@@ -112,18 +112,18 @@ void	calculate(t_game *game)
 			draw_end = height - 1;
 
 		int	color;
-		// map = move_map(map, map_y);
-		if (worldMap[map_y][map_x] == 1)
-		// if (map->row[map_x] == 1)
+		map = move_map(map, map_y);
+		// if (worldMap[map_y][map_x] == 1)
+		if (map->row[map_x] == 1)
 			color = 0xFF0000;
-		else if (worldMap[map_y][map_x] == 2)
-		// else if (map->row[map_x] == 2)
+		// else if (worldMap[map_y][map_x] == 2)
+		else if (map->row[map_x] == 2)
 			color = 0x00FF00;
-		else if (worldMap[map_y][map_x] == 3)
-		// else if (map->row[map_x] == 3)
+		// else if (worldMap[map_y][map_x] == 3)
+		else if (map->row[map_x] == 3)
 			color = 0x0000FF;
-		else if (worldMap[map_y][map_x] == 4)
-		// else if (map->row[map_x] == 4)
+		// else if (worldMap[map_y][map_x] == 4)
+		else if (map->row[map_x] == 4)
 			color = 0xFFFFFF;
 		else
 			color = 0xFFFF00;
