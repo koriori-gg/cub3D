@@ -21,17 +21,17 @@ static t_map	*move_map(t_map *map, int num)
 	return (map);
 }
 
-int get_color(int map_x, int map_y, int side)
+int get_color(t_game *game, int map_x, int map_y, int side)
 {
 	int color;
 
-	if (worldMap[map_y][map_x] == 1)
+	if (game->world_map[map_y][map_x] == 1)
 		color = 0xFF0000;
-	else if (worldMap[map_y][map_x] == 2)
+	else if (game->world_map[map_y][map_x] == 2)
 		color = 0x00FF00;
-	else if (worldMap[map_y][map_x] == 3)
+	else if (game->world_map[map_y][map_x] == 3)
 		color = 0x0000FF;
-	else if (worldMap[map_y][map_x] == 4)
+	else if (game->world_map[map_y][map_x] == 4)
 		color = 0xFFFFFF;
 	else
 		color = 0xFFFF00;
@@ -95,7 +95,7 @@ void	prepare_dda(t_game *game, t_dda *dda, double ray_direction_x, double ray_di
 		}
 }
 
-int	calculate_dda(t_dda *dda)
+int	calculate_dda(t_game *game, t_dda *dda)
 {
 	int hit; //was there a wall hit?
 	int side; //was a NS or a EW wall hit?
@@ -117,7 +117,7 @@ int	calculate_dda(t_dda *dda)
 			side = 1;
 		}
 		//Check if ray has hit a wall
-		if (worldMap[dda->map_x][dda->map_y] > 0)
+		if (game->world_map[dda->map_x][dda->map_y] > 0)
 		{
 			hit = 1;
 		}
@@ -133,6 +133,7 @@ void	calculate(t_game *game)
 	// 	draw_vertical_line(game, i++, 20, 200, 4169e1);
 	// draw_vertical_line(game, i++, 20, 200, 708090);
 	int	x;
+	t_dda	dda;
 
 	x = 0;
 	while (x < width)
@@ -140,10 +141,9 @@ void	calculate(t_game *game)
 		double ray_direction_x = game->player->direction_x + game->player->plane_x * calculate_camera_location(x, width);
 		double ray_direction_y = game->player->direction_y + game->player->plane_y * calculate_camera_location(x, width);
 
-		t_dda	dda;
 		prepare_dda(game, &dda, ray_direction_x, ray_direction_y);
 		int side;
-		side = calculate_dda(&dda);
+		side = calculate_dda(game, &dda);
 		double perp_wall_dist;
 		if (side == 0)
 			perp_wall_dist = (dda.map_x - game->player->position_x + (1 - dda.step_x) / 2) / ray_direction_x;
@@ -155,7 +155,7 @@ void	calculate(t_game *game)
 		//calculate lowest and highest pixel to fill in current stripe
 		int draw_start = calculate_draw_start(height, line_height);
 		int draw_end = calculate_draw_end(height, line_height);
-		int	color = get_color(side, dda.map_x, dda.map_y);
+		int	color = get_color(game, side, dda.map_x, dda.map_y);
 		draw_vertical_line(game, x, draw_start, draw_end, color);
 		x++;
 	}

@@ -85,8 +85,8 @@ void	init_struct(t_game *game, char **argv)
 	game->mlx = mlx_init();
 	game->win = mlx_new_window(game->mlx, 1000, 800, "cub3D");
 	mlx_pixel_put(game->mlx, game->win, 10, 20, 4169e1);
-	// game->world_map = map_to_char(game->map_info->map);
-	// print_argv(game->world_map);
+	game->world_map = map_to_char(game->map_info->map);
+	print_argv(game->world_map);
 	// game->img.img = mlx_new_image(game->mlx, width, height);
 	// game->img.data = (int *)mlx_get_data_addr(game->img.img, &game->img.bpp, &game->img.size_l, &game->img.endian);
 
