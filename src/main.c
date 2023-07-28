@@ -31,6 +31,7 @@ int input_key(int keycode, t_game *game)
 int	main_loop(t_game *game)
 {
 	calculate(game);
+	// draw(game);
 	return (0);
 }
 

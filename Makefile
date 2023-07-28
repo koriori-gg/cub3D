@@ -17,6 +17,7 @@ SRC = src/main.c \
 	src/utils/print_debug.c \
 	src/setup/init_struct.c \
 	src/raycasting/calculate.c \
+	src/raycasting/draw.c \
 
 OBJ = $(SRC:.c=.o)
 

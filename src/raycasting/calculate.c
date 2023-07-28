@@ -1,11 +1,11 @@
 #include "cub3d.h"
 
-void	draw_vertical_line(t_game *game, int x, int y1, int y2, int color)
+void	draw_vertical_line(t_game *game, int x, int top, int bottom, int color)
 {
 	int	y;
 
-	y = y1;
-	while (y <= y2)
+	y = top;
+	while (y <= bottom)
 	{
 		mlx_pixel_put(game->mlx, game->win, x, y, color);
 		y++;
@@ -21,118 +21,142 @@ static t_map	*move_map(t_map *map, int num)
 	return (map);
 }
 
-void	calculate(t_game *game)
+int get_color(int map_x, int map_y, int side)
 {
-	int	x;
-	t_map *map;
+	int color;
 
-	map = game->map_info->map;
-	x = 0;
-	while (x < width)
-	{
-		double camera_x = 2 * x / (double)width - 1;
-		double ray_direction_x = game->player->direction_x + game->player->plane_x * camera_x;
-		double ray_direction_y = game->player->direction_y + game->player->plane_y * camera_x;
+	if (worldMap[map_y][map_x] == 1)
+		color = 0xFF0000;
+	else if (worldMap[map_y][map_x] == 2)
+		color = 0x00FF00;
+	else if (worldMap[map_y][map_x] == 3)
+		color = 0x0000FF;
+	else if (worldMap[map_y][map_x] == 4)
+		color = 0xFFFFFF;
+	else
+		color = 0xFFFF00;
+	if (side == 1)
+		color = color / 2;
+	return (color);
+}
 
-		int map_x = (int)game->player->position_x;
-		int map_y = (int)game->player->position_y;
-		// map = move_map(map, map_y);
-		//length of ray from current position to next x or y-side
-		double side_dest_x;
-		double side_dest_y;
+double calculate_camera_location(int x, int wid)
+{
+	double camera_x;
 
-		 //length of ray from one x or y-side to next x or y-side
-		double delta_dist_x = fabs(1 / ray_direction_x); //fabs 浮動小数点ありの絶対値
-		double delta_dist_y = fabs(1 / ray_direction_y);
-		double perp_wall_dist;
+	camera_x = 2 * x / (double)wid - 1;
+	return (camera_x);
+}
 
-		//what direction to step in x or y-direction (either +1 or -1)
-		int step_x;
-		int step_y;
+int	calculate_draw_end(int hei, int line_height)
+{
+	int	draw_end;
 
-		int hit = 0; //was there a wall hit?
-		int side; //was a NS or a EW wall hit?
+	draw_end = line_height / 2 + hei / 2;
+	if(draw_end >= hei)
+		draw_end = hei - 1;
+	return (draw_end);
+}
 
+int	 calculate_draw_start(int hei, int line_height)
+{
+	int draw_start;
+
+	draw_start =  hei / 2 - line_height / 2;
+	if(draw_start < 0)
+		draw_start = 0;
+	return (draw_start);
+}
+void	prepare_dda(t_game *game, t_dda *dda, double ray_direction_x, double ray_direction_y)
+{
+		dda->map_x = (int)game->player->position_x;
+		dda->map_y = (int)game->player->position_y;
+		dda->delta_dist_x = fabs(1 / ray_direction_x);//fabs 浮動小数点ありの絶対値
+		dda->delta_dist_y = fabs(1 / ray_direction_y);
 		if (ray_direction_x < 0)
 		{
-			step_x = -1;
-			side_dest_x = (game->player->position_x - map_x) * delta_dist_x;
+			dda->step_x = -1;
+			dda->side_dest_x = (game->player->position_x - game->player->position_x) * dda->delta_dist_x;//ここ0になってしまっている　いいんかも？？
 		}
 		else
 		{
-			step_x = 1;
-			side_dest_x = (map_x + 1.0 - game->player->position_x) * delta_dist_x;
+			dda->step_x = 1;
+			dda->side_dest_x = (game->player->position_x + 1.0 - game->player->position_x) * dda->delta_dist_x;
 		}
 		if (ray_direction_y < 0)
 		{
-			step_y = -1;
-			side_dest_y = (game->player->position_y - map_y) * delta_dist_y;
+			dda->step_y = -1;
+			dda->side_dest_y = (game->player->position_y - game->player->position_y) *dda->delta_dist_y;
 		}
 		else
 		{
-			step_y = 1;
-			side_dest_y = (map_y + 1.0 - game->player->position_y) * delta_dist_y;
+			dda->step_y = 1;
+			dda->side_dest_y = (game->player->position_y + 1.0 - game->player->position_y) * dda->delta_dist_y;
 		}
+}
 
-		while (hit == 0)
+int	calculate_dda(t_dda *dda)
+{
+	int hit; //was there a wall hit?
+	int side; //was a NS or a EW wall hit?
+
+	hit = 0;
+	while (hit == 0)
+	{
+		//jump to next map square, OR in x-direction, OR in y-direction
+		if (dda->side_dest_x < dda->side_dest_y)
 		{
-			//jump to next map square, OR in x-direction, OR in y-direction
-			if (side_dest_x < side_dest_y)
-			{
-				side_dest_x += delta_dist_x;
-				map_x += step_x;
-				side = 0;
-			}
-			else
-			{
-				side_dest_y += delta_dist_y;
-				map_y += step_y;
-				side = 1;
-			}
-			map = move_map(map, map_y);
-			//Check if ray has hit a wall
-			// if (worldMap[map_x][map_y] > 0)
-			if (map->row[map_x] > 0)
-				hit = 1;
+			dda->side_dest_x += dda->delta_dist_x;
+			dda->map_x += dda->step_x;
+			side = 0;
 		}
-		if (side == 0)
-			perp_wall_dist = (map_x - game->player->position_x + (1 - step_x) / 2) / ray_direction_x;
 		else
-			perp_wall_dist = (map_y - game->player->position_y + (1 - step_y) / 2) / ray_direction_y;
+		{
+			dda->side_dest_y += dda->delta_dist_y;
+			dda->map_y += dda->step_y;
+			side = 1;
+		}
+		//Check if ray has hit a wall
+		if (worldMap[dda->map_x][dda->map_y] > 0)
+		{
+			hit = 1;
+		}
+	}
+	return (side);
+}
+
+void	calculate(t_game *game)
+{
+	// int	i;
+	// i = 30;
+	// while (i < 70)
+	// 	draw_vertical_line(game, i++, 20, 200, 4169e1);
+	// draw_vertical_line(game, i++, 20, 200, 708090);
+	int	x;
+
+	x = 0;
+	while (x < width)
+	{
+		double ray_direction_x = game->player->direction_x + game->player->plane_x * calculate_camera_location(x, width);
+		double ray_direction_y = game->player->direction_y + game->player->plane_y * calculate_camera_location(x, width);
+
+		t_dda	dda;
+		prepare_dda(game, &dda, ray_direction_x, ray_direction_y);
+		int side;
+		side = calculate_dda(&dda);
+		double perp_wall_dist;
+		if (side == 0)
+			perp_wall_dist = (dda.map_x - game->player->position_x + (1 - dda.step_x) / 2) / ray_direction_x;
+		else
+			perp_wall_dist = (dda.map_y - game->player->position_y + (1 - dda.step_y) / 2) / ray_direction_y;
 
 		//Calculate height of line to draw on screen
 		int line_height = (int)(height / perp_wall_dist);
-
 		//calculate lowest and highest pixel to fill in current stripe
-		int draw_start = -line_height / 2 + height / 2;
-		if(draw_start < 0)
-			draw_start = 0;
-		int draw_end = line_height / 2 + height / 2;
-		if(draw_end >= height)
-			draw_end = height - 1;
-
-		int	color;
-		map = move_map(map, map_y);
-		// if (worldMap[map_y][map_x] == 1)
-		if (map->row[map_x] == 1)
-			color = 0xFF0000;
-		// else if (worldMap[map_y][map_x] == 2)
-		else if (map->row[map_x] == 2)
-			color = 0x00FF00;
-		// else if (worldMap[map_y][map_x] == 3)
-		else if (map->row[map_x] == 3)
-			color = 0x0000FF;
-		// else if (worldMap[map_y][map_x] == 4)
-		else if (map->row[map_x] == 4)
-			color = 0xFFFFFF;
-		else
-			color = 0xFFFF00;
-
-		if (side == 1)
-			color = color / 2;
-
+		int draw_start = calculate_draw_start(height, line_height);
+		int draw_end = calculate_draw_end(height, line_height);
+		int	color = get_color(side, dda.map_x, dda.map_y);
 		draw_vertical_line(game, x, draw_start, draw_end, color);
-
 		x++;
 	}
 }
