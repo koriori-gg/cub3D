@@ -22,10 +22,8 @@ void	calc(t_info *info)
 		double cameraX = 2 * x / (double)width - 1;
 		double rayDirX = info->dirX + info->planeX * cameraX;
 		double rayDirY = info->dirY + info->planeY * cameraX;
-		
 		int mapX = (int)info->posX;
 		int mapY = (int)info->posY;
-
 		//length of ray from current position to next x or y-side
 		double sideDistX;
 		double sideDistY;
@@ -62,7 +60,8 @@ void	calc(t_info *info)
 			stepY = 1;
 			sideDistY = (mapY + 1.0 - info->posY) * deltaDistY;
 		}
-
+		printf("%d %d %d %d\n", mapX, mapY, stepX, stepY);
+		printf("%lf %lf %lf %lf\n", deltaDistX, deltaDistY, sideDistX, sideDistY);
 		while (hit == 0)
 		{
 			//jump to next map square, OR in x-direction, OR in y-direction
@@ -111,7 +110,7 @@ void	calc(t_info *info)
 
 		if (side == 1)
 			color = color / 2;
-		printf("%d %d %d %d %d\n", x, drawStart, drawEnd, color, mapX, mapY);
+		printf("--- %d %d %d %d %d %d\n", x, drawStart, drawEnd, color, mapX, mapY);
 		verLine(info, x, drawStart, drawEnd, color);
 
 		x++;
