@@ -32,6 +32,12 @@
 # define x_axis 0
 # define y_axis 1
 
+# define RGB_RED 0xFF0000
+# define RGB_GREEN 0x00FF00
+# define RGB_BLUE 0x0000FF
+# define RGB_WHITE 0xFFFFFF
+# define RGB_YELLOW 0xFFFF00
+
 enum e_message
 {
 	AGUMENT_ERROR,
@@ -110,10 +116,10 @@ typedef struct s_game {
 	t_player	*player;
 	t_mapinfo	*map_info;
 	char 		**world_map;
-	int			**buf;
+	// int			**buf;
 	t_image		img;
-	int			texture[8][tex_height * tex_width];
-	int			re_buf;
+	// int			texture[8][tex_height * tex_width];
+	// int			re_buf;
 }				t_game;
 
 //validate_argument and map

@@ -111,7 +111,7 @@ void	calc(t_info *info)
 
 		if (side == 1)
 			color = color / 2;
-
+		printf("%d %d %d %d %d\n", x, drawStart, drawEnd, color, mapX, mapY);
 		verLine(info, x, drawStart, drawEnd, color);
 
 		x++;
