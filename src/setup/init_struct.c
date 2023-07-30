@@ -8,7 +8,7 @@ static void	init_player(t_game *game)
 	//temp
 	game->player->position_x = 12.0;//本来はmapから読み取る必要あり
 	game->player->position_y = 5.0;
-	game->player->direction_x = -1.0;
+	game->player->direction_x = -1.0;//本来はmapから読み取る必要あり
 	game->player->direction_y = 0.0;
 	game->player->plane_x = 0.0;
 	game->player->plane_y = 0.66;
@@ -106,7 +106,6 @@ void	init_struct(t_game *game, char **argv)
 	print_map_info(game->map_info);
 	game->mlx = mlx_init();
 	game->win = mlx_new_window(game->mlx, 1000, 1000, "cub3D");//map + minimap
-	// mlx_pixel_put(game->mlx, game->win, 10, 20, 4169e1);
 	game->world_map = map_to_char(game->map_info->map);
 	print_argv(game->world_map);
 	game->img_width = 5;
