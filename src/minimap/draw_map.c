@@ -9,13 +9,13 @@ void	draw_player_direction(t_game *game, int img_width, int img_height)//width h
 	player = game->player;
 
 	if (player->direction_x == 0)
-		x = (game->img_width + 1) / 2;
+		x = game->img_width / 2;
 	else if (player->direction_x > 0)
 		x = game->img_width;
 	else if (player->direction_x < 0)
 		x = 0;
 	if (player->direction_y == 0)
-		x = (game->img_height + 1) / 2;
+		x = game->img_height / 2;
 	else if (player->direction_y > 0)
 		x = game->img_height;
 	else if (player->direction_y < 0)

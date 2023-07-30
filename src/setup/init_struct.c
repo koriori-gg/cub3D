@@ -106,7 +106,7 @@ void	init_struct(t_game *game, char **argv)
 	print_map_info(game->map_info);
 	game->mlx = mlx_init();
 	game->win = mlx_new_window(game->mlx, 1000, 800, "cub3D");
-	mlx_pixel_put(game->mlx, game->win, 10, 20, 4169e1);
+	// mlx_pixel_put(game->mlx, game->win, 10, 20, 4169e1);
 	game->world_map = map_to_char(game->map_info->map);
 	print_argv(game->world_map);
 	game->img_width = 5;
