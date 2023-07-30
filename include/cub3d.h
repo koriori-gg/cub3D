@@ -121,8 +121,9 @@ typedef struct s_game {
 	t_player	*player;
 	t_mapinfo	*map_info;
 	char 		**world_map;
-	void		*player_img[4][2];
-	void		*tile_img[5];
+	void		*tile_img[3];
+	int			img_height;
+	int			img_width;
 	// int			**buf;
 	t_image		img;
 	// int			texture[8][tex_height * tex_width];
@@ -152,6 +153,8 @@ void		print_map_info(t_mapinfo *map_info);
 void		init_struct(t_game *game, char **argv);
 //calculate
 void		calculate(t_game *game);
+//minimap
+void	draw_map(t_game *game);
 //temp
 void	draw(t_game *game);
 

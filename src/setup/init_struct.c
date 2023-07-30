@@ -77,35 +77,26 @@ char	**map_to_char(t_map *map)
 	return (ret);
 }
 
-static void	*ft_xpm_to_image(t_base *data, char *str)
+
+static void	*ft_xpm_to_image(t_game *game, char *str)
 {
 	char	*path;
 	void	*img;
 
-	path = ft_strjoin("textures/16/", str);//path error
-	img = mlx_xpm_file_to_image(data->mlx, path, &data->img_width,
-			&data->img_height);
+	path = ft_strjoin("textures/4/", str);//path error
+	img = mlx_xpm_file_to_image(game->mlx, path, &game->img_width,
+			&game->img_height);
 	free(path);
 	if (!img)
-		error_free(data, IMAGE_ERROR);
+		error_exit(IMAGE_ERROR);
 	return (img);
 }
 
 void	init_asset(t_game *game)
 {
-	game->player_img[DIR_DOWN][0] = ft_xpm_to_image(game, "player_front.xpm");
-	game->player_img[DIR_DOWN][1] = ft_xpm_to_image(game, "player_front1.xpm");
-	game->player_img[DIR_UP][0] = ft_xpm_to_image(game, "player_back.xpm");
-	game->player_img[DIR_UP][1] = ft_xpm_to_image(game, "player_back1.xpm");
-	game->player_img[DIR_RIGHT][0] = ft_xpm_to_image(game, "player_right.xpm");
-	game->player_img[DIR_RIGHT][1] = ft_xpm_to_image(game, "player_right1.xpm");
-	game->player_img[DIR_LEFT][0] = ft_xpm_to_image(game, "player_left.xpm");
-	game->player_img[DIR_LEFT][1] = ft_xpm_to_image(game, "player_left1.xpm");
 	game->tile_img[0] = ft_xpm_to_image(game, "zero.xpm");
 	game->tile_img[1] = ft_xpm_to_image(game, "one.xpm");
-	game->tile_img[2] = ft_xpm_to_image(game, "collect.xpm");
-	game->tile_img[3] = ft_xpm_to_image(game, "exit_before.xpm");
-	game->tile_img[4] = ft_xpm_to_image(game, "exit_after.xpm");
+	game->tile_img[2] = ft_xpm_to_image(game, "player.xpm");
 }
 
 void	init_struct(t_game *game, char **argv)
@@ -118,6 +109,8 @@ void	init_struct(t_game *game, char **argv)
 	mlx_pixel_put(game->mlx, game->win, 10, 20, 4169e1);
 	game->world_map = map_to_char(game->map_info->map);
 	print_argv(game->world_map);
+	game->img_width = 5;
+	game->img_height = 5;
 	init_asset(game);
 	// game->img.img = mlx_new_image(game->mlx, width, height);
 	// game->img.data = (int *)mlx_get_data_addr(game->img.img, &game->img.bpp, &game->img.size_l, &game->img.endian);
