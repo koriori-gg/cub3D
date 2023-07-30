@@ -77,6 +77,28 @@ char	**map_to_char(t_map *map)
 	return (ret);
 }
 
+static void	*ft_xpm_to_image(t_game *game, char *str)
+{
+	char	*path;
+	void	*img;
+
+	path = ft_strjoin("textures/4/", str);
+	img = mlx_xpm_file_to_image(game->mlx, path, &game->img_width,
+			&game->img_height);
+	free(path);
+	if (!img)
+		error_exit(IMAGE_ERROR);
+	return (img);
+}
+
+void	init_asset(t_game *game)
+{
+	game->tile_img[0] = ft_xpm_to_image(game, "zero.xpm");
+	game->tile_img[1] = ft_xpm_to_image(game, "one.xpm");
+	game->tile_img[2] = ft_xpm_to_image(game, "player.xpm");
+}
+
+
 void	init_struct(t_game *game, char **argv)
 {
 	init_player(game);
@@ -87,6 +109,9 @@ void	init_struct(t_game *game, char **argv)
 	mlx_pixel_put(game->mlx, game->win, 10, 20, 4169e1);
 	game->world_map = map_to_char(game->map_info->map);
 	print_argv(game->world_map);
+	game->img_width = 5;
+	game->img_height = 5;
+	init_asset(game);
 	// game->img.img = mlx_new_image(game->mlx, width, height);
 	// game->img.data = (int *)mlx_get_data_addr(game->img.img, &game->img.bpp, &game->img.size_l, &game->img.endian);
 }

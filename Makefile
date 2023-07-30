@@ -18,6 +18,7 @@ SRC = src/main.c \
 	src/setup/init_struct.c \
 	src/raycasting/calculate.c \
 	src/raycasting/draw.c \
+	src/minimap/draw_map.c \
 
 OBJ = $(SRC:.c=.o)
 
