@@ -105,7 +105,7 @@ void	init_struct(t_game *game, char **argv)
 	game->map_info = init_mapinfo(argv);//initのやり方統一した方がいい??
 	print_map_info(game->map_info);
 	game->mlx = mlx_init();
-	game->win = mlx_new_window(game->mlx, 1000, 800, "cub3D");
+	game->win = mlx_new_window(game->mlx, 1000, 1000, "cub3D");//map + minimap
 	// mlx_pixel_put(game->mlx, game->win, 10, 20, 4169e1);
 	game->world_map = map_to_char(game->map_info->map);
 	print_argv(game->world_map);

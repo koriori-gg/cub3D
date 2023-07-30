@@ -29,7 +29,7 @@ static void	draw_image(t_game *game, char *str, int i, int j)
 	int	img_width;
 	int	img_height;
 
-	img_width = i * game->img_width;
+	img_width = width + i * game->img_width;
 	img_height = j * game->img_height;
 	if (str[i] == '0')
 		mlx_put_image_to_window(game->mlx, game->win,
