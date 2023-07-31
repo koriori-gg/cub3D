@@ -34,10 +34,10 @@ static void	draw_image(t_game *game, char *str, int i, int j)
 	if (str[i] == '0')
 		mlx_put_image_to_window(game->mlx, game->win,
 			game->tile_img[0], img_width, img_height);
-	else if (str[i] == '1')
+	else if (ft_strchr("123456789", str[i]))
 		mlx_put_image_to_window(game->mlx, game->win,
 			game->tile_img[1], img_width, img_height);
-	else if (str[i] == 'N')
+	else if (ft_strchr("NSWE", str[i]))
 	{
 		mlx_put_image_to_window(game->mlx, game->win,
 			game->tile_img[2], img_width, img_height);
