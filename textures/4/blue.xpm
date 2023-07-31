@@ -1,0 +1,24 @@
+/* XPM */
+static char *result[] = {
+/* columns rows colors chars-per-pixel */
+"5 5 1 1 ",
+"X c #306850",
+/* pixels */
+"XXXXX",
+"XXXXX",
+"XXXXX",
+"XXXXX",
+"XXXXX"
+};
+/* XPM */
+static char *result[] = {
+/* columns rows colors chars-per-pixel */
+"5 5 1 1 ",
+"X c #1e01fe",
+/* pixels */
+"XXXXX",
+"XXXXX",
+"XXXXX",
+"XXXXX",
+"XXXXX"
+};
