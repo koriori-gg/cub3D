@@ -49,12 +49,24 @@ static void	draw_image(t_game *game, char *str, int i, int j)
 	else if (ft_strchr("56789", str[i]))
 		mlx_put_image_to_window(game->mlx, game->win,
 			game->tile_img[5], img_width, img_height);
-	else if (ft_strchr("NSWE", str[i]))
-	{
-		mlx_put_image_to_window(game->mlx, game->win,
+	// else if (ft_strchr("NSWE", str[i]))
+	// {
+	// 	mlx_put_image_to_window(game->mlx, game->win,
+	// 		game->tile_img[6], img_width, img_height);
+	// 	draw_player_direction(game, img_width, img_height);
+	// }
+}
+
+void	draw_player(t_game *game, int i, int j)
+{
+	int	img_width;
+	int	img_height;
+
+	img_width = width + i * game->img_width;
+	img_height = j * game->img_height;
+	mlx_put_image_to_window(game->mlx, game->win,
 			game->tile_img[6], img_width, img_height);
-		draw_player_direction(game, img_width, img_height);
-	}
+	draw_player_direction(game, img_width, img_height);
 }
 
 void	draw_map(t_game *game)
@@ -72,7 +84,10 @@ void	draw_map(t_game *game)
 		str = map_head->row;
 		while (str[i])
 		{
-			draw_image(game, str, i, j);
+			if (j == (int)game->player->position_x&& j == (int)game->player->position_y)
+				draw_player(game, (int)game->player->position_x, (int)game->player->position_y);
+			else
+				draw_image(game, str, i, j);
 			i++;
 		}
 		j++;
