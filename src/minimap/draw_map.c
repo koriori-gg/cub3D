@@ -15,11 +15,11 @@ void	draw_player_direction(t_game *game, int img_width, int img_height)//width h
 	else if (player->direction_x < 0)
 		x = 0;
 	if (player->direction_y == 0)
-		x = game->img_height / 2;
+		y = game->img_height / 2;
 	else if (player->direction_y > 0)
-		x = game->img_height;
+		y = game->img_height;
 	else if (player->direction_y < 0)
-		x = 0;
+		y = 0;
 
 	mlx_pixel_put(game->mlx, game->win, img_width + x, img_height + y, RGB_RED);
 }
