@@ -26,8 +26,11 @@
 #define tex_height 64
 #define map_width 24
 #define map_height 24
-#define width 640
-#define height 480
+// #define width 640
+// #define height 480
+#define width 1920
+#define height 1080
+
 
 # define x_axis 0
 # define y_axis 1
@@ -124,10 +127,11 @@ typedef struct s_game {
 	void		*tile_img[7];
 	int			img_height;
 	int			img_width;
-	// int			**buf;
+//02
+	int			**buf;
 	t_image		img;
-	// int			texture[8][tex_height * tex_width];
-	// int			re_buf;
+	int			texture[8][tex_height * tex_width];
+	int			re_buf;
 }				t_game;
 
 //validate_argument and map
@@ -155,7 +159,6 @@ void		init_struct(t_game *game, char **argv);
 void		calculate(t_game *game);
 //minimap
 void	draw_map(t_game *game);
-//temp
 void	draw(t_game *game);
 
 #endif

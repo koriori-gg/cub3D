@@ -62,7 +62,7 @@ int	main_loop(t_game *game)
 {
 	draw_map(game);
 	calculate(game);
-	// draw(game);
+	draw(game);
 	return (0);
 }
 

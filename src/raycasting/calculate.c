@@ -121,6 +121,30 @@ int	calculate_dda(t_game *game, t_dda *dda)
 	return (side);
 }
 
+int char_to_int(char s)
+{
+	if (s == '0')
+		return (0);
+	if (s == '1')
+		return (1);
+	if (s == '2')
+		return (2);
+	if (s == '3')
+		return (3);
+	if (s == '4')
+		return (4);
+	if (s == '5')
+		return (5);
+	if (s == '6')
+		return (6);
+	if (s == '7')
+		return (7);
+	if (s == '8')
+		return (8);
+	if (s == '9')
+		return (9);
+}
+
 void	calculate(t_game *game)
 {
 	int	x;
@@ -144,9 +168,37 @@ void	calculate(t_game *game)
 		int line_height = (int)(height / perp_wall_dist);
 		int draw_start = calculate_draw_start(height, line_height);
 		int draw_end = calculate_draw_end(height, line_height);
-		int	color = get_color(game, side, dda.map_x, dda.map_y);
+
+		int tex_num = char_to_int(game->world_map[dda.map_x][dda.map_y]);//もうちょっといい変換方法ありそう
+		double wall_x;
+		if (side == 0)
+			wall_x = game->player->position_y + perp_wall_dist * ray_direction_y;
+		else
+			wall_x = game->player->position_x + perp_wall_dist * ray_direction_x;
+		wall_x -= floor(wall_x);
+		int tex_x = (int)(wall_x * (double)tex_width);
+		if (side == 0 && ray_direction_x > 0)
+			tex_x = tex_width - tex_x - 1;
+		if (side == 1 && ray_direction_y < 0)
+			tex_x = tex_width - tex_x - 1;
+		double step = 1.0 * tex_height / line_height;
+		double tex_position = (draw_start - height / 2 + line_height / 2) * step;
+		int y;
+		y = draw_start;
+		while (y < draw_end)
+		{
+			int tex_y = (int)tex_position & (tex_height - 1);
+			tex_position += step;
+			int color = game->texture[tex_num][tex_height * tex_y + tex_x];
+			if (side == 1)
+				color = (color >> 1) & 8355711;
+			game->buf[y][x] = color;
+			game->re_buf = 1;
+			y++;
+		}
+		// int	color = get_color(game, side, dda.map_x, dda.map_y);
 		// printf("--- draw %d %d %d color %d map %d %d\n", x, draw_start, draw_end, color, dda.map_x, dda.map_y);
-		draw_vertical_line(game, x, draw_start, draw_end, color);
+		// draw_vertical_line(game, x, draw_start, draw_end, color);
 		x++;
 	}
 }
