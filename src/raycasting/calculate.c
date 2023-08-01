@@ -103,7 +103,6 @@ int	calculate_dda(t_game *game, t_dda *dda)
 	// printf("map %d %d step %d %d\n", dda->map_x, dda->map_y, dda->step_x, dda->step_y);
 	while (hit == 0)
 	{
-		//jump to next map square, OR in x-direction, OR in y-direction
 		if (dda->side_dist_x < dda->side_dist_y)
 		{
 			dda->side_dist_x += dda->delta_dist_x;
@@ -116,7 +115,6 @@ int	calculate_dda(t_game *game, t_dda *dda)
 			dda->map_y += dda->step_y;
 			side = 1;
 		}
-		//Check if ray has hit a wall
 		if (game->world_map[dda->map_x][dda->map_y] != '0')
 			hit = 1;
 	}
@@ -143,9 +141,7 @@ void	calculate(t_game *game)
 			perp_wall_dist = (dda.map_x - game->player->position_x + (1 - dda.step_x) / 2) / ray_direction_x;
 		else
 			perp_wall_dist = (dda.map_y - game->player->position_y + (1 - dda.step_y) / 2) / ray_direction_y;
-		//Calculate height of line to draw on screen
 		int line_height = (int)(height / perp_wall_dist);
-		//calculate lowest and highest pixel to fill in current stripe
 		int draw_start = calculate_draw_start(height, line_height);
 		int draw_end = calculate_draw_end(height, line_height);
 		int	color = get_color(game, side, dda.map_x, dda.map_y);
