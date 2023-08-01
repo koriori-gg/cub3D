@@ -115,7 +115,6 @@ void	init_struct(t_game *game, char **argv)
 	game->img_width = 5;
 	game->img_height = 5;
 	init_asset(game);
-	printf("hoge\n");
 	// game->img.img = mlx_new_image(game->mlx, width, height);
 	// game->img.data = (int *)mlx_get_data_addr(game->img.img, &game->img.bpp, &game->img.size_l, &game->img.endian);
 }

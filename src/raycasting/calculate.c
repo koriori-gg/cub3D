@@ -100,7 +100,7 @@ int	calculate_dda(t_game *game, t_dda *dda)
 	int hit; //was there a wall hit?
 	int side; //was a NS or a EW wall hit?
 	hit = 0;
-	printf("map %d %d step %d %d\n", dda->map_x, dda->map_y, dda->step_x, dda->step_y);
+	// printf("map %d %d step %d %d\n", dda->map_x, dda->map_y, dda->step_x, dda->step_y);
 	while (hit == 0)
 	{
 		//jump to next map square, OR in x-direction, OR in y-direction
@@ -134,10 +134,10 @@ void	calculate(t_game *game)
 		double ray_direction_x = game->player->direction_x + game->player->plane_x * calculate_camera_location(x, width);
 		double ray_direction_y = game->player->direction_y + game->player->plane_y * calculate_camera_location(x, width);
 		prepare_dda(game, &dda, ray_direction_x, ray_direction_y);
-		printf("delta %lf %lf side %lf %lf\n", dda.delta_dist_x, dda.delta_dist_y, dda.side_dist_x, dda.side_dist_y);
+		// printf("delta %lf %lf side %lf %lf\n", dda.delta_dist_x, dda.delta_dist_y, dda.side_dist_x, dda.side_dist_y);
 		int side;
 		side = calculate_dda(game, &dda);
-		printf("map %d %d\n", dda.map_x, dda.map_y);
+		// printf("map %d %d\n", dda.map_x, dda.map_y);
 		double perp_wall_dist;
 		if (side == 0)
 			perp_wall_dist = (dda.map_x - game->player->position_x + (1 - dda.step_x) / 2) / ray_direction_x;
@@ -149,7 +149,7 @@ void	calculate(t_game *game)
 		int draw_start = calculate_draw_start(height, line_height);
 		int draw_end = calculate_draw_end(height, line_height);
 		int	color = get_color(game, side, dda.map_x, dda.map_y);
-		printf("--- draw %d %d %d color %d map %d %d\n", x, draw_start, draw_end, color, dda.map_x, dda.map_y);
+		// printf("--- draw %d %d %d color %d map %d %d\n", x, draw_start, draw_end, color, dda.map_x, dda.map_y);
 		draw_vertical_line(game, x, draw_start, draw_end, color);
 		x++;
 	}

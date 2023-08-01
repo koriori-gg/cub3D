@@ -60,8 +60,8 @@ void	calc(t_info *info)
 			stepY = 1;
 			sideDistY = (mapY + 1.0 - info->posY) * deltaDistY;
 		}
-		printf("delta %lf %lf side %lf %lf\n", deltaDistX, deltaDistY, sideDistX, sideDistY);
-		printf("map %d %d step %d %d\n", mapX, mapY, stepX, stepY);
+		// printf("delta %lf %lf side %lf %lf\n", deltaDistX, deltaDistY, sideDistX, sideDistY);
+		// printf("map %d %d step %d %d\n", mapX, mapY, stepX, stepY);
 		while (hit == 0)
 		{
 			//jump to next map square, OR in x-direction, OR in y-direction
@@ -80,7 +80,7 @@ void	calc(t_info *info)
 			//Check if ray has hit a wall
 			if (worldMap[mapX][mapY] > '0') hit = 1;
 		}
-		printf("map %d %d\n", mapX, mapY);
+		// printf("map %d %d\n", mapX, mapY);
 		if (side == 0)
 			perpWallDist = (mapX - info->posX + (1 - stepX) / 2) / rayDirX;
 		else
@@ -111,7 +111,7 @@ void	calc(t_info *info)
 
 		if (side == 1)
 			color = color / 2;
-		printf("--- draw %d %d %d color %d map %d %d\n", x, drawStart, drawEnd, color, mapX, mapY);
+		// printf("--- draw %d %d %d color %d map %d %d\n", x, drawStart, drawEnd, color, mapX, mapY);
 		verLine(info, x, drawStart, drawEnd, color);
 
 		x++;
@@ -128,6 +128,7 @@ int	main_loop(t_info *info)
 
 int	key_press(int key, t_info *info)
 {
+	printf("hoge\n");
 	if (key == KEY_W)
 	{
 		if (!worldMap[(int)(info->posX + info->dirX * info->moveSpeed)][(int)(info->posY)])
