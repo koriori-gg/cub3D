@@ -94,9 +94,13 @@ static void	*ft_xpm_to_image(t_game *game, char *str)
 
 void	init_asset(t_game *game)
 {
-	game->tile_img[0] = ft_xpm_to_image(game, "zero.xpm");
-	game->tile_img[1] = ft_xpm_to_image(game, "one.xpm");
-	game->tile_img[2] = ft_xpm_to_image(game, "player.xpm");
+	game->tile_img[0] = ft_xpm_to_image(game, "floor.xpm");
+	game->tile_img[1] = ft_xpm_to_image(game, "red.xpm");
+	game->tile_img[2] = ft_xpm_to_image(game, "green.xpm");
+	game->tile_img[3] = ft_xpm_to_image(game, "blue.xpm");
+	game->tile_img[4] = ft_xpm_to_image(game, "white.xpm");
+	game->tile_img[5] = ft_xpm_to_image(game, "yellow.xpm");
+	game->tile_img[6] = ft_xpm_to_image(game, "player.xpm");
 }
 
 void	init_struct(t_game *game, char **argv)
@@ -111,6 +115,7 @@ void	init_struct(t_game *game, char **argv)
 	game->img_width = 5;
 	game->img_height = 5;
 	init_asset(game);
+	printf("hoge\n");
 	// game->img.img = mlx_new_image(game->mlx, width, height);
 	// game->img.data = (int *)mlx_get_data_addr(game->img.img, &game->img.bpp, &game->img.size_l, &game->img.endian);
 }

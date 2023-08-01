@@ -121,7 +121,7 @@ typedef struct s_game {
 	t_player	*player;
 	t_mapinfo	*map_info;
 	char 		**world_map;
-	void		*tile_img[3];
+	void		*tile_img[7];
 	int			img_height;
 	int			img_width;
 	// int			**buf;

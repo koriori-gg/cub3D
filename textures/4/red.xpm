@@ -2,19 +2,7 @@
 static char *result[] = {
 /* columns rows colors chars-per-pixel */
 "5 5 1 1 ",
-"X c #fe3a61",
-/* pixels */
-"XXXXX",
-"XXXXX",
-"XXXXX",
-"XXXXX",
-"XXXXX"
-};
-/* XPM */
-static char *result[] = {
-/* columns rows colors chars-per-pixel */
-"5 5 1 1 ",
-"X c #1e01fe",
+"X c #FF0000",
 /* pixels */
 "XXXXX",
 "XXXXX",
