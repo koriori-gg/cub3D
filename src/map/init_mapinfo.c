@@ -36,7 +36,7 @@ static void	add_mapinfo(t_mapinfo *map_info, char *str)
 		map_info->east_texture = str;
 	if (ft_strncmp(str,"F", 1) == 0)
 		map_info->floor_color = set_rgb(str);
-	if (ft_strncmp(str,"C", 1) == 0)
+	if (ft_strncmp(str,"C", 1) == 0)//TODO: split + indetifier check
 		map_info->ceiling_color = set_rgb(str);
 }
 

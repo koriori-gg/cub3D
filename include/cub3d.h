@@ -26,8 +26,11 @@
 #define tex_height 64
 #define map_width 24
 #define map_height 24
+// #define width 640
+// #define height 480
 #define width 1920
 #define height 1080
+
 
 # define x_axis 0
 # define y_axis 1
@@ -37,6 +40,11 @@
 # define RGB_BLUE 0x0000FF
 # define RGB_WHITE 0xFFFFFF
 # define RGB_YELLOW 0xFFFF00
+
+# define DIR_DOWN		0
+# define DIR_UP			1
+# define DIR_RIGHT		2
+# define DIR_LEFT		3
 
 enum e_message
 {
@@ -104,8 +112,8 @@ typedef struct	s_dda
 	int		map_y;
 	int		step_x;
 	int		step_y;
-	double	side_dest_x;
-	double	side_dest_y;
+	double	side_dist_x;
+	double	side_dist_y;
 	double	delta_dist_x;
 	double	delta_dist_y;
 }				t_dda;
@@ -116,13 +124,14 @@ typedef struct s_game {
 	t_player	*player;
 	t_mapinfo	*map_info;
 	char 		**world_map;
-	void		*tile_img[3];
+	void		*tile_img[7];
 	int			img_height;
 	int			img_width;
-	// int			**buf;
+//02
+	int			**buf;
 	t_image		img;
-	// int			texture[8][tex_height * tex_width];
-	// int			re_buf;
+	int			texture[8][tex_height * tex_width];
+	int			re_buf;
 }				t_game;
 
 //validate_argument and map

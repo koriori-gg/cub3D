@@ -22,10 +22,8 @@ void	calc(t_info *info)
 		double cameraX = 2 * x / (double)width - 1;
 		double rayDirX = info->dirX + info->planeX * cameraX;
 		double rayDirY = info->dirY + info->planeY * cameraX;
-		
 		int mapX = (int)info->posX;
 		int mapY = (int)info->posY;
-
 		//length of ray from current position to next x or y-side
 		double sideDistX;
 		double sideDistY;
@@ -62,7 +60,8 @@ void	calc(t_info *info)
 			stepY = 1;
 			sideDistY = (mapY + 1.0 - info->posY) * deltaDistY;
 		}
-
+		// printf("delta %lf %lf side %lf %lf\n", deltaDistX, deltaDistY, sideDistX, sideDistY);
+		// printf("map %d %d step %d %d\n", mapX, mapY, stepX, stepY);
 		while (hit == 0)
 		{
 			//jump to next map square, OR in x-direction, OR in y-direction
@@ -79,8 +78,9 @@ void	calc(t_info *info)
 				side = 1;
 			}
 			//Check if ray has hit a wall
-			if (worldMap[mapX][mapY] > 0) hit = 1;
+			if (worldMap[mapX][mapY] > '0') hit = 1;
 		}
+		// printf("map %d %d\n", mapX, mapY);
 		if (side == 0)
 			perpWallDist = (mapX - info->posX + (1 - stepX) / 2) / rayDirX;
 		else
@@ -98,20 +98,20 @@ void	calc(t_info *info)
 			drawEnd = height - 1;
 
 		int	color;
-		if (worldMap[mapY][mapX] == 1)
+		if (worldMap[mapY][mapX] == '1')
 			color = 0xFF0000;
-		else if (worldMap[mapY][mapX] == 2)
+		else if (worldMap[mapY][mapX] == '2')
 			color = 0x00FF00;
-		else if (worldMap[mapY][mapX] == 3)
+		else if (worldMap[mapY][mapX] == '3')
 			color = 0x0000FF;
-		else if (worldMap[mapY][mapX] == 4)
+		else if (worldMap[mapY][mapX] == '4')
 			color = 0xFFFFFF;
 		else
 			color = 0xFFFF00;
 
 		if (side == 1)
 			color = color / 2;
-		printf("%d %d %d %d %d\n", x, drawStart, drawEnd, color, mapX, mapY);
+		// printf("--- draw %d %d %d color %d map %d %d\n", x, drawStart, drawEnd, color, mapX, mapY);
 		verLine(info, x, drawStart, drawEnd, color);
 
 		x++;
@@ -128,6 +128,7 @@ int	main_loop(t_info *info)
 
 int	key_press(int key, t_info *info)
 {
+	printf("hoge\n");
 	if (key == KEY_W)
 	{
 		if (!worldMap[(int)(info->posX + info->dirX * info->moveSpeed)][(int)(info->posY)])

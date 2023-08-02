@@ -272,8 +272,8 @@ int	main(void)
 
 	info.img.img = mlx_new_image(info.mlx, width, height);
 	info.img.data = (int *)mlx_get_data_addr(info.img.img, &info.img.bpp, &info.img.size_l, &info.img.endian);
-
-	mlx_key_hook(info.win, &key_press, &info);
+	mlx_hook(info.win, X_EVENT_KEY_PRESS, 1L<<0, &key_press, &info);
+	// mlx_key_hook(info.win, &key_press, &info);
 	mlx_loop_hook(info.mlx, &main_loop, &info);
 
 	mlx_loop(info.mlx);

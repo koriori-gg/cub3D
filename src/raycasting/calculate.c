@@ -76,22 +76,22 @@ void	prepare_dda(t_game *game, t_dda *dda, double ray_direction_x, double ray_di
 		if (ray_direction_x < 0)
 		{
 			dda->step_x = -1;
-			dda->side_dest_x = (game->player->position_x - dda->map_x) * dda->delta_dist_x;//ここ0になってしまっている　いいんかも？？
+			dda->side_dist_x = (game->player->position_x - dda->map_x) * dda->delta_dist_x;//ここ0になってしまっている　いいんかも？？
 		}
 		else
 		{
 			dda->step_x = 1;
-			dda->side_dest_x = (dda->map_x + 1.0 - game->player->position_x) * dda->delta_dist_x;
+			dda->side_dist_x = (dda->map_x + 1.0 - game->player->position_x) * dda->delta_dist_x;
 		}
 		if (ray_direction_y < 0)
 		{
 			dda->step_y = -1;
-			dda->side_dest_y = (game->player->position_y - dda->map_y) *dda->delta_dist_y;
+			dda->side_dist_y = (game->player->position_y - dda->map_y) *dda->delta_dist_y;
 		}
 		else
 		{
 			dda->step_y = 1;
-			dda->side_dest_y = (dda->map_y + 1.0 - game->player->position_y) * dda->delta_dist_y;
+			dda->side_dist_y = (dda->map_y + 1.0 - game->player->position_y) * dda->delta_dist_y;
 		}
 }
 
@@ -99,39 +99,54 @@ int	calculate_dda(t_game *game, t_dda *dda)
 {
 	int hit; //was there a wall hit?
 	int side; //was a NS or a EW wall hit?
-
 	hit = 0;
+	// printf("map %d %d step %d %d\n", dda->map_x, dda->map_y, dda->step_x, dda->step_y);
 	while (hit == 0)
 	{
-		//jump to next map square, OR in x-direction, OR in y-direction
-		if (dda->side_dest_x < dda->side_dest_y)
+		if (dda->side_dist_x < dda->side_dist_y)
 		{
-			dda->side_dest_x += dda->delta_dist_x;
+			dda->side_dist_x += dda->delta_dist_x;
 			dda->map_x += dda->step_x;
 			side = 0;
 		}
 		else
 		{
-			dda->side_dest_y += dda->delta_dist_y;
+			dda->side_dist_y += dda->delta_dist_y;
 			dda->map_y += dda->step_y;
 			side = 1;
 		}
-		//Check if ray has hit a wall
-		if (game->world_map[dda->map_x][dda->map_y] > 0)
+		if (game->world_map[dda->map_x][dda->map_y] != '0')
 			hit = 1;
 	}
 	return (side);
 }
 
+int char_to_int(char s)
+{
+	if (s == '0')
+		return (0);
+	if (s == '1')
+		return (1);
+	if (s == '2')
+		return (2);
+	if (s == '3')
+		return (3);
+	if (s == '4')
+		return (4);
+	if (s == '5')
+		return (5);
+	if (s == '6')
+		return (6);
+	if (s == '7')
+		return (7);
+	if (s == '8')
+		return (8);
+	if (s == '9')
+		return (9);
+}
+
 void	calculate(t_game *game)
 {
-	//test
-	int	i;
-	i = 30;
-	while (i < 70)
-		draw_vertical_line(game, i++, 20, 200, 4169e1);
-	draw_vertical_line(game, i++, 20, 200, 708090);
-	//---
 	int	x;
 	t_dda	dda;
 
@@ -140,24 +155,50 @@ void	calculate(t_game *game)
 	{
 		double ray_direction_x = game->player->direction_x + game->player->plane_x * calculate_camera_location(x, width);
 		double ray_direction_y = game->player->direction_y + game->player->plane_y * calculate_camera_location(x, width);
-
 		prepare_dda(game, &dda, ray_direction_x, ray_direction_y);
+		// printf("delta %lf %lf side %lf %lf\n", dda.delta_dist_x, dda.delta_dist_y, dda.side_dist_x, dda.side_dist_y);
 		int side;
 		side = calculate_dda(game, &dda);
+		// printf("map %d %d\n", dda.map_x, dda.map_y);
 		double perp_wall_dist;
 		if (side == 0)
 			perp_wall_dist = (dda.map_x - game->player->position_x + (1 - dda.step_x) / 2) / ray_direction_x;
 		else
 			perp_wall_dist = (dda.map_y - game->player->position_y + (1 - dda.step_y) / 2) / ray_direction_y;
-
-		//Calculate height of line to draw on screen
 		int line_height = (int)(height / perp_wall_dist);
-		//calculate lowest and highest pixel to fill in current stripe
 		int draw_start = calculate_draw_start(height, line_height);
 		int draw_end = calculate_draw_end(height, line_height);
-		int	color = get_color(game, side, dda.map_x, dda.map_y);
-		printf("%d %d %d %d %d\n", x, draw_start, draw_end, color, dda.map_x, dda.map_y);
-		draw_vertical_line(game, x, draw_start, draw_end, color);
+
+		int tex_num = char_to_int(game->world_map[dda.map_x][dda.map_y]);//もうちょっといい変換方法ありそう
+		double wall_x;
+		if (side == 0)
+			wall_x = game->player->position_y + perp_wall_dist * ray_direction_y;
+		else
+			wall_x = game->player->position_x + perp_wall_dist * ray_direction_x;
+		wall_x -= floor(wall_x);
+		int tex_x = (int)(wall_x * (double)tex_width);
+		if (side == 0 && ray_direction_x > 0)
+			tex_x = tex_width - tex_x - 1;
+		if (side == 1 && ray_direction_y < 0)
+			tex_x = tex_width - tex_x - 1;
+		double step = 1.0 * tex_height / line_height;
+		double tex_position = (draw_start - height / 2 + line_height / 2) * step;
+		int y;
+		y = draw_start;
+		while (y < draw_end)
+		{
+			int tex_y = (int)tex_position & (tex_height - 1);
+			tex_position += step;
+			int color = game->texture[tex_num][tex_height * tex_y + tex_x];
+			if (side == 1)
+				color = (color >> 1) & 8355711;
+			game->buf[y][x] = color;
+			game->re_buf = 1;
+			y++;
+		}
+		// int	color = get_color(game, side, dda.map_x, dda.map_y);
+		// printf("--- draw %d %d %d color %d map %d %d\n", x, draw_start, draw_end, color, dda.map_x, dda.map_y);
+		// draw_vertical_line(game, x, draw_start, draw_end, color);
 		x++;
 	}
 }
