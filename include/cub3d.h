@@ -28,9 +28,10 @@
 #define map_height 24
 // #define width 640
 // #define height 480
-#define width 1920
-#define height 1080
-
+// #define width 1920
+// #define height 1080
+#define width 960
+#define height 540 //mapから読み取り or ディスプレイサイズに合わせる必要あり
 
 # define x_axis 0
 # define y_axis 1
