@@ -67,13 +67,16 @@ int	 calculate_draw_start(int hei, int line_height)
 		draw_start = 0;
 	return (draw_start);
 }
-void	prepare_dda(t_game *game, t_dda *dda, double ray_direction_x, double ray_direction_y)
+
+void	prepare_dda(t_game *game, t_dda *dda, int x)
 {
+		dda->ray_direction_x = game->player->direction_x + game->player->plane_x * calculate_camera_location(x, width);
+		dda->ray_direction_y = game->player->direction_y + game->player->plane_y * calculate_camera_location(x, width);
 		dda->map_x = (int)game->player->position_x;
 		dda->map_y = (int)game->player->position_y;
-		dda->delta_dist_x = fabs(1 / ray_direction_x);//fabs 浮動小数点ありの絶対値
-		dda->delta_dist_y = fabs(1 / ray_direction_y);
-		if (ray_direction_x < 0)
+		dda->delta_dist_x = fabs(1 / dda->ray_direction_x);//fabs 浮動小数点ありの絶対値
+		dda->delta_dist_y = fabs(1 / dda->ray_direction_y);
+		if (dda->ray_direction_x < 0)
 		{
 			dda->step_x = -1;
 			dda->side_dist_x = (game->player->position_x - dda->map_x) * dda->delta_dist_x;//ここ0になってしまっている　いいんかも？？
@@ -83,7 +86,7 @@ void	prepare_dda(t_game *game, t_dda *dda, double ray_direction_x, double ray_di
 			dda->step_x = 1;
 			dda->side_dist_x = (dda->map_x + 1.0 - game->player->position_x) * dda->delta_dist_x;
 		}
-		if (ray_direction_y < 0)
+		if (dda->ray_direction_y < 0)
 		{
 			dda->step_y = -1;
 			dda->side_dist_y = (game->player->position_y - dda->map_y) *dda->delta_dist_y;
@@ -99,8 +102,8 @@ int	calculate_dda(t_game *game, t_dda *dda)
 {
 	int hit; //was there a wall hit?
 	int side; //was a NS or a EW wall hit?
+
 	hit = 0;
-	// printf("map %d %d step %d %d\n", dda->map_x, dda->map_y, dda->step_x, dda->step_y);
 	while (hit == 0)
 	{
 		if (dda->side_dist_x < dda->side_dist_y)
@@ -145,47 +148,59 @@ int char_to_int(char s)
 		return (9);
 }
 
+void	prepare_map_draw(t_draw	*draw, double perp_wall_dist)
+{
+	draw->line_height = (int)(height / perp_wall_dist);
+	draw->draw_start = calculate_draw_start(height, draw->line_height);
+	draw->draw_end = calculate_draw_end(height, draw->line_height);
+}
+
+int calculate_texture_x(t_game *game,t_dda dda, int side)
+{
+	double wall_x;
+	int tex_x;
+
+	if (side == 0)
+		wall_x = game->player->position_y + dda.perp_wall_dist * dda.ray_direction_y;
+	else
+		wall_x = game->player->position_x + dda.perp_wall_dist * dda.ray_direction_x;
+	wall_x -= floor(wall_x);
+	tex_x = (int)(wall_x * (double)tex_width);
+	if (side == 0 && dda.ray_direction_x > 0)
+		tex_x = tex_width - tex_x - 1;
+	if (side == 1 && dda.ray_direction_y < 0)
+		tex_x = tex_width - tex_x - 1;
+	return (tex_x);
+}
+
 void	calculate(t_game *game)
 {
-	int	x;
+	int		x;
+	int 	side;
 	t_dda	dda;
+	t_draw	draw;
+	double	perp_wall_dist;
+	int 	tex_x;
 
 	x = 0;
 	while (x < width)
 	{
-		double ray_direction_x = game->player->direction_x + game->player->plane_x * calculate_camera_location(x, width);
-		double ray_direction_y = game->player->direction_y + game->player->plane_y * calculate_camera_location(x, width);
-		prepare_dda(game, &dda, ray_direction_x, ray_direction_y);
-		// printf("delta %lf %lf side %lf %lf\n", dda.delta_dist_x, dda.delta_dist_y, dda.side_dist_x, dda.side_dist_y);
-		int side;
+		prepare_dda(game, &dda, x);
 		side = calculate_dda(game, &dda);
-		// printf("map %d %d\n", dda.map_x, dda.map_y);
-		double perp_wall_dist;
 		if (side == 0)
-			perp_wall_dist = (dda.map_x - game->player->position_x + (1 - dda.step_x) / 2) / ray_direction_x;
+			dda.perp_wall_dist = (dda.map_x - game->player->position_x + (1 - dda.step_x) / 2) / dda.ray_direction_x;
 		else
-			perp_wall_dist = (dda.map_y - game->player->position_y + (1 - dda.step_y) / 2) / ray_direction_y;
-		int line_height = (int)(height / perp_wall_dist);
-		int draw_start = calculate_draw_start(height, line_height);
-		int draw_end = calculate_draw_end(height, line_height);
+			dda.perp_wall_dist = (dda.map_y - game->player->position_y + (1 - dda.step_y) / 2) / dda.ray_direction_y;
+		prepare_map_draw(&draw, dda.perp_wall_dist);
+
 
 		int tex_num = char_to_int(game->world_map[dda.map_x][dda.map_y]);//もうちょっといい変換方法ありそう
-		double wall_x;
-		if (side == 0)
-			wall_x = game->player->position_y + perp_wall_dist * ray_direction_y;
-		else
-			wall_x = game->player->position_x + perp_wall_dist * ray_direction_x;
-		wall_x -= floor(wall_x);
-		int tex_x = (int)(wall_x * (double)tex_width);
-		if (side == 0 && ray_direction_x > 0)
-			tex_x = tex_width - tex_x - 1;
-		if (side == 1 && ray_direction_y < 0)
-			tex_x = tex_width - tex_x - 1;
-		double step = 1.0 * tex_height / line_height;
-		double tex_position = (draw_start - height / 2 + line_height / 2) * step;
+		tex_x = calculate_texture_x(game, dda, side);
+		double step = 1.0 * tex_height / draw.line_height;
+		double tex_position = (draw.draw_start - height / 2 + draw.line_height / 2) * step;
 		int y;
-		y = draw_start;
-		while (y < draw_end)
+		y = draw.draw_start;
+		while (y < draw.draw_end)
 		{
 			int tex_y = (int)tex_position & (tex_height - 1);
 			tex_position += step;
@@ -196,9 +211,6 @@ void	calculate(t_game *game)
 			game->re_buf = 1;
 			y++;
 		}
-		// int	color = get_color(game, side, dda.map_x, dda.map_y);
-		// printf("--- draw %d %d %d color %d map %d %d\n", x, draw_start, draw_end, color, dda.map_x, dda.map_y);
-		// draw_vertical_line(game, x, draw_start, draw_end, color);
 		x++;
 	}
 }
