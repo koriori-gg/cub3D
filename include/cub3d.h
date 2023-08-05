@@ -160,6 +160,7 @@ void		print_map(t_map *map);
 void		print_map_info(t_mapinfo *map_info);
 //setup
 void		init_struct(t_game *game, char **argv);
+void		*ft_xpm_to_image(t_game *game, char *str);
 //calculate
 void		calculate(t_game *game);
 //minimap
