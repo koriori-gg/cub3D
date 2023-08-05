@@ -107,6 +107,12 @@ typedef struct	s_image
 	int		endian;
 }				t_image;
 
+typedef struct s_minimap {
+	void		*tile_img[7];
+	int			img_height;
+	int			img_width;
+}				t_minimap;
+
 typedef struct	s_dda
 {
 	int		map_x;
@@ -124,10 +130,8 @@ typedef struct s_game {
 	void		*win;
 	t_player	*player;
 	t_mapinfo	*map_info;
+	t_minimap	minimap;
 	char 		**world_map;
-	void		*tile_img[7];
-	int			img_height;
-	int			img_width;
 //02
 	int			**buf;
 	t_image		img;

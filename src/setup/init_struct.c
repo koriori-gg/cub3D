@@ -89,23 +89,25 @@ static void	*ft_xpm_to_image(t_game *game, char *str)
 	void	*img;
 
 	path = ft_strjoin("textures/4/", str);//path error
-	img = mlx_xpm_file_to_image(game->mlx, path, &game->img_width,
-			&game->img_height);
+	img = mlx_xpm_file_to_image(game->mlx, path, &game->minimap.img_width,
+			&game->minimap.img_height);
 	free(path);
 	if (!img)
 		error_exit(IMAGE_ERROR);
 	return (img);
 }
 
-void	init_asset(t_game *game)
+void	init_minimap(t_game *game)
 {
-	game->tile_img[0] = ft_xpm_to_image(game, "floor.xpm");
-	game->tile_img[1] = ft_xpm_to_image(game, "red.xpm");
-	game->tile_img[2] = ft_xpm_to_image(game, "green.xpm");
-	game->tile_img[3] = ft_xpm_to_image(game, "blue.xpm");
-	game->tile_img[4] = ft_xpm_to_image(game, "white.xpm");
-	game->tile_img[5] = ft_xpm_to_image(game, "yellow.xpm");
-	game->tile_img[6] = ft_xpm_to_image(game, "player.xpm");
+	game->minimap.img_width = 5;
+	game->minimap.img_height = 5;
+	game->minimap.tile_img[0] = ft_xpm_to_image(game, "floor.xpm");
+	game->minimap.tile_img[1] = ft_xpm_to_image(game, "red.xpm");
+	game->minimap.tile_img[2] = ft_xpm_to_image(game, "green.xpm");
+	game->minimap.tile_img[3] = ft_xpm_to_image(game, "blue.xpm");
+	game->minimap.tile_img[4] = ft_xpm_to_image(game, "white.xpm");
+	game->minimap.tile_img[5] = ft_xpm_to_image(game, "yellow.xpm");
+	game->minimap.tile_img[6] = ft_xpm_to_image(game, "player.xpm");
 }
 
 void	init_struct(t_game *game, char **argv)
@@ -117,9 +119,7 @@ void	init_struct(t_game *game, char **argv)
 	game->win = mlx_new_window(game->mlx, width * 3 / 2, height, "cub3D");//map + minimap
 	game->world_map = map_to_char(game->map_info->map);
 	print_argv(game->world_map);
-	game->img_width = 5;
-	game->img_height = 5;//minimap
-	init_asset(game);
+	init_minimap(game);
 	game->img.img = mlx_new_image(game->mlx, width, height);
 	game->img.data = (int *)mlx_get_data_addr(game->img.img, &game->img.bpp, &game->img.size_l, &game->img.endian);
 }
