@@ -11,6 +11,7 @@ SRC = src/main.c \
 	src/error/validate_map.c \
 	src/error/able_to_goal.c \
 	src/error/error.c \
+	src/error/free.c \
 	src/map/map.c \
 	src/map/init_mapinfo.c \
 	src/map/mapinfo_operator.c \
