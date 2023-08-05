@@ -6,6 +6,8 @@ void	*ft_xpm_to_image(t_game *game, char *str)
 	void	*img;
 
 	path = ft_strjoin("textures/4/", str);//path error
+	if (!path)
+		error_exit(MALLOC_ERROR);
 	img = mlx_xpm_file_to_image(game->mlx, path, &game->minimap.img_width,
 			&game->minimap.img_height);
 	free(path);
