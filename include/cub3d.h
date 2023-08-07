@@ -126,17 +126,18 @@ typedef struct	s_dda
 	double	delta_dist_x;
 	double	delta_dist_y;
 	double	perp_wall_dist;
+	int		side;
 }				t_dda;
 
 typedef struct	s_draw
 {
-	int line_height;
-	int draw_start;
-	int draw_end;
-	int tex_num;
-	int tex_x;
-	double step;
-	double tex_position;
+	int		line_height;
+	int		draw_start;
+	int		draw_end;
+	int		tex_num;
+	int		tex_x;
+	double	step;
+	double	tex_position;
 }				t_draw;
 
 typedef struct s_game {

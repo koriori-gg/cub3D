@@ -79,7 +79,7 @@ void	prepare_dda(t_game *game, t_dda *dda, int x)
 		if (dda->ray_direction_x < 0)
 		{
 			dda->step_x = -1;
-			dda->side_dist_x = (game->player->position_x - dda->map_x) * dda->delta_dist_x;//ここ0になってしまっている　いいんかも？？
+			dda->side_dist_x = (game->player->position_x - dda->map_x) * dda->delta_dist_x;
 		}
 		else
 		{
@@ -173,10 +173,30 @@ int calculate_texture_x(t_game *game,t_dda dda, int side)
 	return (tex_x);
 }
 
+void	save_color(t_game *game, t_dda dda, t_draw draw, int x)
+{
+		draw.tex_num = char_to_int(game->world_map[dda.map_x][dda.map_y]);//もうちょっといい変換方法ありそう
+		draw.tex_x = calculate_texture_x(game, dda, dda.side);
+		draw.step = 1.0 * tex_height / draw.line_height;
+		draw.tex_position = (draw.draw_start - height / 2 + draw.line_height / 2) * draw.step;
+		int y;
+		y = draw.draw_start;
+		while (y < draw.draw_end)
+		{
+			int tex_y = (int)draw.tex_position & (tex_height - 1);
+			draw.tex_position += draw.step;
+			int color = game->texture[draw.tex_num][tex_height * tex_y + draw.tex_x];
+			if (dda.side == 1)
+				color = (color >> 1) & 8355711;
+			game->buf[y][x] = color;
+			game->re_buf = 1;
+			y++;
+		}
+}
+
 void	calculate(t_game *game)
 {
 	int		x;
-	int 	side;
 	t_dda	dda;
 	t_draw	draw;
 	double	perp_wall_dist;
@@ -186,31 +206,14 @@ void	calculate(t_game *game)
 	while (x < width)
 	{
 		prepare_dda(game, &dda, x);
-		side = calculate_dda(game, &dda);
-		if (side == 0)
+		dda.side = calculate_dda(game, &dda);
+		if (dda.side == 0)
 			dda.perp_wall_dist = (dda.map_x - game->player->position_x + (1 - dda.step_x) / 2) / dda.ray_direction_x;
 		else
 			dda.perp_wall_dist = (dda.map_y - game->player->position_y + (1 - dda.step_y) / 2) / dda.ray_direction_y;
 		prepare_map_draw(&draw, dda.perp_wall_dist);
 
-
-		int tex_num = char_to_int(game->world_map[dda.map_x][dda.map_y]);//もうちょっといい変換方法ありそう
-		tex_x = calculate_texture_x(game, dda, side);
-		double step = 1.0 * tex_height / draw.line_height;
-		double tex_position = (draw.draw_start - height / 2 + draw.line_height / 2) * step;
-		int y;
-		y = draw.draw_start;
-		while (y < draw.draw_end)
-		{
-			int tex_y = (int)tex_position & (tex_height - 1);
-			tex_position += step;
-			int color = game->texture[tex_num][tex_height * tex_y + tex_x];
-			if (side == 1)
-				color = (color >> 1) & 8355711;
-			game->buf[y][x] = color;
-			game->re_buf = 1;
-			y++;
-		}
+		save_color(game, dda, draw, x);
 		x++;
 	}
 }
