@@ -136,8 +136,8 @@ typedef struct	s_draw
 	int		draw_end;
 	int		tex_num;
 	int		tex_x;
-	double	step;
 	double	tex_position;
+	double	step;
 }				t_draw;
 
 typedef struct s_game {
