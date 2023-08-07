@@ -1,20 +1,20 @@
 #include "cub3d.h"
 
-int	calculate_draw_end(int hei, int line_height)
+int	calculate_draw_end(int window_height, int line_height)
 {
 	int	draw_end;
 
-	draw_end = line_height / 2 + hei / 2;
-	if(draw_end >= hei)
-		draw_end = hei - 1;
+	draw_end = line_height / 2 + window_height / 2;
+	if(draw_end >= window_height)
+		draw_end = window_height - 1;
 	return (draw_end);
 }
 
-int	 calculate_draw_start(int hei, int line_height)
+int	 calculate_draw_start(int window_height, int line_height)
 {
 	int draw_start;
 
-	draw_start =  hei / 2 - line_height / 2;
+	draw_start =  window_height / 2 - line_height / 2;
 	if(draw_start < 0)
 		draw_start = 0;
 	return (draw_start);
