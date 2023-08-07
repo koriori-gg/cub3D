@@ -19,6 +19,9 @@ SRC = src/main.c \
 	src/setup/init_struct.c \
 	src/setup/ft_xpm_to_image.c \
 	src/raycasting/calculate.c \
+	src/raycasting/calculate_dda.c \
+	src/raycasting/calculate_draw.c \
+	src/raycasting/char_to_int.c \
 	src/raycasting/draw.c \
 	src/minimap/draw_map.c \
 

@@ -178,9 +178,14 @@ void		init_struct(t_game *game, char **argv);
 void		*ft_xpm_to_image(t_game *game, char *str);
 //calculate
 void		calculate(t_game *game);
+void		prepare_dda(t_game *game, t_dda *dda, int x);
+int			calculate_dda(t_game *game, t_dda *dda);
+void		prepare_map_draw(t_draw	*draw, double perp_wall_dist);
+void		save_color(t_game *game, t_dda *dda, t_draw *draw, int x);
+int			char_to_int(char s);
 //minimap
-void	draw_map(t_game *game);
+void		draw_map(t_game *game);
 //temp
-void	draw(t_game *game);
+void		draw(t_game *game);
 
 #endif
