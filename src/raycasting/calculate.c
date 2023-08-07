@@ -5,7 +5,6 @@ void	calculate(t_game *game)
 	int		x;
 	t_dda	dda;
 	t_draw	draw;
-	double	perp_wall_dist;
 	int 	tex_x;
 
 	x = 0;
