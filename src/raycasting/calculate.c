@@ -1,45 +1,5 @@
 #include "cub3d.h"
 
-void	draw_vertical_line(t_game *game, int x, int top, int bottom, int color)
-{
-	int	y;
-
-	y = top;
-	while (y <= bottom)
-	{
-		mlx_pixel_put(game->mlx, game->win, x, y, color);
-		y++;
-	}
-}
-
-static t_map	*move_map(t_map *map, int num)
-{
-	while (map->y > num && map->prev)
-		map = map->prev;
-	while (map->y < num && map->next)
-		map = map->next;
-	return (map);
-}
-
-int get_color(t_game *game, int map_x, int map_y, int side)
-{
-	int color;
-
-	if (game->world_map[map_y][map_x] == '1')
-		color = RGB_RED;
-	else if (game->world_map[map_y][map_x] == '2')
-		color = RGB_GREEN;
-	else if (game->world_map[map_y][map_x] == '3')
-		color = RGB_BLUE;
-	else if (game->world_map[map_y][map_x] == '4')
-		color = RGB_WHITE;
-	else
-		color = RGB_YELLOW;
-	if (side == 1)
-		color = color / 2;
-	return (color);
-}
-
 double calculate_camera_location(int x, int wid)
 {
 	double camera_x;
