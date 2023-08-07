@@ -20,6 +20,7 @@
 # define KEY_LEFT		65361
 # define KEY_DOWN		65364
 # define KEY_RIGHT		65363
+# define X_EVENT_KEY_PRESS	2
 
 //temp
 #define tex_width 64

@@ -29,9 +29,9 @@ int input_key(int keycode, t_game *game)
 	else if (keycode == KEY_DOWN || keycode == KEY_S)
 	{
 		printf("back\n");
-		if (!game->world_map[(int)(game->player->position_x - game->player->direction_x * game->player->move_speed)][(int)(game->player->position_y)] || ft_strchr("NSWE", game->world_map[(int)(game->player->position_x + game->player->direction_x * game->player->move_speed)][(int)(game->player->position_y)]))
+		if (game->world_map[(int)(game->player->position_x - game->player->direction_x * game->player->move_speed)][(int)(game->player->position_y)] == 0 || ft_strchr("NSWE", game->world_map[(int)(game->player->position_x + game->player->direction_x * game->player->move_speed)][(int)(game->player->position_y)]))
 			game->player->position_x -= game->player->direction_x * game->player->move_speed;
-		if (!game->world_map[(int)(game->player->position_x)][(int)(game->player->position_y - game->player->direction_y * game->player->move_speed)] || ft_strchr("NSWE", game->world_map[(int)(game->player->position_x)][(int)(game->player->position_y + game->player->direction_y * game->player->move_speed)]))
+		if (game->world_map[(int)(game->player->position_x)][(int)(game->player->position_y - game->player->direction_y * game->player->move_speed)] == 0 || ft_strchr("NSWE", game->world_map[(int)(game->player->position_x)][(int)(game->player->position_y + game->player->direction_y * game->player->move_speed)]))
 			game->player->position_y -= game->player->direction_y * game->player->move_speed;
 	}
 	else if (keycode == KEY_RIGHT || keycode == KEY_D)
@@ -74,7 +74,7 @@ int main(int argc, char **argv)
 	printf("argc : %d\n", argc);
 	// validate_argument(argc, argv);
 	init_struct(&game, argv);
-	mlx_key_hook(game.win, input_key, &game);
+	mlx_hook(game.win, X_EVENT_KEY_PRESS, 1L<<0, &input_key, &game);
 	mlx_hook(game.win, RED_CLOSS, 0, &close_game, &game);
 	mlx_loop_hook(game.mlx, main_loop, &game);
 	mlx_loop(game.mlx);
