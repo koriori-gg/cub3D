@@ -88,6 +88,8 @@ typedef struct s_mapinfo {
 }				t_mapinfo;
 
 typedef struct s_player {
+	double	pre_position_x;
+	double	pre_position_y;
 	double	position_x;//現在いる座標
 	double	position_y;
 	double	direction_x;//向いている角度

@@ -13,12 +13,21 @@ int	close_game(t_game *game)
 	exit(0);
 }
 
+void	update_pre_position(int keycode, t_game *game)
+{
+	if (keycode == KEY_UP || keycode == KEY_W || keycode == KEY_DOWN || keycode == KEY_S
+		|| keycode == KEY_RIGHT || keycode == KEY_D || keycode == KEY_LEFT || keycode == KEY_A)
+		game->player->pre_position_x = game->player->position_x;
+		game->player->pre_position_y = game->player->position_y;
+}
+
 int input_key(int keycode, t_game *game)
 {
-	printf("before position :%lf %lf + %lf\n", game->player->position_x, game->player->position_y, game->player->direction_x * game->player->move_speed);
+	printf("before position :x %lf y %lf + %lf\n", game->player->position_x, game->player->position_y, game->player->direction_x * game->player->move_speed);
 	if (keycode == KEY_ESC)
 		close_game(game);
-	else if (keycode == KEY_UP || keycode == KEY_W)
+	update_pre_position(keycode, game);
+	if (keycode == KEY_UP || keycode == KEY_W)
 	{
 		printf("go\n");
 		if (game->world_map[(int)(game->player->position_x + game->player->direction_x * game->player->move_speed)][(int)(game->player->position_y)] == 0 || ft_strchr("NSWE", game->world_map[(int)(game->player->position_x + game->player->direction_x * game->player->move_speed)][(int)(game->player->position_y)]))
@@ -54,7 +63,7 @@ int input_key(int keycode, t_game *game)
 		game->player->plane_x = game->player->plane_x * cos(game->player->rot_speed) - game->player->plane_y * sin(game->player->rot_speed);
 		game->player->plane_y = old_plane_x * sin(game->player->rot_speed) + game->player->plane_y * cos(game->player->rot_speed);
 	}
-	printf("after  position :%lf %lf\n", game->player->position_x, game->player->position_y);
+	printf("after  position :x %lf y %lf\n", game->player->position_x, game->player->position_y);
 	// update_map(game);
 	return (0);
 }
