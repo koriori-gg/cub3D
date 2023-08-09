@@ -14,52 +14,88 @@ static void	init_player(t_game *game)
 	game->player->plane_y = 0.66;
 	game->player->move_speed = 0.05;
 	game->player->rot_speed = 0.05;
-	game->re_buf = 0;
-	game->buf = (int **)ft_calloc(height, sizeof(int *));
-	int i;
-	int j;
-	i = 0;
-	while (i < height)
-		game->buf[i++] = (int *)ft_calloc(width, sizeof(int));
-	i = 0;
-	while (i < height)
+}
+
+void	load_image(t_game *game, int *texture, char *path, t_image *img)
+{
+	img->img = mlx_xpm_file_to_image(game->mlx, path, &img->img_width, &img->img_height);
+	printf("hpppp\n");
+	img->data = (int *)mlx_get_data_addr(img->img, &img->bpp, &img->size_l, &img->endian);
+	for (int y = 0; y < img->img_height; y++)
 	{
-		j = 0;
-		while (j < width)
-			game->buf[i][j++] = 0;
-		i++;
-	}
-	i = 0;
-	j = 0;
-	while (i < 8)
-	{
-		while (j < tex_height * tex_width)
-			game->texture[i][j++] = 0;
-		i++;
-	}
-	int x;
-	int y;
-	x = 0;
-	while (x < tex_width)
-	{
-		y = 0;
-		while (y < tex_height)
+		for (int x = 0; x < img->img_width; x++)
 		{
-			int xorcolor = (x * 256 / tex_width) ^ (y * 256 / tex_height);
-			int ycolor = y * 256 / tex_height;
-			int xycolor = y * 128 / tex_height + x * 128 / tex_width;
-			game->texture[0][tex_width * y + x] = 65536 * 254 * (x != y && x != tex_width - y); //flat red texture with black cross
-			game->texture[1][tex_width * y + x] = xycolor + 256 * xycolor + 65536 * xycolor; //sloped greyscale
-			game->texture[2][tex_width * y + x] = 256 * xycolor + 65536 * xycolor; //sloped yellow gradient
-			game->texture[3][tex_width * y + x] = xorcolor + 256 * xorcolor + 65536 * xorcolor; //xor greyscale
-			game->texture[4][tex_width * y + x] = 256 * xorcolor; //xor green
-			game->texture[5][tex_width * y + x] = 65536 * 192 * (x % 16 && y % 16); //red bricks
-			game->texture[6][tex_width * y + x] = 65536 * ycolor; //red gradient
-			game->texture[7][tex_width * y + x] = 128 + 256 * 128 + 65536 * 128; //flat grey texture
-			y++;
+			texture[img->img_width * y + x] = img->data[img->img_width * y + x];
 		}
-		x++;
 	}
+	mlx_destroy_image(game->mlx, img->img);
+}
+
+void	*ft_xpm_to_image2(t_game *game, char *str)
+{
+	char	*path;
+	void	*img;
+
+	path = ft_strjoin("textures/", str);
+	if (!path)
+		error_exit(MALLOC_ERROR);
+	img = mlx_xpm_file_to_image(game->mlx, path, &game->minimap.img_width,
+			&game->minimap.img_height);
+	free(path);
+	if (!img)
+		error_exit(IMAGE_ERROR);
+	return (img);
+}
+
+void	load_texture(t_game *game)
+{
+	t_image	img;
+
+	printf("hoge1\n");
+	// game->texture[0] = ft_xpm_to_image2(game, "eagle.xpm");
+	// game->texture[1] = ft_xpm_to_image2(game, "redbrick.xpm");
+	// game->texture[2] = ft_xpm_to_image2(game, "purplestone.xpm");
+	// game->texture[3] = ft_xpm_to_image2(game, "greystone.xpm");
+	// game->texture[4] = ft_xpm_to_image2(game, "bluestone.xpm");
+	// game->texture[5] = ft_xpm_to_image2(game, "mossy.xpm");
+	// game->texture[6] = ft_xpm_to_image2(game, "wood.xpm");
+	// game->texture[7] = ft_xpm_to_image2(game, "colorstone.xpm");
+	load_image(game, game->texture[0], "textures/eagle.xpm", &img);
+	load_image(game, game->texture[1], "textures/redbrick.xpm", &img);
+	load_image(game, game->texture[2], "textures/purplestone.xpm", &img);
+	load_image(game, game->texture[3], "textures/greystone.xpm", &img);
+	load_image(game, game->texture[4], "textures/bluestone.xpm", &img);
+	load_image(game, game->texture[5], "textures/mossy.xpm", &img);
+	load_image(game, game->texture[6], "textures/wood.xpm", &img);
+	load_image(game, game->texture[7], "textures/colorstone.xpm", &img);
+	printf("hoge\n");
+}
+
+void	init_texture(t_game *game)
+{
+	game->re_buf = 0;
+	for (int i = 0; i < height; i++)
+	{
+		for (int j = 0; j < width; j++)
+		{
+			game->buf[i][j] = 0;
+		}
+	}
+	if (!(game->texture = (int **)malloc(sizeof(int *) * 8)))
+		return ;
+	for (int i = 0; i < 8; i++)
+	{
+		if (!(game->texture[i] = (int *)malloc(sizeof(int) * (tex_height * tex_width))))
+			return ;
+	}
+	for (int i = 0; i < 8; i++)
+	{
+		for (int j = 0; j < tex_height * tex_width; j++)
+		{
+			game->texture[i][j] = 0;
+		}
+	}
+	load_texture(game);
 }
 
 char	**map_to_char(t_map *map)
@@ -106,6 +142,7 @@ void	init_struct(t_game *game, char **argv)
 	game->world_map = map_to_char(game->map_info->map);
 	print_argv(game->world_map);
 	init_minimap(game);
+	init_texture(game);
 	game->img.img = mlx_new_image(game->mlx, width, height);
 	game->img.data = (int *)mlx_get_data_addr(game->img.img, &game->img.bpp, &game->img.size_l, &game->img.endian);
 }

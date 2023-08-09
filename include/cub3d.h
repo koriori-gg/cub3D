@@ -108,6 +108,8 @@ typedef struct	s_image
 	int		size_l;
 	int		bpp;
 	int		endian;
+	int		img_width;
+	int		img_height;
 }				t_image;
 
 typedef struct s_minimap {
@@ -151,9 +153,9 @@ typedef struct s_game {
 	t_minimap	minimap;
 	char 		**world_map;
 //02
-	int			**buf;
+	int			buf[height][width];
+	int			**texture;
 	t_image		img;
-	int			texture[8][tex_height * tex_width];
 	int			re_buf;
 }				t_game;
 
