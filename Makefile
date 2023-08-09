@@ -1,29 +1,32 @@
 NAME = project
 
+LIBS = -L/usr/X11R6/lib -lX11 -lXext
+
+LIBFT_DIR = libft
+LIBFT = $(LIBFT_DIR)/libft.a
+
+MLX_DIR = minilibx-linux
+MLX = $(MLX_DIR)/libmlx.a \
+	$(MLX_DIR)/libmlx_Darwin.a
+
 CC = cc
-
-CFLAGS = -I include -I libft/include -Wall -Wextra -Werror
-
-RM = rm -f
+INCLUDES = -I $(LIBFT_DIR)/include -I include -I minilibx-linux
+CFLAGS = -Wall -Wextra -Werror $(INCLUDES)
 
 SRCS = src/main.c
 
-LIBFT_DIR = libft
-
-LIBFT_OBJ = $(LIBFT_DIR)/libft.a
-
-OBJS = $(SRCS:.c=.o)
-
-.c.o:
-	$(CC) $(CFLAGS)  $(INCLUDE)-c $< -o $(<:.c=.o)
-
-$(NAME): $(OBJS) $(LIBFT_OBJ)
-	$(CC) $(CFLAGS) -o $(NAME) -L. $(LIBFT_OBJ) $(OBJS) 
-
-$(LIBFT_OBJ):
-	make -C $(LIBFT_DIR)
+OBJS = $(SRCS:%.c=%.o)
 
 all: $(NAME)
+
+$(NAME): $(LIBFT) $(MLX) $(OBJS)
+	$(CC) $(CFLAGS) -o $(NAME) $(LIBS) $(LIBFT) $(MLX) $(OBJS)
+
+$(LIBFT):
+	make -C $(LIBFT_DIR)
+
+$(MLX):
+	make -C $(MLX_DIR)
 
 clean:
 	$(RM) $(OBJS)
