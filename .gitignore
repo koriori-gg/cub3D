@@ -68,9 +68,6 @@ xcuserdata/
 
 
 #add
-*tester
-tester*
-test*
 .vscode
 .DS_Store
 project
