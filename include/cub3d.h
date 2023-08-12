@@ -4,7 +4,7 @@
 # include "get_next_line.h"
 # include "libft.h"
 # include "mlx.h"
-# include "mlx_int.h"
+// # include "mlx_int.h"
 # include <stdbool.h>
 # include <math.h>
 
@@ -66,7 +66,7 @@ enum e_message
 
 typedef struct s_map {
 	char			*row;
-	size_t			y;
+	int				y;
 	struct s_map	*next;
 	struct s_map	*prev;
 }				t_map;

@@ -22,4 +22,5 @@ int char_to_int(char s)
 		return (8);
 	if (s == '9')
 		return (9);
+	return (-1);
 }

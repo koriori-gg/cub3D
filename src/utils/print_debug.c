@@ -41,11 +41,11 @@ void	print_map(t_map *map)
 	while (map)
 	{
 		if (map->y < 10)
-			printf("[  %zu] %s", map->y, map->row);
+			printf("[  %d] %s", map->y, map->row);
 		else if (map->y < 100)
-			printf("[ %zu] %s", map->y, map->row);
+			printf("[ %d] %s", map->y, map->row);
 		else if (map->y < 1000)
-			printf("[%zu] %s", map->y, map->row);
+			printf("[%d] %s", map->y, map->row);
 		map = map->next;
 	}
 }

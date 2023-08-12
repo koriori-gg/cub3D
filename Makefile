@@ -1,12 +1,13 @@
 NAME = cub3D
 
 LIBFT_DIR = libft
-LIBFT_OBJ = $(LIBFT_DIR)/libft.a
+LIBFT = $(LIBFT_DIR)/libft.a
 
 MLX_DIR = minilibx-linux
-MLX_OBJ = $(MLX_DIR)/libmlx_Darwin.a
+MLX = $(MLX_DIR)/libmlx.a \
+	$(MLX_DIR)/libmlx_Darwin.a
 
-SRC = src/main.c \
+SRCS = src/main.c \
 	src/error/validate_argument.c \
 	src/error/validate_map.c \
 	src/error/able_to_goal.c \
@@ -25,30 +26,34 @@ SRC = src/main.c \
 	src/raycasting/draw.c \
 	src/minimap/draw_map.c \
 
-OBJ = $(SRC:.c=.o)
+OBJ = $(SRCS:%.c=%.o)
 
-CC = gcc
-CFLAGS = -I minilibx-linux -I include -I libft/include -I /opt/X11/include #-Wall -Wextra -Werror
+CC = cc
 
-ifeq ($(shell uname), Darwin)
-XFLAGS = -L/usr/X11R6/lib -lX11 -lXext -framework OpenGL -framework AppKit
-MLX_OBJ = $(MLX_DIR)/libmlx_Darwin.a
-else
-XFLAGS = -Lmlx -Llibft -L/usr/X1R6/lib -lXext -lX11 -lm
-MLX_OBJ = $(MLX_DIR)/libmlx.a #TODO:check必要
-endif
+LIBS = -L/usr/X11R6/lib -lX11 -lXext
+
+INCLUDES = -I $(LIBFT_DIR)/include -I include -I minilibx-linux
+
+CFLAGS = -Wall -Wextra -Werror $(INCLUDES)
+
+# ifeq ($(shell uname), Darwin)
+# XFLAGS = -L/usr/X11R6/lib -lX11 -lXext -framework OpenGL -framework AppKit
+# MLX = $(MLX_DIR)/libmlx_Darwin.a
+# else
+# XFLAGS = -Lmlx -Llibft -L/usr/X1R6/lib -lXext -lX11 -lm
+# MLX = $(MLX_DIR)/libmlx.a #TODO:check必要
+# endif
 
 all: $(NAME)
 
-$(NAME): $(OBJ) $(LIBFT_OBJ) $(MLX_OBJ)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(LIBFT_OBJ) $(MLX_OBJ) $(XFLAGS)
+$(NAME): $(OBJ) $(LIBFT) $(MLX)
+	$(CC) $(CFLAGS) -o $(NAME) $(LIBS) $(OBJ) $(LIBFT) $(MLX)
 
-$(LIBFT_OBJ):
+$(LIBFT):
 	make -C $(LIBFT_DIR)
 
-$(MLX_OBJ):
+$(MLX):
 	make -C $(MLX_DIR)
-
 
 clean:
 	$(RM) $(OBJ)

@@ -12,13 +12,13 @@ void	draw_player_direction(t_game *game, int img_width, int img_height)//width h
 		x = game->minimap.img_width / 2;
 	else if (player->direction_x > 0)
 		x = game->minimap.img_width;
-	else if (player->direction_x < 0)
+	else
 		x = 0;
 	if (player->direction_y == 0)
 		y = game->minimap.img_height / 2;
 	else if (player->direction_y > 0)
 		y = game->minimap.img_height;
-	else if (player->direction_y < 0)
+	else
 		y = 0;
 
 	mlx_pixel_put(game->mlx, game->win, img_width + x, img_height + y, RGB_RED);

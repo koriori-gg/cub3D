@@ -68,9 +68,7 @@ xcuserdata/
 
 
 #add
-*tester
-tester*
-test*
 .vscode
 .DS_Store
 cub3D
+

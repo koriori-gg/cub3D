@@ -40,7 +40,7 @@ static void	add_mapinfo(t_mapinfo *map_info, char *str)
 		map_info->ceiling_color = set_rgb(str);
 }
 
-static void	add_map(t_mapinfo *map_info, char *str, size_t y)
+static void	add_map(t_mapinfo *map_info, char *str, int y)
 {
 	if (!ft_strchr(str, '\n'))
 		str = join_line_feed(str);
@@ -56,7 +56,7 @@ t_mapinfo	*init_mapinfo(char **argv)
 	t_mapinfo	*map_info;
 	int			fd;
 	char		*str;
-	size_t		y;
+	int			y;
 
 	map_info = (t_mapinfo *)ft_calloc(sizeof(t_mapinfo), 1);
 	if (!map_info)
@@ -70,7 +70,7 @@ t_mapinfo	*init_mapinfo(char **argv)
 	{
 		if (is_elements_info(str))
 			add_mapinfo(map_info, str);
-		else if (strncmp(str, "\n", 1) == 0)//一旦入れるけど実装としてはよくない
+		else if (ft_strncmp(str, "\n", 1) == 0)//一旦入れるけど実装としてはよくない
 			free(str);
 		else
 			add_map(map_info, str, y++);//strをポインタで渡した方がいい?
