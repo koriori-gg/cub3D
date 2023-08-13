@@ -34,7 +34,6 @@ t_cub_info *read_cub(char *path)
 		exit_with_error_message("invalid filename");
 	if (!can_read_file(path))	
 		exit_with_error_message("open file failed");
-	
 	return (cub_info);
 }
 
