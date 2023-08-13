@@ -17,4 +17,6 @@ typedef struct s_cub_info {
 	char	**map;
 }	t_cub_info;
 
+void	exit_with_error(char *message);
+
 #endif
