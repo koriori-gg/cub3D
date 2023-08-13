@@ -1,4 +1,4 @@
-NAME = project
+NAME = cub3d
 
 LIBS = -L/usr/X11R6/lib -lX11 -lXext
 

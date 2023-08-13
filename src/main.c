@@ -1,4 +1,5 @@
-#include "project.h"
+#include "cub3d.h"
+
 
 
 int main()
