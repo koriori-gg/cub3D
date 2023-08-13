@@ -26,10 +26,6 @@ bool	can_read_file(char *path)
 	return (true);
 }
 
-
-// ファイルがあるかどうか
-// ファイルの読み取り権限があるかどうか
-// ファイルの拡張子が.cubかどうか
 t_cub_info *read_cub(char *path)
 {
 	t_cub_info *cub_info = NULL;
@@ -38,6 +34,7 @@ t_cub_info *read_cub(char *path)
 		exit_with_error_message("invalid filename");
 	if (!can_read_file(path))	
 		exit_with_error_message("open file failed");
+	
 	return (cub_info);
 }
 
