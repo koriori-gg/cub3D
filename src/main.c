@@ -19,6 +19,13 @@ bool	is_valid_filename(char *path)
 	return (true);
 }
 
+bool	can_read_file(char *path)
+{
+	if (open(path, O_RDONLY) == -1)	
+		return (false);
+	return (true);
+}
+
 
 // ファイルがあるかどうか
 // ファイルの読み取り権限があるかどうか
@@ -29,7 +36,8 @@ t_cub_info *read_cub(char *path)
 
 	if (!is_valid_filename(path))
 		exit_with_error_message("invalid filename");
-	
+	if (!can_read_file(path))	
+		exit_with_error_message("open file failed");
 	return (cub_info);
 }
 
