@@ -1,48 +1,39 @@
 #include "cub3d.h"
 
-void	exit_with_error_message(char *message)
+__attribute__((destructor))
+void	destructor(void)
 {
-	printf("Error\n");
-	printf("%s\n", message);
-	exit(1);
+	system("leaks -q cub3d");
 }
 
-bool	is_valid_filename(char *path)
+// debug
+void	print_info(t_cub_info info)
 {
-	int	path_len;
-
-	if (!path)
-		return (false);
-	path_len = ft_strlen(path);
-	if (ft_strncmp(&path[path_len - 4], ".cub", 4))
-		return (false);
-	return (true);
+	printf("north_texture = %s\n", info.north_texture);
+	printf("south_texture = %s\n", info.south_texture);
+	printf("west_texture = %s\n", info.west_texture);
+	printf("east_texture = %s\n", info.east_texture);
+	printf("floor_color = %d, %d, %d\n", info.floor_color[0], info.floor_color[1], info.floor_color[2]);
+	printf("ceiling_color = %d, %d, %d\n", info.ceiling_color[0], info.ceiling_color[1], info.ceiling_color[2]);
 }
 
-bool	can_read_file(char *path)
+void	free_cub_info(t_cub_info cub_info)
 {
-	if (open(path, O_RDONLY) == -1)	
-		return (false);
-	return (true);
-}
-
-t_cub_info *read_cub(char *path)
-{
-	t_cub_info *cub_info = NULL;
-
-	if (!is_valid_filename(path))
-		exit_with_error_message("invalid filename");
-	if (!can_read_file(path))	
-		exit_with_error_message("open file failed");
-	return (cub_info);
+	free(cub_info.north_texture);
+	free(cub_info.south_texture);
+	free(cub_info.west_texture);
+	free(cub_info.east_texture);
+	// free_double_pointer(cub_info.map);
 }
 
 int main(int argc, char *argv[])
 {
-	t_cub_info	*cub_info;
+	t_cub_info	cub_info;
 
 	if (argc != 2)
-		exit_with_error_message("invalid input");
+		exit_with_error("invalid input");
 	cub_info = read_cub(argv[1]);
+	print_info(cub_info);
+	free_cub_info(cub_info);
 	return (0);
 }
