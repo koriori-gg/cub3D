@@ -7,7 +7,7 @@ void	exit_with_error_message(char *message)
 	exit(1);
 }
 
-bool	is_correct_filename(char *path)
+bool	is_valid_filename(char *path)
 {
 	int	path_len;
 
@@ -27,7 +27,7 @@ t_cub_info *read_cub(char *path)
 {
 	t_cub_info *cub_info = NULL;
 
-	if (!is_correct_filename(path))
+	if (!is_valid_filename(path))
 		exit_with_error_message("invalid filename");
 	
 	return (cub_info);
