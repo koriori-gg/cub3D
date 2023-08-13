@@ -1,8 +1,15 @@
 #include "cub3d.h"
 
-
-
-int main()
+void	exit_with_error_message(char *message)
 {
-	mlx_init();
+	printf("Error\n");
+	printf("%s\n", message);
+	exit(1);
+}
+
+int main(int argc, char *argv[])
+{
+	(void)argv;
+	if (argc != 2)
+		exit_with_error_message("invalid input");
 }
