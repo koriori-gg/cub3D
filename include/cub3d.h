@@ -21,4 +21,8 @@ void	exit_with_error(char *message);
 t_cub_info read_cub(char *path);
 void	free_double_pointer(void *ptr);
 
+// debug
+void	print_info(t_cub_info info);
+void	print_two_dimensional_array(char **array);
+
 #endif
