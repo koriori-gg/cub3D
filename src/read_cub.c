@@ -64,6 +64,23 @@ void	cut_color_info(int *color_info, char *line)
 	free_double_pointer(rgb);
 }
 
+char	**cut_map_info(int fd, char *first_line, int i)
+{
+	char **map;
+	char *line;
+
+	line = get_next_line(fd);
+	if (!line)
+	{
+		map = ft_calloc(i + 1, sizeof(char *));
+		map[0] = ft_strdup(first_line);
+		return (map);
+	}
+	map = cut_map_info(fd, first_line, i + 1);
+	map[i] = line;
+	return (map);
+}
+
 t_cub_info read_cub(char *path)
 {
 	int fd;
@@ -94,7 +111,10 @@ t_cub_info read_cub(char *path)
 			cut_color_info(cub_info.floor_color, line);
 		else if (ft_strncmp(line, "C", 1) == 0)
 			cut_color_info(cub_info.ceiling_color, line);
-		
+		else if (ft_strncmp(line, "\n", 1) == 0)
+			;
+		else
+			cub_info.map = cut_map_info(fd, line, 1);
 		free(line);
 	}	
 	return (cub_info);
