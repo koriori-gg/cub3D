@@ -18,48 +18,29 @@ static void	init_player(t_game *game)
 
 void	load_image(t_game *game, int *texture, char *path, t_image *img)
 {
+	int y;
+	int x;
+
 	img->img = mlx_xpm_file_to_image(game->mlx, path, &img->img_width, &img->img_height);
-	printf("hpppp\n");
 	img->data = (int *)mlx_get_data_addr(img->img, &img->bpp, &img->size_l, &img->endian);
-	for (int y = 0; y < img->img_height; y++)
+	y = 0;
+	while (y < img->img_height)
 	{
-		for (int x = 0; x < img->img_width; x++)
+		x = 0;
+		while (x < img->img_width)
 		{
 			texture[img->img_width * y + x] = img->data[img->img_width * y + x];
+			x++;
 		}
+		y++;
 	}
 	mlx_destroy_image(game->mlx, img->img);
-}
-
-void	*ft_xpm_to_image2(t_game *game, char *str)
-{
-	char	*path;
-	void	*img;
-
-	path = ft_strjoin("textures/", str);
-	if (!path)
-		error_exit(MALLOC_ERROR);
-	img = mlx_xpm_file_to_image(game->mlx, path, &game->minimap.img_width,
-			&game->minimap.img_height);
-	free(path);
-	if (!img)
-		error_exit(IMAGE_ERROR);
-	return (img);
 }
 
 void	load_texture(t_game *game)
 {
 	t_image	img;
 
-	printf("hoge1\n");
-	// game->texture[0] = ft_xpm_to_image2(game, "eagle.xpm");
-	// game->texture[1] = ft_xpm_to_image2(game, "redbrick.xpm");
-	// game->texture[2] = ft_xpm_to_image2(game, "purplestone.xpm");
-	// game->texture[3] = ft_xpm_to_image2(game, "greystone.xpm");
-	// game->texture[4] = ft_xpm_to_image2(game, "bluestone.xpm");
-	// game->texture[5] = ft_xpm_to_image2(game, "mossy.xpm");
-	// game->texture[6] = ft_xpm_to_image2(game, "wood.xpm");
-	// game->texture[7] = ft_xpm_to_image2(game, "colorstone.xpm");
 	load_image(game, game->texture[0], "textures/eagle.xpm", &img);
 	load_image(game, game->texture[1], "textures/redbrick.xpm", &img);
 	load_image(game, game->texture[2], "textures/purplestone.xpm", &img);
@@ -68,7 +49,6 @@ void	load_texture(t_game *game)
 	load_image(game, game->texture[5], "textures/mossy.xpm", &img);
 	load_image(game, game->texture[6], "textures/wood.xpm", &img);
 	load_image(game, game->texture[7], "textures/colorstone.xpm", &img);
-	printf("hoge\n");
 }
 
 void	init_texture(t_game *game)
@@ -81,14 +61,14 @@ void	init_texture(t_game *game)
 			game->buf[i][j] = 0;
 		}
 	}
-	if (!(game->texture = (int **)malloc(sizeof(int *) * 8)))
+	if (!(game->texture = (int **)malloc(sizeof(int *) * 9)))
 		return ;
-	for (int i = 0; i < 8; i++)
+	for (int i = 0; i < 9; i++)
 	{
 		if (!(game->texture[i] = (int *)malloc(sizeof(int) * (tex_height * tex_width))))
 			return ;
 	}
-	for (int i = 0; i < 8; i++)
+	for (int i = 0; i < 9; i++)
 	{
 		for (int j = 0; j < tex_height * tex_width; j++)
 		{
