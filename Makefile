@@ -16,7 +16,8 @@ CFLAGS = -Wall -Wextra -Werror $(INCLUDES)
 SRCS = src/main.c \
 	src/exit_with_error.c \
 	src/read_cub.c \
-	src/free_double_pointer.c
+	src/free_double_pointer.c \
+	src/debug.c
 
 OBJS = $(SRCS:%.c=%.o)
 
