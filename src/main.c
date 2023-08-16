@@ -72,6 +72,7 @@ void	update_map(t_game *game)
 int input_key(int keycode, t_game *game)
 {
 	printf("before position :x %lf y %lf + %lf\n", game->player->position_x, game->player->position_y, game->player->direction_x * game->player->move_speed);
+	printf("before direction:x %lf y %lf\n", game->player->direction_x, game->player->direction_y);
 	if (keycode == KEY_ESC)
 		close_game(game);
 	update_pre_position(keycode, game);
@@ -112,6 +113,8 @@ int input_key(int keycode, t_game *game)
 		game->player->plane_y = old_plane_x * sin(game->player->rot_speed) + game->player->plane_y * cos(game->player->rot_speed);
 	}
 	printf("after  position :x %lf y %lf\n", game->player->position_x, game->player->position_y);
+	printf("after  direction:x %lf y %lf\n", game->player->direction_x, game->player->direction_y);
+	printf("-------------\n");
 	update_map(game);
 	return (0);
 }
