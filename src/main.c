@@ -79,17 +79,18 @@ int input_key(int keycode, t_game *game)
 	if (keycode == KEY_UP || keycode == KEY_W)
 	{
 		printf("go\n");
-		if (game->world_map[(int)(game->player->position_x + game->player->direction_x * game->player->move_speed)][(int)(game->player->position_y)] == 0 || ft_strchr("NSWE", game->world_map[(int)(game->player->position_x + game->player->direction_x * game->player->move_speed)][(int)(game->player->position_y)]))
+		printf("int    position :x %d y %d\n", (int)(game->player->position_x + game->player->direction_x * game->player->move_speed), (int)game->player->position_y);
+		if (game->world_map[(int)(game->player->position_y)][(int)(game->player->position_x + game->player->direction_x * game->player->move_speed)] == 0 || ft_strchr("NSWE", game->world_map[(int)(game->player->position_y)][(int)(game->player->position_x + game->player->direction_x * game->player->move_speed)]) == 0)
 			game->player->position_x += game->player->direction_x * game->player->move_speed;
-		if (game->world_map[(int)(game->player->position_x)][(int)(game->player->position_y + game->player->direction_y * game->player->move_speed)] == 0 || ft_strchr("NSWE", game->world_map[(int)(game->player->position_x)][(int)(game->player->position_y + game->player->direction_y * game->player->move_speed)]))
+		if (game->world_map[(int)(game->player->position_y + game->player->direction_y * game->player->move_speed)][(int)(game->player->position_x)] == 0 || ft_strchr("NSWE", game->world_map[(int)(game->player->position_y + game->player->direction_y * game->player->move_speed)][(int)(game->player->position_x)]) == 0)
 			game->player->position_y += game->player->direction_y * game->player->move_speed;
 	}
 	else if (keycode == KEY_DOWN || keycode == KEY_S)
 	{
 		printf("back\n");
-		if (game->world_map[(int)(game->player->position_x - game->player->direction_x * game->player->move_speed)][(int)(game->player->position_y)] == 0 || ft_strchr("NSWE", game->world_map[(int)(game->player->position_x + game->player->direction_x * game->player->move_speed)][(int)(game->player->position_y)]))
+		if (game->world_map[(int)(game->player->position_y)][(int)(game->player->position_x - game->player->direction_x * game->player->move_speed)] == 0 || ft_strchr("NSWE", game->world_map[(int)(game->player->position_y)][(int)(game->player->position_x + game->player->direction_x * game->player->move_speed)]) == 0)
 			game->player->position_x -= game->player->direction_x * game->player->move_speed;
-		if (game->world_map[(int)(game->player->position_x)][(int)(game->player->position_y - game->player->direction_y * game->player->move_speed)] == 0 || ft_strchr("NSWE", game->world_map[(int)(game->player->position_x)][(int)(game->player->position_y + game->player->direction_y * game->player->move_speed)]))
+		if (game->world_map[(int)(game->player->position_y - game->player->direction_y * game->player->move_speed)][(int)(game->player->position_x)] == 0 || ft_strchr("NSWE", game->world_map[(int)(game->player->position_y - game->player->direction_y * game->player->move_speed)][(int)(game->player->position_x)]) == 0)
 			game->player->position_y -= game->player->direction_y * game->player->move_speed;
 	}
 	else if (keycode == KEY_RIGHT || keycode == KEY_D)

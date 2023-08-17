@@ -6,12 +6,12 @@ static void	init_player(t_game *game)
 	if (!game->player)
 		error_exit(MALLOC_ERROR);
 	//temp
-	game->player->position_x = 22.0;//本来はmapから読み取る必要あり
-	game->player->position_y = 11.5;
-	game->player->direction_x = -1.0;//本来はmapから読み取る必要あり
-	game->player->direction_y = 0.0;
-	game->player->plane_x = 0.0;
-	game->player->plane_y = 0.66;
+	game->player->position_x = 11.5;//本来はmapから読み取る必要あり
+	game->player->position_y = 22.0;
+	game->player->direction_x = 0.0;//本来はmapから読み取る必要あり
+	game->player->direction_y = -1.0;
+	game->player->plane_x = 0.66;
+	game->player->plane_y = 0.0;
 	game->player->move_speed = 0.05;
 	game->player->rot_speed = 0.05;
 }
