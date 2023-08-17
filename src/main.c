@@ -38,7 +38,7 @@ int	main(int argc, char *argv[])
 	init_map_info(&map_info);
 	fd = open_cub_file(argv[1]);
 	map_info = get_map_info(fd);
-	print_info(map_info);
+	validate_map_info(map_info);
 	free_map_info(map_info);
 	return (0);
 }

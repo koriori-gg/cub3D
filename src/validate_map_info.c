@@ -9,8 +9,21 @@ static void	validate_texture_path(char *texture_path)
 
 static void	validate_rgb(int *rgb)
 {
+	int	i;
+
 	if (!rgb)
 		exit_with_error("rgb not found");
+	i = 0;
+	// rgbの要素が0の時にwhileを抜けてしまう
+	while (rgb[i])
+	{
+		if (rgb[i] < 0 || rgb[i] > 255)
+			exit_with_error("invalid RGB");
+		i++;
+	}
+	printf("%d\n", i);
+	if (i != 3)
+		exit_with_error("invalid RGB");
 }
 
 static void	validate_map(char **map)
@@ -21,7 +34,11 @@ static void	validate_map(char **map)
 
 void	validate_map_info(t_map_info map_info)
 {
-	validate_texture_path(char *texture_path);
-	validate_rgb(int *rgb);
-	validate_map(char **map);
+	validate_texture_path(map_info.north_texture);
+	validate_texture_path(map_info.south_texture);
+	validate_texture_path(map_info.west_texture);
+	validate_texture_path(map_info.east_texture);
+	validate_rgb(map_info.floor_color);
+	validate_rgb(map_info.ceiling_color);
+	validate_map(map_info.map);
 }
