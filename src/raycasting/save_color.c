@@ -55,7 +55,13 @@ void	save_color(t_game *game, t_dda *dda, t_draw *draw, int x)
 	draw->tex_x = calculate_texture_x(game, dda);
 	draw->step = 1.0 * tex_height / draw->line_height;
 	draw->tex_position = (draw->draw_start - height / 2 + draw->line_height / 2) * draw->step;
-	y = draw->draw_start;
+	y = 0;
+	while (y < draw->draw_start)
+	{
+		color = 646490;
+		game->buf[y][x] = color;
+		y++;
+	}
 	while (y < draw->draw_end)
 	{
 		tex_y = (int)draw->tex_position & (tex_height - 1);
@@ -65,6 +71,12 @@ void	save_color(t_game *game, t_dda *dda, t_draw *draw, int x)
 			color = (color >> 1) & 8355711;
 		game->buf[y][x] = color;
 		game->re_buf = 1;
+		y++;
+	}
+	while (y < height)
+	{
+		color = 928742;
+		game->buf[y][x] = color;
 		y++;
 	}
 }
