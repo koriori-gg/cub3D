@@ -31,19 +31,18 @@ bool	is_space(char c)
 	return (false);
 }
 
-void	cut_texture_info(char **texture_info, char *line)
+char	*cut_texture_info(char *line)
 {
 	int i;
-	int len;
+	char *texture_info;
 	
 	i = 2;
 	if (line[i] == '\0' || line[i] == '\n')	
-		return ;
+		return (NULL);
 	while (is_space(line[i]))
 		i++;
-	len = ft_strlen(&line[i]);
-	*texture_info = ft_calloc(len, sizeof(char));
-	ft_strlcpy(*texture_info, &line[i], len);
+	texture_info = ft_substr(&line[i], 0, ft_strlen(&line[i]) - 1);
+	return (texture_info);
 }
 
 void	cut_color_info(int *color_info, char *line)
@@ -101,13 +100,13 @@ t_cub_info read_cub(char *path)
 		if (!line)
 			break ;
 		if (ft_strncmp(line, "NO", 2) == 0)
-			cut_texture_info(&cub_info.north_texture, line);
+			cub_info.north_texture = cut_texture_info(line);
 		else if (ft_strncmp(line, "SO", 2) == 0)
-			cut_texture_info(&cub_info.south_texture, line);
+			cub_info.south_texture = cut_texture_info(line);
 		else if (ft_strncmp(line, "WE", 2) == 0)
-			cut_texture_info(&cub_info.west_texture, line);
+			cub_info.west_texture = cut_texture_info(line);
 		else if (ft_strncmp(line, "EA", 2) == 0)
-			cut_texture_info(&cub_info.east_texture, line);
+			cub_info.east_texture = cut_texture_info(line);
 		else if (ft_strncmp(line, "F", 1) == 0)
 			cut_color_info(cub_info.floor_color, line);
 		else if (ft_strncmp(line, "C", 1) == 0)
