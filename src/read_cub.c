@@ -52,7 +52,7 @@ void	cut_color_info(int *color_info, char *line)
 	char **rgb;
 
 	i = 1;
-	if (line[i] == '\0')
+	if (line[i] == '\0' || line[i] == '\n')
 		return ; 
 	while (is_space(line[i]))
 		i++;
