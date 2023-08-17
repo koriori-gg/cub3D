@@ -10,6 +10,7 @@ void	print_info(t_cub_info info)
 	printf("east_texture = %s\n", info.east_texture);
 	printf("floor_color = %d, %d, %d\n", info.floor_color[0], info.floor_color[1], info.floor_color[2]);
 	printf("ceiling_color = %d, %d, %d\n", info.ceiling_color[0], info.ceiling_color[1], info.ceiling_color[2]);
+	print_two_dimensional_array(info.map);
 }
 
 void	print_two_dimensional_array(char **array)
