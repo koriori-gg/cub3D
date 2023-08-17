@@ -25,7 +25,8 @@ static void	init_cub_info(t_cub_info *cub_info)
 
 bool	is_space(char c)
 {
-	if (c == ' ' || c == '\t')
+	if (c == '\t' || c == '\n' || c == '\v'
+		|| c == '\f' || c == '\r' || c == ' ')
 		return (true);
 	return (false);
 }
