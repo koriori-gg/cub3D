@@ -1,4 +1,4 @@
-NAME = project
+NAME = cub3d
 
 LIBS = -L/usr/X11R6/lib -lX11 -lXext
 
@@ -13,7 +13,12 @@ CC = cc
 INCLUDES = -I $(LIBFT_DIR)/include -I include -I minilibx-linux
 CFLAGS = -Wall -Wextra -Werror $(INCLUDES)
 
-SRCS = src/main.c
+SRCS = src/main.c \
+	src/exit_with_error.c \
+	src/open_cub_file.c \
+	src/get_map_info.c \
+	src/free_double_pointer.c \
+	src/debug.c
 
 OBJS = $(SRCS:%.c=%.o)
 
