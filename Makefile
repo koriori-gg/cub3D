@@ -17,6 +17,7 @@ SRCS = src/main.c \
 	src/exit_with_error.c \
 	src/open_cub_file.c \
 	src/get_map_info.c \
+	src/validate_map_info.c \
 	src/free_double_pointer.c \
 	src/debug.c
 
