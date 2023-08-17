@@ -1,6 +1,6 @@
 #include "cub3d.h"
 
-static char	*cut_texture_info(char *line)
+static char	*extract_texture_path(char *line)
 {
 	int		i;
 	char	*texture_info;
@@ -14,7 +14,7 @@ static char	*cut_texture_info(char *line)
 	return (texture_info);
 }
 
-static int	*cut_color_info(char *line)
+static int	*extract_rgb(char *line)
 {
 	int		i;
 	char	**rgb;
@@ -42,7 +42,7 @@ static int	*cut_color_info(char *line)
 	return (color_info);
 }
 
-static char	**cut_map_info(int fd, char *first_line, int i)
+static char	**extract_map(int fd, char *first_line, int i)
 {
 	char	**map;
 	char	*line;
@@ -54,7 +54,7 @@ static char	**cut_map_info(int fd, char *first_line, int i)
 		map[0] = ft_strdup(first_line);
 		return (map);
 	}
-	map = cut_map_info(fd, first_line, i + 1);
+	map = extract_map(fd, first_line, i + 1);
 	map[i] = line;
 	return (map);
 }
@@ -70,19 +70,19 @@ t_map_info	get_map_info(int fd)
 		if (!line)
 			break ;
 		if (ft_strncmp(line, "NO", 2) == 0)
-			map_info.north_texture = cut_texture_info(line);
+			map_info.north_texture = extract_texture_path(line);
 		else if (ft_strncmp(line, "SO", 2) == 0)
-			map_info.south_texture = cut_texture_info(line);
+			map_info.south_texture = extract_texture_path(line);
 		else if (ft_strncmp(line, "WE", 2) == 0)
-			map_info.west_texture = cut_texture_info(line);
+			map_info.west_texture = extract_texture_path(line);
 		else if (ft_strncmp(line, "EA", 2) == 0)
-			map_info.east_texture = cut_texture_info(line);
+			map_info.east_texture = extract_texture_path(line);
 		else if (ft_strncmp(line, "F", 1) == 0)
-			map_info.floor_color = cut_color_info(line);
+			map_info.floor_color = extract_rgb(line);
 		else if (ft_strncmp(line, "C", 1) == 0)
-			map_info.ceiling_color = cut_color_info(line);
+			map_info.ceiling_color = extract_rgb(line);
 		else if (ft_strncmp(line, "\n", 1) != 0)
-			map_info.map = cut_map_info(fd, line, 1);
+			map_info.map = extract_map(fd, line, 1);
 		free(line);
 	}
 	return (map_info);
