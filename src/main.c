@@ -97,21 +97,22 @@ int input_key(int keycode, t_game *game)
 	{
 		printf("right\n");
 		double old_direction_x = game->player->direction_x;
-		game->player->direction_x = game->player->direction_x * cos(-game->player->rot_speed) - game->player->direction_y * sin(-game->player->rot_speed);
-		game->player->direction_y = old_direction_x * sin(-game->player->rot_speed) + game->player->direction_y * cos(-game->player->rot_speed);
-		double old_plane_x = game->player->plane_x;
-		game->player->plane_x = game->player->plane_x * cos(-game->player->rot_speed) - game->player->plane_y * sin(-game->player->rot_speed);
-		game->player->plane_y = old_plane_x * sin(-game->player->rot_speed) + game->player->plane_y * cos(-game->player->rot_speed);
-	}
-	else if (keycode == KEY_LEFT || keycode == KEY_A)
-	{
-		printf("left\n");
-		double old_direction_x = game->player->direction_x;
 		game->player->direction_x = game->player->direction_x * cos(game->player->rot_speed) - game->player->direction_y * sin(game->player->rot_speed);
 		game->player->direction_y = old_direction_x * sin(game->player->rot_speed) + game->player->direction_y * cos(game->player->rot_speed);
 		double old_plane_x = game->player->plane_x;
 		game->player->plane_x = game->player->plane_x * cos(game->player->rot_speed) - game->player->plane_y * sin(game->player->rot_speed);
 		game->player->plane_y = old_plane_x * sin(game->player->rot_speed) + game->player->plane_y * cos(game->player->rot_speed);
+
+	}
+	else if (keycode == KEY_LEFT || keycode == KEY_A)
+	{
+		printf("left\n");
+		double old_direction_x = game->player->direction_x;
+		game->player->direction_x = game->player->direction_x * cos(-game->player->rot_speed) - game->player->direction_y * sin(-game->player->rot_speed);
+		game->player->direction_y = old_direction_x * sin(-game->player->rot_speed) + game->player->direction_y * cos(-game->player->rot_speed);
+		double old_plane_x = game->player->plane_x;
+		game->player->plane_x = game->player->plane_x * cos(-game->player->rot_speed) - game->player->plane_y * sin(-game->player->rot_speed);
+		game->player->plane_y = old_plane_x * sin(-game->player->rot_speed) + game->player->plane_y * cos(-game->player->rot_speed);
 	}
 	printf("after  position :x %lf y %lf\n", game->player->position_x, game->player->position_y);
 	printf("after  direction:x %lf y %lf\n", game->player->direction_x, game->player->direction_y);
