@@ -7,7 +7,7 @@
 # include "mlx.h"
 # include <stdbool.h>
 
-typedef struct s_cub_info {
+typedef struct s_map_info {
 	char	*north_texture;
 	char	*south_texture;
 	char	*west_texture;
@@ -15,14 +15,15 @@ typedef struct s_cub_info {
 	int		*floor_color;
 	int		*ceiling_color;
 	char	**map;
-}	t_cub_info;
+}	t_map_info;
 
-void	exit_with_error(char *message);
-t_cub_info read_cub(char *path);
-void	free_double_pointer(void *ptr);
+void		exit_with_error(char *message);
+int			open_cub_file(char *path);
+t_map_info	get_map_info(int fd);
+void		free_double_pointer(void *ptr);
 
 // debug
-void	print_info(t_cub_info info);
+void	print_info(t_map_info info);
 void	print_two_dimensional_array(char **array);
 
 #endif

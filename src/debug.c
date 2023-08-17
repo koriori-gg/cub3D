@@ -1,9 +1,10 @@
 #include "cub3d.h"
 
-void	print_info(t_cub_info info)
+// norminette not applied
+
+void	print_info(t_map_info info)
 {
 	printf("------ DEBUG: print_info ------\n");
-
 	printf("north_texture = %s\n", info.north_texture);
 	printf("south_texture = %s\n", info.south_texture);
 	printf("west_texture = %s\n", info.west_texture);
@@ -15,9 +16,9 @@ void	print_info(t_cub_info info)
 
 void	print_two_dimensional_array(char **array)
 {
-	printf("------ DEBUG: print_two_dimensional_array ------\n");
-
 	int	i = 0;
+
+	printf("------ DEBUG: print_two_dimensional_array ------\n");
 	while (array[i])
 	{
 		printf("%s\n", array[i]);

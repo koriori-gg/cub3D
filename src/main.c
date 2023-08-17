@@ -6,25 +6,39 @@ void	destructor(void)
 	system("leaks -q cub3d");
 }
 
-void	free_cub_info(t_cub_info cub_info)
+void	free_map_info(t_map_info map_info)
 {
-	free(cub_info.north_texture);
-	free(cub_info.south_texture);
-	free(cub_info.west_texture);
-	free(cub_info.east_texture);
-	free(cub_info.floor_color);
-	free(cub_info.ceiling_color);
-	free_double_pointer(cub_info.map);
+	free(map_info.north_texture);
+	free(map_info.south_texture);
+	free(map_info.west_texture);
+	free(map_info.east_texture);
+	free(map_info.floor_color);
+	free(map_info.ceiling_color);
+	free_double_pointer(map_info.map);
 }
 
-int main(int argc, char *argv[])
+static void	init_map_info(t_map_info *map_info)
 {
-	t_cub_info	cub_info;
+	map_info->north_texture = NULL;
+	map_info->south_texture = NULL;
+	map_info->west_texture = NULL;
+	map_info->east_texture = NULL;
+	map_info->floor_color = NULL;
+	map_info->ceiling_color = NULL;
+	map_info->map = NULL;
+}
+
+int	main(int argc, char *argv[])
+{
+	t_map_info	map_info;
+	int			fd;
 
 	if (argc != 2)
 		exit_with_error("invalid input");
-	cub_info = read_cub(argv[1]);
-	print_info(cub_info);
-	free_cub_info(cub_info);
+	init_map_info(&map_info);
+	fd = open_cub_file(argv[1]);
+	map_info = get_map_info(fd);
+	print_info(map_info);
+	free_map_info(map_info);
 	return (0);
 }

@@ -15,7 +15,8 @@ CFLAGS = -Wall -Wextra -Werror $(INCLUDES)
 
 SRCS = src/main.c \
 	src/exit_with_error.c \
-	src/read_cub.c \
+	src/open_cub_file.c \
+	src/get_map_info.c \
 	src/free_double_pointer.c \
 	src/debug.c
 
