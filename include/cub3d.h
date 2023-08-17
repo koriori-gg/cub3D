@@ -187,6 +187,8 @@ void		prepare_dda(t_game *game, t_dda *dda, int x);
 int			calculate_dda(t_game *game, t_dda *dda);
 void		prepare_map_draw(t_draw	*draw, double perp_wall_dist);
 void		save_color(t_game *game, t_dda *dda, t_draw *draw, int x);
+void		save_ceiling(t_game *game, t_draw *draw, int x);
+void		save_floor(t_game *game, t_draw *draw, int x);
 int			char_to_int(char s);
 //minimap
 void		draw_map(t_game *game);
