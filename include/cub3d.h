@@ -21,6 +21,7 @@ void		exit_with_error(char *message);
 int			open_cub_file(char *path);
 t_map_info	get_map_info(int fd);
 void		free_double_pointer(void *ptr);
+void		validate_map_info(t_map_info map_info);
 
 // debug
 void	print_info(t_map_info info);
