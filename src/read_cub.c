@@ -18,8 +18,8 @@ static void	init_cub_info(t_cub_info *cub_info)
 	cub_info->south_texture = NULL;
 	cub_info->west_texture = NULL;
 	cub_info->east_texture = NULL;
-	cub_info->floor_color[0] = -1;
-	cub_info->ceiling_color[0] = -1;
+	cub_info->floor_color = NULL;
+	cub_info->ceiling_color = NULL;
 	cub_info->map = NULL;
 }
 
@@ -44,24 +44,32 @@ char	*cut_texture_info(char *line)
 	texture_info = ft_substr(&line[i], 0, ft_strlen(&line[i]) - 1);
 	return (texture_info);
 }
-
-void	cut_color_info(int *color_info, char *line)
+ 
+int	*cut_color_info(char *line)
 {
 	int i;
 	char **rgb;
+	int	*color_info;
 
 	i = 1;
 	if (line[i] == '\0' || line[i] == '\n')
-		return ; 
+		return (NULL); 
 	while (is_space(line[i]))
 		i++;
 	rgb = ft_split(&line[i], ',');
 	if (!rgb)
-		return ;
-	color_info[0] = ft_atoi(rgb[0]);
-	color_info[1] = ft_atoi(rgb[1]);
-	color_info[2] = ft_atoi(rgb[2]);
-	free_double_pointer(rgb);
+		return (NULL);
+	i = 0;
+	while (rgb[i])
+		i++;
+	color_info = ft_calloc(i + 1, sizeof(int));
+	i = 0;
+	while (rgb[i])
+	{
+		color_info[i] = ft_atoi(rgb[i]);
+		i++;
+	}
+	return (color_info);
 }
 
 char	**cut_map_info(int fd, char *first_line, int i)
@@ -108,14 +116,14 @@ t_cub_info read_cub(char *path)
 		else if (ft_strncmp(line, "EA", 2) == 0)
 			cub_info.east_texture = cut_texture_info(line);
 		else if (ft_strncmp(line, "F", 1) == 0)
-			cut_color_info(cub_info.floor_color, line);
+			cub_info.floor_color = cut_color_info(line);
 		else if (ft_strncmp(line, "C", 1) == 0)
-			cut_color_info(cub_info.ceiling_color, line);
+			cub_info.ceiling_color = cut_color_info(line);
 		else if (ft_strncmp(line, "\n", 1) == 0)
 			;
 		else
 			cub_info.map = cut_map_info(fd, line, 1);
 		free(line);
-	}	
+	}
 	return (cub_info);
 }

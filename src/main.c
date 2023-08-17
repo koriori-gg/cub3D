@@ -12,6 +12,8 @@ void	free_cub_info(t_cub_info cub_info)
 	free(cub_info.south_texture);
 	free(cub_info.west_texture);
 	free(cub_info.east_texture);
+	free(cub_info.floor_color);
+	free(cub_info.ceiling_color);
 	free_double_pointer(cub_info.map);
 }
 
