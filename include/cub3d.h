@@ -194,5 +194,9 @@ int			char_to_int(char s);
 void		draw_map(t_game *game);
 //temp
 void		draw(t_game *game);
+//move
+int			input_key(int keycode, t_game *game);
+//close
+int			close_game(t_game *game);
 
 #endif

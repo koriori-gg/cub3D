@@ -8,6 +8,7 @@ MLX = $(MLX_DIR)/libmlx.a \
 	$(MLX_DIR)/libmlx_Darwin.a
 
 SRCS = src/main.c \
+	src/input_key.c \
 	src/error/validate_argument.c \
 	src/error/validate_map.c \
 	src/error/able_to_goal.c \
