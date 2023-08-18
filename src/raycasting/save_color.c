@@ -51,7 +51,7 @@ void	save_color(t_game *game, t_dda *dda, t_draw *draw, int x)
 	int color;
 	int tex_y;
 
-	draw->tex_num = char_to_int(game->world_map[dda->map_y][dda->map_x]);//もうちょっといい変換方法ありそう
+	draw->tex_num = char_to_int(game->map_info.map[dda->map_y][dda->map_x]);//もうちょっといい変換方法ありそう
 	draw->tex_x = calculate_texture_x(game, dda);
 	draw->step = 1.0 * tex_height / draw->line_height;
 	draw->tex_position = (draw->draw_start - height / 2 + draw->line_height / 2) * draw->step;

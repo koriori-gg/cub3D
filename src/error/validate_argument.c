@@ -21,5 +21,5 @@ void	validate_argument(int argc, char **argv)
 	if (argc < 2)
 		error_exit(AGUMENT_ERROR);
 	validate_file(argv[1]);//TODO: change 複数map対応
-	validate_map(argv);
+	// validate_map(argv);
 }

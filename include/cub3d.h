@@ -4,7 +4,6 @@
 # include "get_next_line.h"
 # include "libft.h"
 # include "mlx.h"
-// # include "mlx_int.h"
 # include <stdbool.h>
 # include <math.h>
 
@@ -77,15 +76,15 @@ typedef struct s_rgb {
 	int	blue;
 }				t_rgb;
 
-typedef struct s_mapinfo {
+typedef struct s_map_info {
 	char	*north_texture;
 	char	*south_texture;
 	char	*west_texture;
 	char	*east_texture;
-	t_rgb	*floor_color;
-	t_rgb	*ceiling_color;
-	t_map	*map;
-}				t_mapinfo;
+	int		*floor_color;
+	int		*ceiling_color;
+	char	**map;
+}	t_map_info;
 
 typedef struct s_player {
 	double	pre_position_x;
@@ -149,7 +148,7 @@ typedef struct s_game {
 	void		*mlx;
 	void		*win;
 	t_player	*player;
-	t_mapinfo	*map_info;
+	t_map_info	map_info;
 	t_minimap	minimap;
 	char 		**world_map;
 //02
@@ -161,7 +160,7 @@ typedef struct s_game {
 
 //validate_argument and map
 void		validate_argument(int argc, char **argv);
-void		validate_map(char **argv);
+// void		validate_map(char **argv);
 //error
 void		error_exit(int signal);
 void		print_error(char *str);
@@ -171,13 +170,16 @@ int			ft_mapsize(t_map *map);
 void		ft_mapadd_back(t_map **map, t_map *new);
 void		ft_free_map(t_map *map);
 t_map		*mapdup(t_map *map);
-t_mapinfo	*init_mapinfo(char **argv);
-void		free_map_info(t_mapinfo *map_info);
+// t_map_info	*init_map_info(char **argv);
+// void		free_map_info(t_map_info *map_info);
+
+void		free_map_info(t_map_info map_info);//!!
+
 bool		is_elements_info(char *str);
 //utils
 void		print_argv(char **argv);
 void		print_map(t_map *map);
-void		print_map_info(t_mapinfo *map_info);
+void		print_map_info(t_map_info *map_info);
 //setup
 void		init_struct(t_game *game, char **argv);
 void		*ft_xpm_to_image(t_game *game, char *str);
@@ -198,5 +200,13 @@ void		draw(t_game *game);
 int			input_key(int keycode, t_game *game);
 //close
 int			close_game(t_game *game);
+
+void		exit_with_error(char *message);
+int			open_cub_file(char *path);
+t_map_info	get_map_info(int fd);
+
+// debug
+void	print_info(t_map_info info);
+void	print_two_dimensional_array(char **array);
 
 #endif

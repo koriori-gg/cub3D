@@ -8,6 +8,10 @@ MLX = $(MLX_DIR)/libmlx.a \
 	$(MLX_DIR)/libmlx_Darwin.a
 
 SRCS = src/main.c \
+	src/exit_with_error.c \
+	src/open_cub_file.c \
+	src/get_map_info.c \
+	src/debug.c \
 	src/input_key.c \
 	src/error/validate_argument.c \
 	src/error/validate_map.c \
@@ -28,7 +32,7 @@ SRCS = src/main.c \
 	src/raycasting/draw.c \
 	src/minimap/draw_map.c \
 
-OBJ = $(SRCS:%.c=%.o)
+OBJS = $(SRCS:%.c=%.o)
 
 CC = cc
 
@@ -38,18 +42,10 @@ INCLUDES = -I $(LIBFT_DIR)/include -I include -I minilibx-linux
 
 CFLAGS = -Wall -Wextra -Werror $(INCLUDES)
 
-# ifeq ($(shell uname), Darwin)
-# XFLAGS = -L/usr/X11R6/lib -lX11 -lXext -framework OpenGL -framework AppKit
-# MLX = $(MLX_DIR)/libmlx_Darwin.a
-# else
-# XFLAGS = -Lmlx -Llibft -L/usr/X1R6/lib -lXext -lX11 -lm
-# MLX = $(MLX_DIR)/libmlx.a #TODO:check必要
-# endif
-
 all: $(NAME)
 
-$(NAME): $(OBJ) $(LIBFT) $(MLX)
-	$(CC) $(CFLAGS) -o $(NAME) $(LIBS) $(OBJ) $(LIBFT) $(MLX)
+$(NAME): $(OBJS) $(LIBFT) $(MLX)
+	$(CC) $(CFLAGS) -o $(NAME) $(LIBS) $(OBJS) $(LIBFT) $(MLX)
 
 $(LIBFT):
 	make -C $(LIBFT_DIR)
@@ -58,7 +54,7 @@ $(MLX):
 	make -C $(MLX_DIR)
 
 clean:
-	$(RM) $(OBJ)
+	$(RM) $(OBJS)
 	make fclean -C $(LIBFT_DIR)
 	make clean -C $(MLX_DIR)
 

@@ -78,26 +78,26 @@ void	init_texture(t_game *game)
 	load_texture(game);
 }
 
-char	**map_to_char(t_map *map)
-{
-	int		size;
-	int		i;
-	char	**ret;
+// char	**map_to_char(t_map *map)
+// {
+// 	int		size;
+// 	int		i;
+// 	char	**ret;
 
-	size = ft_mapsize(map);
-	ret = (char **)ft_calloc(size + 1, sizeof(char *));
-	if (!ret)
-		error_exit(MALLOC_ERROR);
-	i = 0;
-	while (map)
-	{
-		ret[i] = ft_strdup(map->row);
-		i++;
-		map = map->next;
-	}
-	ret[i] = 0;
-	return (ret);
-}
+// 	size = ft_mapsize(map);
+// 	ret = (char **)ft_calloc(size + 1, sizeof(char *));
+// 	if (!ret)
+// 		error_exit(MALLOC_ERROR);
+// 	i = 0;
+// 	while (map)
+// 	{
+// 		ret[i] = ft_strdup(map->row);
+// 		i++;
+// 		map = map->next;
+// 	}
+// 	ret[i] = 0;
+// 	return (ret);
+// }
 
 void	init_minimap(t_game *game)
 {
@@ -112,15 +112,32 @@ void	init_minimap(t_game *game)
 	game->minimap.tile_img[6] = ft_xpm_to_image(game, "player.xpm");
 }
 
+static void	init_map_info(t_map_info *map_info)
+{
+	map_info->north_texture = NULL;
+	map_info->south_texture = NULL;
+	map_info->west_texture = NULL;
+	map_info->east_texture = NULL;
+	map_info->floor_color = NULL;
+	map_info->ceiling_color = NULL;
+	map_info->map = NULL;
+}
+
 void	init_struct(t_game *game, char **argv)
 {
+	int fd;
+
 	init_player(game);
-	game->map_info = init_mapinfo(argv);//initのやり方統一した方がいい??
-	print_map_info(game->map_info);
+	init_map_info(&game->map_info);
+	fd = open_cub_file(argv[1]);
+	game->map_info = get_map_info(fd);
+	print_info(game->map_info);
+	// game->map_info = init_mapinfo(argv);//initのやり方統一した方がいい??
+	// print_map_info(game->map_info);
 	game->mlx = mlx_init();
 	game->win = mlx_new_window(game->mlx, width * 3 / 2, height, "cub3D");//map + minimap
-	game->world_map = map_to_char(game->map_info->map);
-	print_argv(game->world_map);
+	// game->world_map = map_to_char(game->map_info->map);
+	// print_argv(game->world_map);
 	init_minimap(game);
 	init_texture(game);
 	game->img.img = mlx_new_image(game->mlx, width, height);

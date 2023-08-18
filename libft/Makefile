@@ -42,6 +42,7 @@ M_SRC = src/ft_atoi.c \
 	src/ft_putendl_fd.c \
 	src/ft_putnbr_fd.c \
 	src/ft_striteri.c \
+	src/ft_isspace.c
 
 B_SRC = src/ft_lstnew_bonus.c \
 			src/ft_lstadd_front_bonus.c \

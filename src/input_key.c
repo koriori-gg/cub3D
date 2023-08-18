@@ -14,7 +14,7 @@ void	change_map(t_game *game, t_map *map, int map_x, int map_y)
 	int		pre_map_x;
 	int		pre_map_y;
 
-	temp = game->world_map[map_y][map_x];
+	temp = game->map_info.map[map_y][map_x];
 	pre_map_x = (int)game->player->pre_position_x;
 	pre_map_y = (int)game->player->pre_position_y;
 	while (map->y < map_y)
@@ -35,43 +35,43 @@ void	change_worldmap(int map_x, int map_y, t_game *game)
 	int		pre_map_x;
 	int		pre_map_y;
 
-	if (game->world_map[map_y][map_x] == 0)
+	if (game->map_info.map[map_y][map_x] == 0)
 	{
-		temp = game->world_map[map_y][map_x];
+		temp = game->map_info.map[map_y][map_x];
 		pre_map_x = (int)game->player->pre_position_x;
 		pre_map_y = (int)game->player->pre_position_y;
-		game->world_map[map_y][map_x] = game->world_map[pre_map_y][pre_map_x];
-		game->world_map[pre_map_y][pre_map_x] = temp;
+		game->map_info.map[map_y][map_x] = game->map_info.map[pre_map_y][pre_map_x];
+		game->map_info.map[pre_map_y][pre_map_x] = temp;
 	}
 }
 
-void	update_map(t_game *game)
-{
-	int	map_x;
-	int map_y;
+// void	update_map(t_game *game)
+// {
+// 	int	map_x;
+// 	int map_y;
 
-	map_x = (int)game->player->position_x;
-	map_y = (int)game->player->position_y;
-	change_map(game, game->map_info->map, map_x, map_y);
-	change_worldmap(map_x, map_y, game);
-}
+// 	map_x = (int)game->player->position_x;
+// 	map_y = (int)game->player->position_y;
+// 	change_map(game, game->map_info->map, map_x, map_y);
+// 	change_worldmap(map_x, map_y, game);
+// }
 
 void	move(int keycode, t_game *game)
 {
 	if (keycode == KEY_UP || keycode == KEY_W)
 	{
 		printf("go\n");
-		if (game->world_map[(int)(game->player->position_y)][(int)(game->player->position_x + game->player->direction_x * game->player->move_speed)] == '0')
+		if (game->map_info.map[(int)(game->player->position_y)][(int)(game->player->position_x + game->player->direction_x * game->player->move_speed)] == '0')
 			game->player->position_x += game->player->direction_x * game->player->move_speed;
-		if (game->world_map[(int)(game->player->position_y + game->player->direction_y * game->player->move_speed)][(int)(game->player->position_x)] == '0')
+		if (game->map_info.map[(int)(game->player->position_y + game->player->direction_y * game->player->move_speed)][(int)(game->player->position_x)] == '0')
 			game->player->position_y += game->player->direction_y * game->player->move_speed;
 	}
 	else if (keycode == KEY_DOWN || keycode == KEY_S)
 	{
 		printf("back\n");
-		if (game->world_map[(int)(game->player->position_y)][(int)(game->player->position_x - game->player->direction_x * game->player->move_speed)] == '0')
+		if (game->map_info.map[(int)(game->player->position_y)][(int)(game->player->position_x - game->player->direction_x * game->player->move_speed)] == '0')
 			game->player->position_x -= game->player->direction_x * game->player->move_speed;
-		if (game->world_map[(int)(game->player->position_y - game->player->direction_y * game->player->move_speed)][(int)(game->player->position_x)] == '0')
+		if (game->map_info.map[(int)(game->player->position_y - game->player->direction_y * game->player->move_speed)][(int)(game->player->position_x)] == '0')
 			game->player->position_y -= game->player->direction_y * game->player->move_speed;
 	}
 }
@@ -116,6 +116,6 @@ int input_key(int keycode, t_game *game)
 	printf("after  position :x %lf y %lf\n", game->player->position_x, game->player->position_y);
 	printf("after  direction:x %lf y %lf\n", game->player->direction_x, game->player->direction_y);
 	printf("-------------\n");
-	update_map(game);
+	// update_map(game);
 	return (0);
 }

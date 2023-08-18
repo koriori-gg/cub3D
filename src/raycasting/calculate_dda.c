@@ -58,7 +58,7 @@ int	calculate_dda(t_game *game, t_dda *dda)
 			dda->map_y += dda->step_y;
 			side = 1;
 		}
-		if (game->world_map[dda->map_y][dda->map_x] != '0')
+		if (game->map_info.map[dda->map_y][dda->map_x] != '0')
 			hit = 1;
 	}
 	return (side);

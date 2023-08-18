@@ -80,4 +80,3 @@ t_map	*mapdup(t_map *map)
 	}
 	return (ret);
 }
-
