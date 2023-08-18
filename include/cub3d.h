@@ -150,38 +150,22 @@ typedef struct s_game {
 	t_player	*player;
 	t_map_info	map_info;
 	t_minimap	minimap;
-	char 		**world_map;
-//02
 	int			buf[height][width];
 	int			**texture;
 	t_image		img;
 	int			re_buf;
 }				t_game;
 
-//validate_argument and map
-void		validate_argument(int argc, char **argv);
-// void		validate_map(char **argv);
 //error
 void		error_exit(int signal);
 void		print_error(char *str);
 //map
-t_map		*ft_mapnew(char *str, size_t y);
-int			ft_mapsize(t_map *map);
-void		ft_mapadd_back(t_map **map, t_map *new);
-void		ft_free_map(t_map *map);
-t_map		*mapdup(t_map *map);
-// t_map_info	*init_map_info(char **argv);
-// void		free_map_info(t_map_info *map_info);
-
-void		free_map_info(t_map_info map_info);//!!
-
-bool		is_elements_info(char *str);
+void		free_map_info(t_map_info map_info);
 //utils
 void		print_argv(char **argv);
 void		print_map(t_map *map);
-void		print_map_info(t_map_info *map_info);
 //setup
-void		init_struct(t_game *game, char **argv);
+void		init_struct(t_game *game, int fd);
 void		*ft_xpm_to_image(t_game *game, char *str);
 //calculate
 void		calculate(t_game *game);

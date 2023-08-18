@@ -11,16 +11,9 @@ SRCS = src/main.c \
 	src/exit_with_error.c \
 	src/open_cub_file.c \
 	src/get_map_info.c \
-	src/debug.c \
 	src/input_key.c \
-	src/error/validate_argument.c \
-	src/error/validate_map.c \
-	src/error/able_to_goal.c \
 	src/error/error.c \
 	src/error/free.c \
-	src/map/map.c \
-	src/map/init_mapinfo.c \
-	src/map/mapinfo_operator.c \
 	src/utils/print_debug.c \
 	src/setup/init_struct.c \
 	src/setup/ft_xpm_to_image.c \
