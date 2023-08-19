@@ -27,13 +27,11 @@ void	move(int keycode, t_game *game)
 	}
 }
 
-void	change_direction_of_movement(int keycode, t_game *game)
+void	change_direction_of_movement(int keycode, t_player *player)
 {
 	double		old_direction_x;
 	double		old_plane_x;
-	t_player	*player;
 
-	player = game->player;
 	if (keycode == KEY_RIGHT || keycode == KEY_D)
 	{
 		old_direction_x = player->direction_x;
@@ -67,6 +65,6 @@ int	input_key(int keycode, t_game *game)
 	if (keycode == KEY_ESC)
 		close_game(game);
 	move(keycode, game);
-	change_direction_of_movement(keycode, game);
+	change_direction_of_movement(keycode, game->player);
 	return (0);
 }

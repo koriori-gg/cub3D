@@ -44,7 +44,7 @@ static int	get_minimap_size(t_game *game)
 	return (max_length * game->minimap.img_width);
 }
 
-void	init_struct(t_game *game, int fd)
+void	init_game(t_game *game, int fd)
 {
 	init_player(game);
 	init_map_info(&game->map_info);

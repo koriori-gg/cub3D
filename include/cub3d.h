@@ -151,11 +151,12 @@ void		error_exit(int signal);
 void		print_error(char *str);
 //map
 void		free_map_info(t_map_info map_info);
+void		free_game(t_game *game);
 //utils
 void		print_argv(char **argv);
 void		print_map(t_map *map);
 //setup
-void		init_struct(t_game *game, int fd);
+void		init_game(t_game *game, int fd);
 void		init_minimap(t_game *game);
 void		init_texture(t_game *game);
 //calculate

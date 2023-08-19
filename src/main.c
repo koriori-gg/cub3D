@@ -9,7 +9,7 @@ void	destructor(void)
 int	close_game(t_game *game)
 {
 	mlx_destroy_window(game->mlx, game->win);
-	//TODO: add free
+	free_game(game);
 	exit(0);
 }
 
@@ -29,7 +29,7 @@ int	main(int argc, char **argv)
 	if (argc != 2)
 		exit_with_error("invalid input");
 	fd = open_cub_file(argv[1]);
-	init_struct(&game, fd);
+	init_game(&game, fd);
 	mlx_hook(game.win, X_EVENT_KEY_PRESS, 1L << 0, &input_key, &game);
 	mlx_hook(game.win, RED_CLOSS, 0, &close_game, &game);
 	mlx_loop_hook(game.mlx, main_loop, &game);
