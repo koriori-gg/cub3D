@@ -8,10 +8,8 @@ MLX = $(MLX_DIR)/libmlx.a \
 	$(MLX_DIR)/libmlx_Darwin.a
 
 SRCS = src/main.c \
-	src/exit_with_error.c \
-	src/open_cub_file.c \
-	src/get_map_info.c \
-	src/input_key.c \
+	src/error/exit_with_error.c \
+	src/error/open_cub_file.c \
 	src/error/error.c \
 	src/error/free.c \
 	src/utils/print_debug.c \
@@ -24,7 +22,9 @@ SRCS = src/main.c \
 	src/raycasting/save_floor_and_ceiling.c \
 	src/raycasting/char_to_int.c \
 	src/raycasting/draw.c \
-	src/minimap/draw_map.c \
+	src/map/draw_map.c \
+	src/map/get_map_info.c \
+	src/map/input_key.c \
 
 OBJS = $(SRCS:%.c=%.o)
 
