@@ -31,10 +31,13 @@ static int	*extract_rgb(char *line)
 	i = 0;
 	while (rgb[i])
 		i++;
+	if (i != 3)
+		return (NULL);
 	color_info = ft_calloc(i + 1, sizeof(int));
 	i = 0;
 	while (rgb[i])
 	{
+		// atoiだけだと文字がダメになるよ
 		color_info[i] = ft_atoi(rgb[i]);
 		i++;
 	}

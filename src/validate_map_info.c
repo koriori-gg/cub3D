@@ -12,18 +12,14 @@ static void	validate_rgb(int *rgb)
 	int	i;
 
 	if (!rgb)
-		exit_with_error("rgb not found");
+		exit_with_error("invalid RGB");
 	i = 0;
-	// rgbの要素が0の時にwhileを抜けてしまう
 	while (rgb[i])
 	{
 		if (rgb[i] < 0 || rgb[i] > 255)
 			exit_with_error("invalid RGB");
 		i++;
 	}
-	printf("%d\n", i);
-	if (i != 3)
-		exit_with_error("invalid RGB");
 }
 
 static void	validate_map(char **map)
