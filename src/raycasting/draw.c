@@ -2,12 +2,19 @@
 
 void	draw(t_game *game)
 {
-	for (int y = 0; y < height; y++)
+	int y;
+	int x;
+
+	y = 0;
+	while (y < height)
 	{
-		for (int x = 0; x < width; x++)
+		x = 0;
+		while (x < width)
 		{
 			game->img.data[y * width + x] = game->buf[y][x];
+			x++;
 		}
+		y++;
 	}
 	mlx_put_image_to_window(game->mlx, game->win, game->img.img, 0, 0);
 }

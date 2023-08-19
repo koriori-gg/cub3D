@@ -51,29 +51,52 @@ void	load_texture(t_game *game)
 	load_image(game, game->texture[7], "textures/colorstone.xpm", &img);
 }
 
-void	init_texture(t_game *game)
+void 	init_buf(t_game *game)
 {
-	game->re_buf = 0;
-	for (int i = 0; i < height; i++)
+	int	i;
+	int j;
+
+	i = 0;
+	while (i < height)
 	{
-		for (int j = 0; j < width; j++)
+		j = 0;
+		while (j < width)
 		{
 			game->buf[i][j] = 0;
+			j++;
 		}
+		i++;
 	}
-	if (!(game->texture = (int **)malloc(sizeof(int *) * 9)))
+}
+
+void	init_texture(t_game *game)
+{
+	int	i;
+	int j;
+
+	game->re_buf = 0;
+	init_buf(game);
+	game->texture = (int **)ft_calloc(9, sizeof(int *));
+	if (!game->texture)
 		return ;
-	for (int i = 0; i < 9; i++)
+	i = 0;
+	while (i < 9)
 	{
-		if (!(game->texture[i] = (int *)malloc(sizeof(int) * (tex_height * tex_width))))
+		game->texture[i] = (int *)ft_calloc(tex_height * tex_width, sizeof(int));
+		if (!game->texture[i])
 			return ;
+		i++;
 	}
-	for (int i = 0; i < 9; i++)
+	i = 0;
+	while (i < 9)
 	{
-		for (int j = 0; j < tex_height * tex_width; j++)
+		j = 0;
+		while (j < tex_height * tex_width)
 		{
 			game->texture[i][j] = 0;
+			j++;
 		}
+		i++;
 	}
 	load_texture(game);
 }
