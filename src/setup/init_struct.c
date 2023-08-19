@@ -5,9 +5,9 @@ static void	init_player(t_game *game)
 	game->player = (t_player *)ft_calloc(1, sizeof(t_player));
 	if (!game->player)
 		error_exit(MALLOC_ERROR);
-	game->player->position_x = 11.5;//TODO: 本来はmapから読み取る必要あり
+	game->player->position_x = 11.5;
 	game->player->position_y = 22.0;
-	game->player->direction_x = 0.0;//TODO: 本来はmapから読み取る必要あり
+	game->player->direction_x = 0.0;
 	game->player->direction_y = -1.0;
 	game->player->plane_x = 0.66;
 	game->player->plane_y = 0.0;
@@ -38,7 +38,7 @@ static int	get_minimap_size(t_game *game)
 	while (map[i])
 	{
 		if (max_length < (int)ft_strlen(map[i]))
-			max_length = ft_strlen(map[i]);
+			max_length = ft_strlen(map[i]) - 1;
 		i++;
 	}
 	return (max_length * game->minimap.img_width);
