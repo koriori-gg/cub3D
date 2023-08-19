@@ -1,13 +1,12 @@
 #include "cub3d.h"
 
-void	draw_player_direction(t_game *game, int img_width, int img_height)//width heightにする
+void	draw_player_direction(t_game *game, int img_width, int img_height)//TODO:width heightにする
 {
-	int	x;
-	int	y;
-	t_player *player;
+	int			x;
+	int			y;
+	t_player	*player;
 
 	player = game->player;
-
 	if (player->direction_x == 0)
 		x = game->minimap.img_width / 2;
 	else if (player->direction_x > 0)
@@ -20,11 +19,10 @@ void	draw_player_direction(t_game *game, int img_width, int img_height)//width h
 		y = game->minimap.img_height - 1;
 	else
 		y = 0;
-
 	mlx_pixel_put(game->mlx, game->win, img_width + x, img_height + y, RGB_RED);
 }
 
-static void	 draw_player(t_game *game, int x, int y)
+static void	draw_player(t_game *game, int x, int y)
 {
 	int	img_width;
 	int	img_height;
@@ -32,7 +30,7 @@ static void	 draw_player(t_game *game, int x, int y)
 	img_width = width + x * game->minimap.img_width;
 	img_height = y * game->minimap.img_height;
 	mlx_put_image_to_window(game->mlx, game->win,
-			game->minimap.tile_img[6], img_width, img_height);
+		game->minimap.tile_img[6], img_width, img_height);
 	draw_player_direction(game, img_width, img_height);
 }
 
@@ -65,7 +63,7 @@ static void	draw_image(t_game *game, char c, int x, int y)
 
 void	draw_map(t_game *game)
 {
-	char 	**map;
+	char	**map;
 	int		y;
 	int		x;
 
@@ -76,7 +74,8 @@ void	draw_map(t_game *game)
 		x = 0;
 		while (map[y][x] && map[y][x] != '\n')
 		{
-			if (y == (int)game->player->position_y && x == (int)game->player->position_x)
+			if (y == (int)game->player->position_y
+				&& x == (int)game->player->position_x)
 				draw_player(game, x, y);
 			else
 				draw_image(game, map[y][x], x, y);

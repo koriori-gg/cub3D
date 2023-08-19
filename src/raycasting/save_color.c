@@ -5,17 +5,17 @@ int	calculate_draw_end(int window_height, int line_height)
 	int	draw_end;
 
 	draw_end = line_height / 2 + window_height / 2;
-	if(draw_end >= window_height)
+	if (draw_end >= window_height)
 		draw_end = window_height - 1;
 	return (draw_end);
 }
 
-int	 calculate_draw_start(int window_height, int line_height)
+int	calculate_draw_start(int window_height, int line_height)
 {
-	int draw_start;
+	int	draw_start;
 
-	draw_start =  window_height / 2 - line_height / 2;
-	if(draw_start < 0)
+	draw_start = window_height / 2 - line_height / 2;
+	if (draw_start < 0)
 		draw_start = 0;
 	return (draw_start);
 }
@@ -27,15 +27,17 @@ void	prepare_map_draw(t_draw	*draw, double perp_wall_dist)
 	draw->draw_end = calculate_draw_end(height, draw->line_height);
 }
 
-int calculate_texture_x(t_game *game,t_dda *dda)
+int	calculate_texture_x(t_game *game, t_dda *dda)
 {
-	double wall_x;
-	int tex_x;
+	double	wall_x;
+	int		tex_x;
 
 	if (dda->side == 0)
-		wall_x = game->player->position_y + dda->perp_wall_dist * dda->ray_direction_y;
+		wall_x = game->player->position_y
+			+ dda->perp_wall_dist * dda->ray_direction_y;
 	else
-		wall_x = game->player->position_x + dda->perp_wall_dist * dda->ray_direction_x;
+		wall_x = game->player->position_x
+			+ dda->perp_wall_dist * dda->ray_direction_x;
 	wall_x -= floor(wall_x);
 	tex_x = (int)(wall_x * (double)tex_width);
 	if (dda->side == 0 && dda->ray_direction_x > 0)
@@ -47,11 +49,11 @@ int calculate_texture_x(t_game *game,t_dda *dda)
 
 void	save_color(t_game *game, t_dda *dda, t_draw *draw, int x)
 {
-	int y;
-	int color;
-	int tex_y;
+	int	y;
+	int	color;
+	int	tex_y;
 
-	draw->tex_num = char_to_int(game->map_info.map[dda->map_y][dda->map_x]);//もうちょっといい変換方法ありそう
+	draw->tex_num = char_to_int(game->map_info.map[dda->map_y][dda->map_x]);
 	draw->tex_x = calculate_texture_x(game, dda);
 	draw->step = 1.0 * tex_height / draw->line_height;
 	draw->tex_position = (draw->draw_start - height / 2 + draw->line_height / 2) * draw->step;

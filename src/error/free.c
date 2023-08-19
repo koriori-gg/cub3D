@@ -27,5 +27,4 @@ void	free_map_info(t_map_info map_info)
 void	free_struct(t_game *game)
 {
 	free(game->player);
-	// free_map_info(game->map_info);
 }

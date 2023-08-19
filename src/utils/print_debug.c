@@ -16,8 +16,9 @@ void	print_info(t_map_info info)
 
 void	print_two_dimensional_array(char **array)
 {
-	int	i = 0;
+	int	i;
 
+	i = 0;
 	printf("------ DEBUG: print_two_dimensional_array ------\n");
 	while (array[i])
 	{

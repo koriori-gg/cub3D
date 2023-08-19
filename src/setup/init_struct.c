@@ -5,10 +5,9 @@ static void	init_player(t_game *game)
 	game->player = (t_player *)ft_calloc(1, sizeof(t_player));
 	if (!game->player)
 		error_exit(MALLOC_ERROR);
-	//temp
-	game->player->position_x = 11.5;//本来はmapから読み取る必要あり
+	game->player->position_x = 11.5;//TODO: 本来はmapから読み取る必要あり
 	game->player->position_y = 22.0;
-	game->player->direction_x = 0.0;//本来はmapから読み取る必要あり
+	game->player->direction_x = 0.0;//TODO: 本来はmapから読み取る必要あり
 	game->player->direction_y = -1.0;
 	game->player->plane_x = 0.66;
 	game->player->plane_y = 0.0;
@@ -18,11 +17,13 @@ static void	init_player(t_game *game)
 
 void	load_image(t_game *game, int *texture, char *path, t_image *img)
 {
-	int y;
-	int x;
+	int	y;
+	int	x;
 
-	img->img = mlx_xpm_file_to_image(game->mlx, path, &img->img_width, &img->img_height);
-	img->data = (int *)mlx_get_data_addr(img->img, &img->bpp, &img->size_l, &img->endian);
+	img->img = mlx_xpm_file_to_image(game->mlx, path,
+			&img->img_width, &img->img_height);
+	img->data = (int *)mlx_get_data_addr(img->img, &img->bpp,
+			&img->size_l, &img->endian);
 	y = 0;
 	while (y < img->img_height)
 	{
@@ -51,10 +52,10 @@ void	load_texture(t_game *game)
 	load_image(game, game->texture[7], "textures/colorstone.xpm", &img);
 }
 
-void 	init_buf(t_game *game)
+void	init_buf(t_game *game)
 {
 	int	i;
-	int j;
+	int	j;
 
 	i = 0;
 	while (i < height)
@@ -72,7 +73,7 @@ void 	init_buf(t_game *game)
 void	init_texture(t_game *game)
 {
 	int	i;
-	int j;
+	int	j;
 
 	game->re_buf = 0;
 	init_buf(game);
@@ -82,20 +83,17 @@ void	init_texture(t_game *game)
 	i = 0;
 	while (i < 9)
 	{
-		game->texture[i] = (int *)ft_calloc(tex_height * tex_width, sizeof(int));
-		if (!game->texture[i])
+		game->texture[i] = (int *)ft_calloc
+			(tex_height * tex_width, sizeof(int));
+		if (!game->texture[i++])
 			return ;
-		i++;
 	}
 	i = 0;
 	while (i < 9)
 	{
 		j = 0;
 		while (j < tex_height * tex_width)
-		{
-			game->texture[i][j] = 0;
-			j++;
-		}
+			game->texture[i][j++] = 0;
 		i++;
 	}
 	load_texture(game);
@@ -125,11 +123,11 @@ static void	init_map_info(t_map_info *map_info)
 	map_info->map = NULL;
 }
 
-static int get_minimap_size(t_game *game)
+static int	get_minimap_size(t_game *game)
 {
-	char 	**map;
+	char	**map;
 	int		max_length;
-	int 	i;
+	int		i;
 
 	map = game->map_info.map;
 	max_length = 0;
@@ -145,7 +143,6 @@ static int get_minimap_size(t_game *game)
 
 void	init_struct(t_game *game, int fd)
 {
-
 	init_player(game);
 	init_map_info(&game->map_info);
 	game->map_info = get_map_info(fd);
@@ -153,7 +150,9 @@ void	init_struct(t_game *game, int fd)
 	game->mlx = mlx_init();
 	init_minimap(game);
 	init_texture(game);
-	game->win = mlx_new_window(game->mlx, width + get_minimap_size(game), height, "cub3D");//map + minimap
+	game->win = mlx_new_window(game->mlx, width
+			+ get_minimap_size(game), height, "cub3D");
 	game->img.img = mlx_new_image(game->mlx, width, height);
-	game->img.data = (int *)mlx_get_data_addr(game->img.img, &game->img.bpp, &game->img.size_l, &game->img.endian);
+	game->img.data = (int *)mlx_get_data_addr(game->img.img,
+			&game->img.bpp, &game->img.size_l, &game->img.endian);
 }

@@ -1,6 +1,6 @@
 #include "cub3d.h"
 
-int char_to_int(char s)
+int	char_to_int(char s)
 {
 	if (s == '0')
 		return (0);

@@ -21,16 +21,16 @@ int	main_loop(t_game *game)
 	return (0);
 }
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	t_game	game;
-	int 	fd;
+	int		fd;
 
 	if (argc != 2)
 		exit_with_error("invalid input");
 	fd = open_cub_file(argv[1]);
 	init_struct(&game, fd);
-	mlx_hook(game.win, X_EVENT_KEY_PRESS, 1L<<0, &input_key, &game);
+	mlx_hook(game.win, X_EVENT_KEY_PRESS, 1L << 0, &input_key, &game);
 	mlx_hook(game.win, RED_CLOSS, 0, &close_game, &game);
 	mlx_loop_hook(game.mlx, main_loop, &game);
 	mlx_loop(game.mlx);
