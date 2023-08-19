@@ -166,7 +166,8 @@ void		print_argv(char **argv);
 void		print_map(t_map *map);
 //setup
 void		init_struct(t_game *game, int fd);
-void		*ft_xpm_to_image(t_game *game, char *str);
+void		init_minimap(t_game *game);
+void		init_texture(t_game *game);
 //calculate
 void		calculate(t_game *game);
 void		prepare_dda(t_game *game, t_dda *dda, int x);

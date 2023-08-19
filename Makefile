@@ -16,7 +16,8 @@ SRCS = src/main.c \
 	src/error/free.c \
 	src/utils/print_debug.c \
 	src/setup/init_struct.c \
-	src/setup/ft_xpm_to_image.c \
+	src/setup/init_minimap.c \
+	src/setup/init_asset.c \
 	src/raycasting/calculate.c \
 	src/raycasting/calculate_dda.c \
 	src/raycasting/save_color.c \
