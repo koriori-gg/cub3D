@@ -11,17 +11,29 @@ void	draw_player_direction(t_game *game, int img_width, int img_height)//width h
 	if (player->direction_x == 0)
 		x = game->minimap.img_width / 2;
 	else if (player->direction_x > 0)
-		x = game->minimap.img_width;
+		x = game->minimap.img_width - 1;
 	else
 		x = 0;
 	if (player->direction_y == 0)
 		y = game->minimap.img_height / 2;
 	else if (player->direction_y > 0)
-		y = game->minimap.img_height;
+		y = game->minimap.img_height - 1;
 	else
 		y = 0;
 
 	mlx_pixel_put(game->mlx, game->win, img_width + x, img_height + y, RGB_RED);
+}
+
+static void	 draw_player(t_game *game, int x, int y)
+{
+	int	img_width;
+	int	img_height;
+
+	img_width = width + x * game->minimap.img_width;
+	img_height = y * game->minimap.img_height;
+	mlx_put_image_to_window(game->mlx, game->win,
+			game->minimap.tile_img[6], img_width, img_height);
+	draw_player_direction(game, img_width, img_height);
 }
 
 static void	draw_image(t_game *game, char c, int x, int y)
@@ -49,12 +61,6 @@ static void	draw_image(t_game *game, char c, int x, int y)
 	else if (ft_strchr("56789", c))
 		mlx_put_image_to_window(game->mlx, game->win,
 			game->minimap.tile_img[5], img_width, img_height);
-	else if (ft_strchr("NSWE", c))
-	{
-		mlx_put_image_to_window(game->mlx, game->win,
-			game->minimap.tile_img[6], img_width, img_height);
-		draw_player_direction(game, img_width, img_height);
-	}
 }
 
 void	draw_map(t_game *game)
@@ -70,7 +76,10 @@ void	draw_map(t_game *game)
 		x = 0;
 		while (map[y][x] && map[y][x] != '\n')
 		{
-			draw_image(game, map[y][x], x, y);
+			if (y == (int)game->player->position_y && x == (int)game->player->position_x)
+				draw_player(game, x, y);
+			else
+				draw_image(game, map[y][x], x, y);
 			x++;
 		}
 		y++;
