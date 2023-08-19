@@ -15,7 +15,7 @@ int	close_game(t_game *game)
 
 int	main_loop(t_game *game)
 {
-	// draw_map(game);
+	draw_map(game);
 	calculate(game);
 	draw(game);
 	return (0);
