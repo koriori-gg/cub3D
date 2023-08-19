@@ -27,37 +27,46 @@ void	move(int keycode, t_game *game)
 	}
 }
 
-void	change_direction_of_movement(int keycode, t_player *player)
+static void	turn_right(t_player *player)
 {
 	double		old_direction_x;
 	double		old_plane_x;
 
+	old_direction_x = player->direction_x;
+	player->direction_x = player->direction_x * cos(player->rot_speed)
+		- player->direction_y * sin(player->rot_speed);
+	player->direction_y = old_direction_x * sin(player->rot_speed)
+		+ player->direction_y * cos(player->rot_speed);
+	old_plane_x = player->plane_x;
+	player->plane_x = player->plane_x * cos(player->rot_speed)
+		- player->plane_y * sin(player->rot_speed);
+	player->plane_y = old_plane_x * sin(player->rot_speed)
+		+ player->plane_y * cos(player->rot_speed);
+}
+
+static void	turn_left(t_player *player)
+{
+	double		old_direction_x;
+	double		old_plane_x;
+
+	old_direction_x = player->direction_x;
+	player->direction_x = player->direction_x * cos(-player->rot_speed)
+		- player->direction_y * sin(-player->rot_speed);
+	player->direction_y = old_direction_x * sin(-player->rot_speed)
+		+ player->direction_y * cos(-player->rot_speed);
+	old_plane_x = player->plane_x;
+	player->plane_x = player->plane_x * cos(-player->rot_speed)
+		- player->plane_y * sin(-player->rot_speed);
+	player->plane_y = old_plane_x * sin(-player->rot_speed)
+		+ player->plane_y * cos(-player->rot_speed);
+}
+
+void	change_direction_of_movement(int keycode, t_player *player)
+{
 	if (keycode == KEY_RIGHT || keycode == KEY_D)
-	{
-		old_direction_x = player->direction_x;
-		player->direction_x = player->direction_x * cos(player->rot_speed)
-			- player->direction_y * sin(player->rot_speed);
-		player->direction_y = old_direction_x * sin(player->rot_speed)
-			+ player->direction_y * cos(player->rot_speed);
-		old_plane_x = player->plane_x;
-		player->plane_x = player->plane_x * cos(player->rot_speed)
-			- player->plane_y * sin(player->rot_speed);
-		player->plane_y = old_plane_x * sin(player->rot_speed)
-			+ player->plane_y * cos(player->rot_speed);
-	}
-	else if (keycode == KEY_LEFT || keycode == KEY_A)
-	{
-		old_direction_x = player->direction_x;
-		player->direction_x = player->direction_x * cos(-player->rot_speed)
-			- player->direction_y * sin(-player->rot_speed);
-		player->direction_y = old_direction_x * sin(-player->rot_speed)
-			+ player->direction_y * cos(-player->rot_speed);
-		old_plane_x = player->plane_x;
-		player->plane_x = player->plane_x * cos(-player->rot_speed)
-			- player->plane_y * sin(-player->rot_speed);
-		player->plane_y = old_plane_x * sin(-player->rot_speed)
-			+ player->plane_y * cos(-player->rot_speed);
-	}
+		turn_right(player);
+	if (keycode == KEY_LEFT || keycode == KEY_A)
+		turn_left(player);
 }
 
 int	input_key(int keycode, t_game *game)

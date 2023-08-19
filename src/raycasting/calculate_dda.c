@@ -8,16 +8,8 @@ double	calculate_camera_location(int x, int wid)
 	return (camera_x);
 }
 
-void	prepare_dda(t_game *game, t_dda *dda, int x)
+static void	calculate_direction_to_step(t_game *game, t_dda *dda)
 {
-	dda->ray_direction_x = game->player->direction_x
-		+ game->player->plane_x * calculate_camera_location(x, width);
-	dda->ray_direction_y = game->player->direction_y
-		+ game->player->plane_y * calculate_camera_location(x, width);
-	dda->map_x = (int)game->player->position_x;
-	dda->map_y = (int)game->player->position_y;
-	dda->delta_dist_x = fabs(1 / dda->ray_direction_x);
-	dda->delta_dist_y = fabs(1 / dda->ray_direction_y);
 	if (dda->ray_direction_x < 0)
 	{
 		dda->step_x = -1;
@@ -42,6 +34,19 @@ void	prepare_dda(t_game *game, t_dda *dda, int x)
 		dda->side_dist_y
 			= (dda->map_y + 1.0 - game->player->position_y) * dda->delta_dist_y;
 	}
+}
+
+void	prepare_dda(t_game *game, t_dda *dda, int x)
+{
+	dda->ray_direction_x = game->player->direction_x
+		+ game->player->plane_x * calculate_camera_location(x, width);
+	dda->ray_direction_y = game->player->direction_y
+		+ game->player->plane_y * calculate_camera_location(x, width);
+	dda->map_x = (int)game->player->position_x;
+	dda->map_y = (int)game->player->position_y;
+	dda->delta_dist_x = fabs(1 / dda->ray_direction_x);
+	dda->delta_dist_y = fabs(1 / dda->ray_direction_y);
+	calculate_direction_to_step(game, dda);
 }
 
 int	calculate_dda(t_game *game, t_dda *dda)

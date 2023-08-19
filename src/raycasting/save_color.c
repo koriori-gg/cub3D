@@ -56,7 +56,8 @@ void	save_color(t_game *game, t_dda *dda, t_draw *draw, int x)
 	draw->tex_num = char_to_int(game->map_info.map[dda->map_y][dda->map_x]);
 	draw->tex_x = calculate_texture_x(game, dda);
 	draw->step = 1.0 * tex_height / draw->line_height;
-	draw->tex_position = (draw->draw_start - height / 2 + draw->line_height / 2) * draw->step;
+	draw->tex_position = (draw->draw_start - height / 2
+			+ draw->line_height / 2) * draw->step;
 	y = draw->draw_start;
 	save_ceiling(game, draw, x);
 	while (y < draw->draw_end)

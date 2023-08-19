@@ -2,8 +2,8 @@
 
 void	draw(t_game *game)
 {
-	int y;
-	int x;
+	int	y;
+	int	x;
 
 	y = 0;
 	while (y < height)

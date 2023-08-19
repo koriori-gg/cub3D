@@ -1,6 +1,6 @@
 #include "cub3d.h"
 
-void	draw_player_direction(t_game *game, int img_width, int img_height)//TODO:width heightにする
+void	draw_player_direction(t_game *game, int img_width, int img_height)
 {
 	int			x;
 	int			y;
