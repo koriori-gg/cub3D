@@ -102,6 +102,24 @@ static void	init_map_info(t_map_info *map_info)
 	map_info->map = NULL;
 }
 
+static int get_minimap_size(t_game *game)
+{
+	char 	**map;
+	int		max_length;
+	int 	i;
+
+	map = game->map_info.map;
+	max_length = 0;
+	i = 0;
+	while (map[i])
+	{
+		if (max_length < (int)ft_strlen(map[i]))
+			max_length = ft_strlen(map[i]);
+		i++;
+	}
+	return (max_length * game->minimap.img_width);
+}
+
 void	init_struct(t_game *game, int fd)
 {
 
@@ -110,9 +128,9 @@ void	init_struct(t_game *game, int fd)
 	game->map_info = get_map_info(fd);
 	print_info(game->map_info);
 	game->mlx = mlx_init();
-	game->win = mlx_new_window(game->mlx, width * 3 / 2, height, "cub3D");//map + minimap
 	init_minimap(game);
 	init_texture(game);
+	game->win = mlx_new_window(game->mlx, width + get_minimap_size(game), height, "cub3D");//map + minimap
 	game->img.img = mlx_new_image(game->mlx, width, height);
 	game->img.data = (int *)mlx_get_data_addr(game->img.img, &game->img.bpp, &game->img.size_l, &game->img.endian);
 }
