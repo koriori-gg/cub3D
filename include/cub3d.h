@@ -24,17 +24,8 @@
 //temp
 #define tex_width 64
 #define tex_height 64
-#define map_width 24
-#define map_height 24
-// #define width 640
-// #define height 480
-// #define width 1920
-// #define height 1080
 #define width 960
-#define height 540 //mapから読み取り or ディスプレイサイズに合わせる必要あり
-
-# define x_axis 0
-# define y_axis 1
+#define height 540
 
 # define RGB_RED 0xFF0000
 # define RGB_GREEN 0x00FF00
@@ -103,7 +94,6 @@ typedef struct	s_image
 {
 	void	*img;
 	int		*data;
-
 	int		size_l;
 	int		bpp;
 	int		endian;
