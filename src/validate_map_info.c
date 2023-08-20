@@ -96,7 +96,7 @@ void	check_wall(char **map, int y, int x)
 	free_double_pointer(map_copy);
 }
 
-// 壁に囲まれているか 斜めもダメにする
+// 壁に囲まれているか 斜めもダメにする 0はじまりでかんがえる？？？
 // 01NSEWのみで構成されているか
 static void	validate_map(char **map)
 {
