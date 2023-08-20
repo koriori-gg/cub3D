@@ -12,7 +12,7 @@ static void	init_player(t_game *game)
 	game->player->plane_x = 0.66;
 	game->player->plane_y = 0.0;
 	game->player->move_speed = 0.05;
-	game->player->rot_speed = 0.05;
+	game->player->rotation_speed = 0.05;
 }
 
 static void	init_map_info(t_map_info *map_info)
