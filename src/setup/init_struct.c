@@ -1,12 +1,35 @@
 #include "cub3d.h"
 
+void	extract_player_position(t_game *game)
+{
+	int	y;
+	int x;
+
+	y = 0;
+	while (game->map_info.map[y])
+	{
+		x = 0;
+		while (game->map_info.map[y][x])
+		{
+			if (ft_strchr("NSWE", game->map_info.map[y][x]))
+			{
+				game->player->position_x = (double)x + 0.5;
+				game->player->position_y = (double)y + 0.5;
+				game->map_info.map[y][x] = '0';
+				return ;
+			}
+			x++;
+		}
+		y++;
+	}
+}
+
 static void	init_player(t_game *game)
 {
 	game->player = (t_player *)ft_calloc(1, sizeof(t_player));
 	if (!game->player)
 		error_exit(MALLOC_ERROR);
-	game->player->position_x = 11.5;
-	game->player->position_y = 22.0;
+	extract_player_position(game);
 	game->player->direction_x = 0.0;
 	game->player->direction_y = -1.0;
 	game->player->plane_x = 0.66;
@@ -46,10 +69,10 @@ static int	get_minimap_size(t_game *game)
 
 void	init_game(t_game *game, int fd)
 {
-	init_player(game);
 	init_map_info(&game->map_info);
 	game->map_info = get_map_info(fd);
 	print_info(game->map_info);
+	init_player(game);
 	game->mlx = mlx_init();
 	init_minimap(game);
 	init_texture(game);
