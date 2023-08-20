@@ -81,7 +81,7 @@ typedef struct	s_image
 {
 	void	*img;
 	int		*data;
-	int		size_l;
+	int		size_line;
 	int		bpp;
 	int		endian;
 	int		width;

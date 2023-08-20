@@ -57,5 +57,5 @@ void	init_game(t_game *game, int fd)
 			+ get_minimap_size(game), HEIGHT, "cub3D");
 	game->img.img = mlx_new_image(game->mlx, WIDTH, HEIGHT);
 	game->img.data = (int *)mlx_get_data_addr(game->img.img,
-			&game->img.bpp, &game->img.size_l, &game->img.endian);
+			&game->img.bpp, &game->img.size_line, &game->img.endian);
 }
