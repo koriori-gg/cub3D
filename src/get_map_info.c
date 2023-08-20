@@ -64,13 +64,20 @@ static char	**extract_map(int fd, char *first_line, int i)
 	if (!line)
 	{
 		map = ft_calloc(i + 1, sizeof(char *));
-		map[0] = ft_strdup(first_line);
+		if (ft_strchr(first_line, '\0'))
+			map[0] = ft_substr(first_line, 0, ft_strlen(first_line) - 1);
+		else
+			map[0] = ft_strdup(first_line);
 		if (!map[0])
 			exit_with_error("calloc error");
 		return (map);
 	}
 	map = extract_map(fd, first_line, i + 1);
-	map[i] = line;
+	if (ft_strchr(line, '\n'))
+		map[i] = ft_substr(line, 0, ft_strlen(line) - 1) ;
+	else
+		map[i] = ft_strdup(line);
+	free(line);
 	return (map);
 }
 
