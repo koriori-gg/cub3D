@@ -17,6 +17,7 @@ static char	*extract_texture_path(char *line)
 static int	*extract_rgb(char *line)
 {
 	int		i;
+	int		j;
 	char	**rgb;
 	int		*color_info;
 
@@ -27,17 +28,26 @@ static int	*extract_rgb(char *line)
 		i++;
 	rgb = ft_split(&line[i], ',');
 	if (!rgb)
-		return (NULL);
+		exit_with_error("ft_split failed\n");
 	i = 0;
 	while (rgb[i])
 		i++;
 	if (i != 3)
-		return (NULL);
+		exit_with_error("num of dot error\n");
 	color_info = ft_calloc(i + 1, sizeof(int));
+	if (!color_info)
+		exit_with_error("calloc falied\n");
 	i = 0;
 	while (rgb[i])
 	{
-		// atoiだけだと文字がダメになるよ
+		j = 0;
+		while (rgb[i][j] != '\0' && rgb[i][j] != '\n')
+		{
+			printf("%c\n", rgb[i][j]);
+			if (!ft_isdigit(rgb[i][j]))
+				exit_with_error("not digit\n");
+			j++;
+		}
 		color_info[i] = ft_atoi(rgb[i]);
 		i++;
 	}
