@@ -7,13 +7,14 @@ static char	*extract_texture_path(char *line)
 
 	i = 2;
 	if (line[i] == '\0' || line[i] == '\n')
-		return (NULL);
+		exit_with_error("no info\n");
 	while (ft_isspace(line[i]))
 		i++;
 	texture_info = ft_substr(&line[i], 0, ft_strlen(&line[i]) - 1);
 	return (texture_info);
 }
 
+// validated 
 static int	*extract_rgb(char *line)
 {
 	int		i;
@@ -23,7 +24,7 @@ static int	*extract_rgb(char *line)
 
 	i = 1;
 	if (line[i] == '\0' || line[i] == '\n')
-		return (NULL);
+		exit_with_error("no info\n");
 	while (ft_isspace(line[i]))
 		i++;
 	rgb = ft_split(&line[i], ',');
@@ -43,7 +44,6 @@ static int	*extract_rgb(char *line)
 		j = 0;
 		while (rgb[i][j] != '\0' && rgb[i][j] != '\n')
 		{
-			printf("%c\n", rgb[i][j]);
 			if (!ft_isdigit(rgb[i][j]))
 				exit_with_error("not digit\n");
 			j++;
@@ -65,6 +65,8 @@ static char	**extract_map(int fd, char *first_line, int i)
 	{
 		map = ft_calloc(i + 1, sizeof(char *));
 		map[0] = ft_strdup(first_line);
+		if (!map[0])
+			exit_with_error("calloc error");
 		return (map);
 	}
 	map = extract_map(fd, first_line, i + 1);
