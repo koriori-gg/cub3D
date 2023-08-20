@@ -169,7 +169,7 @@ void		save_ceiling(t_game *game, t_draw *draw, int x);
 void		save_floor(t_game *game, t_draw *draw, int x);
 int			char_to_int(char s);
 //minimap
-void		draw_map(t_game *game);
+void		draw_minimap(t_game *game);
 //temp
 void		draw(t_game *game);
 //move

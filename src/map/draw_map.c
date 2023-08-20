@@ -61,7 +61,7 @@ static void	draw_image(t_game *game, char c, int x, int y)
 			game->minimap.tile_img[5], img_width, img_height);
 }
 
-void	draw_map(t_game *game)
+void	draw_minimap(t_game *game)
 {
 	char	**map;
 	int		y;
