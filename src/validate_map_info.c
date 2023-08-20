@@ -22,10 +22,37 @@ static void	validate_rgb(int *rgb)
 	}
 }
 
+int	check_object(char object)
+{
+	if (object == 'N' || object == 'S' || object == 'E' || object == 'W')
+		return (1);
+	else if(object != '0' && object != '1' && object != ' ')
+		exit_with_error("invalid object\n");
+	return (0);
+}
+
+// 壁に囲まれているか
+// 01NSEWのみで構成されているか
 static void	validate_map(char **map)
 {
-	if (!map)
-		exit_with_error("map not found");
+	int	count;
+	int	i;
+	int	j;
+
+	count = 0;
+	i = 0;
+	while (map[i])
+	{
+		j = 0;
+		while (map[i][j] != '\n' && map[i][j] != '\0')
+		{
+			count += check_object(map[i][j]);
+			j++;
+		}
+		i++;
+	}
+	if (count != 1)
+		exit_with_error("too many players\n");
 }
 
 void	validate_map_info(t_map_info map_info)

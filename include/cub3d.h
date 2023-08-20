@@ -15,6 +15,7 @@ typedef struct s_map_info {
 	int		*floor_color;
 	int		*ceiling_color;
 	char	**map;
+	int		player_count;
 }	t_map_info;
 
 void		exit_with_error(char *message);
