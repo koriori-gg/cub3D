@@ -54,19 +54,6 @@ enum e_message
 	MALLOC_ERROR
 };
 
-typedef struct s_map {
-	char			*row;
-	int				y;
-	struct s_map	*next;
-	struct s_map	*prev;
-}				t_map;
-
-typedef struct s_rgb {
-	int	red;
-	int	green;
-	int	blue;
-}				t_rgb;
-
 typedef struct s_map_info {
 	char	*north_texture;
 	char	*south_texture;
@@ -154,7 +141,6 @@ void		free_map_info(t_map_info map_info);
 void		free_game(t_game *game);
 //utils
 void		print_argv(char **argv);
-void		print_map(t_map *map);
 //setup
 void		init_game(t_game *game, int fd);
 void		init_minimap(t_game *game);
