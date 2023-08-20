@@ -7,7 +7,7 @@ void	calculate(t_game *game)
 	t_draw	draw;
 
 	x = 0;
-	while (x < width)
+	while (x < WIDTH)
 	{
 		prepare_dda(game, &dda, x);
 		dda.side = calculate_dda(game, &dda);

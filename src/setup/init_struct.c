@@ -53,9 +53,9 @@ void	init_game(t_game *game, int fd)
 	game->mlx = mlx_init();
 	init_minimap(game);
 	init_texture(game);
-	game->win = mlx_new_window(game->mlx, width
-			+ get_minimap_size(game), height, "cub3D");
-	game->img.img = mlx_new_image(game->mlx, width, height);
+	game->win = mlx_new_window(game->mlx, WIDTH
+			+ get_minimap_size(game), HEIGHT, "cub3D");
+	game->img.img = mlx_new_image(game->mlx, WIDTH, HEIGHT);
 	game->img.data = (int *)mlx_get_data_addr(game->img.img,
 			&game->img.bpp, &game->img.size_l, &game->img.endian);
 }

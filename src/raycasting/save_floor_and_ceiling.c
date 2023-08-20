@@ -20,7 +20,7 @@ void	save_floor(t_game *game, t_draw *draw, int x)
 	int	color;
 
 	y = draw->draw_end;
-	while (y < height)
+	while (y < HEIGHT)
 	{
 		color = 646490;
 		game->buf[y][x] = color;

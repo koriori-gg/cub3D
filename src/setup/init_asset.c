@@ -6,16 +6,16 @@ void	load_image(t_game *game, int *texture, char *path, t_image *img)
 	int	x;
 
 	img->img = mlx_xpm_file_to_image(game->mlx, path,
-			&img->img_width, &img->img_height);
+			&img->width, &img->height);
 	img->data = (int *)mlx_get_data_addr(img->img, &img->bpp,
 			&img->size_l, &img->endian);
 	y = 0;
-	while (y < img->img_height)
+	while (y < img->height)
 	{
 		x = 0;
-		while (x < img->img_width)
+		while (x < img->width)
 		{
-			texture[img->img_width * y + x] = img->data[img->img_width * y + x];
+			texture[img->width * y + x] = img->data[img->width * y + x];
 			x++;
 		}
 		y++;
@@ -43,10 +43,10 @@ void	init_buf(t_game *game)
 	int	j;
 
 	i = 0;
-	while (i < height)
+	while (i < HEIGHT)
 	{
 		j = 0;
-		while (j < width)
+		while (j < WIDTH)
 		{
 			game->buf[i][j] = 0;
 			j++;

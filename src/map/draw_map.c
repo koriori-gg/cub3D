@@ -27,7 +27,7 @@ static void	draw_player(t_game *game, int x, int y)
 	int	img_width;
 	int	img_height;
 
-	img_width = width + x * game->minimap.img_width;
+	img_width = WIDTH + x * game->minimap.img_width;
 	img_height = y * game->minimap.img_height;
 	mlx_put_image_to_window(game->mlx, game->win,
 		game->minimap.tile_img[6], img_width, img_height);
@@ -39,7 +39,7 @@ static void	draw_image(t_game *game, char c, int x, int y)
 	int	img_width;
 	int	img_height;
 
-	img_width = width + x * game->minimap.img_width;
+	img_width = WIDTH + x * game->minimap.img_width;
 	img_height = y * game->minimap.img_height;
 	if (c == '0')
 		mlx_put_image_to_window(game->mlx, game->win,

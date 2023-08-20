@@ -22,9 +22,9 @@ int	calculate_draw_start(int window_height, int line_height)
 
 void	prepare_map_draw(t_draw	*draw, double perp_wall_dist)
 {
-	draw->line_height = (int)(height / perp_wall_dist);
-	draw->draw_start = calculate_draw_start(height, draw->line_height);
-	draw->draw_end = calculate_draw_end(height, draw->line_height);
+	draw->line_height = (int)(HEIGHT / perp_wall_dist);
+	draw->draw_start = calculate_draw_start(HEIGHT, draw->line_height);
+	draw->draw_end = calculate_draw_end(HEIGHT, draw->line_height);
 }
 
 int	calculate_texture_x(t_game *game, t_dda *dda)
@@ -56,7 +56,7 @@ void	save_color(t_game *game, t_dda *dda, t_draw *draw, int x)
 	draw->tex_num = char_to_int(game->map_info.map[dda->map_y][dda->map_x]);
 	draw->tex_x = calculate_texture_x(game, dda);
 	draw->step = 1.0 * tex_height / draw->line_height;
-	draw->tex_position = (draw->draw_start - height / 2
+	draw->tex_position = (draw->draw_start - HEIGHT / 2
 			+ draw->line_height / 2) * draw->step;
 	y = draw->draw_start;
 	save_ceiling(game, draw, x);

@@ -24,8 +24,8 @@
 //temp
 #define tex_width 64
 #define tex_height 64
-#define width 960
-#define height 540
+#define WIDTH 960
+#define HEIGHT 540
 
 # define RGB_RED 0xFF0000
 # define RGB_GREEN 0x00FF00
@@ -84,8 +84,8 @@ typedef struct	s_image
 	int		size_l;
 	int		bpp;
 	int		endian;
-	int		img_width;
-	int		img_height;
+	int		width;
+	int		height;
 }				t_image;
 
 typedef struct s_minimap {
@@ -127,7 +127,7 @@ typedef struct s_game {
 	t_player	*player;
 	t_map_info	map_info;
 	t_minimap	minimap;
-	int			buf[height][width];
+	int			buf[HEIGHT][WIDTH];
 	int			**texture;
 	t_image		img;
 	int			re_buf;
