@@ -1,10 +1,10 @@
 #include "cub3d.h"
 
-double	calculate_camera_location(int x, int wid)
+double	calculate_camera_location(int x, int width)
 {
 	double	camera_x;
 
-	camera_x = 2 * x / (double)wid - 1;
+	camera_x = 2 * x / (double)width - 1;
 	return (camera_x);
 }
 
