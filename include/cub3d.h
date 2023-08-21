@@ -157,7 +157,7 @@ int			char_to_int(char s);
 //minimap
 void		draw_minimap(t_game *game);
 //temp
-void		draw(t_game *game);
+void		draw_field_of_vision(t_game *game);
 //move
 int			input_key(int keycode, t_game *game);
 //close

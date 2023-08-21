@@ -1,6 +1,6 @@
 #include "cub3d.h"
 
-void	draw(t_game *game)
+void	draw_field_of_vision(t_game *game)
 {
 	int	y;
 	int	x;

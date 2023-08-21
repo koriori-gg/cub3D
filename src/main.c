@@ -17,7 +17,7 @@ int	main_loop(t_game *game)
 {
 	draw_minimap(game);
 	calculate(game);
-	draw(game);
+	draw_field_of_vision(game);
 	return (0);
 }
 
