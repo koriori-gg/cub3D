@@ -30,35 +30,35 @@ void	move(int keycode, t_game *game)
 static void	turn_right(t_player *player)
 {
 	double		old_direction_x;
-	double		old_plane_x;
+	double		old_angle_x;
 
 	old_direction_x = player->direction_x;
 	player->direction_x = player->direction_x * cos(player->rotation_speed)
 		- player->direction_y * sin(player->rotation_speed);
 	player->direction_y = old_direction_x * sin(player->rotation_speed)
 		+ player->direction_y * cos(player->rotation_speed);
-	old_plane_x = player->plane_x;
-	player->plane_x = player->plane_x * cos(player->rotation_speed)
-		- player->plane_y * sin(player->rotation_speed);
-	player->plane_y = old_plane_x * sin(player->rotation_speed)
-		+ player->plane_y * cos(player->rotation_speed);
+	old_angle_x = player->angle_x;
+	player->angle_x = player->angle_x * cos(player->rotation_speed)
+		- player->angle_y * sin(player->rotation_speed);
+	player->angle_y = old_angle_x * sin(player->rotation_speed)
+		+ player->angle_y * cos(player->rotation_speed);
 }
 
 static void	turn_left(t_player *player)
 {
 	double		old_direction_x;
-	double		old_plane_x;
+	double		old_angle_x;
 
 	old_direction_x = player->direction_x;
 	player->direction_x = player->direction_x * cos(-player->rotation_speed)
 		- player->direction_y * sin(-player->rotation_speed);
 	player->direction_y = old_direction_x * sin(-player->rotation_speed)
 		+ player->direction_y * cos(-player->rotation_speed);
-	old_plane_x = player->plane_x;
-	player->plane_x = player->plane_x * cos(-player->rotation_speed)
-		- player->plane_y * sin(-player->rotation_speed);
-	player->plane_y = old_plane_x * sin(-player->rotation_speed)
-		+ player->plane_y * cos(-player->rotation_speed);
+	old_angle_x = player->angle_x;
+	player->angle_x = player->angle_x * cos(-player->rotation_speed)
+		- player->angle_y * sin(-player->rotation_speed);
+	player->angle_y = old_angle_x * sin(-player->rotation_speed)
+		+ player->angle_y * cos(-player->rotation_speed);
 }
 
 void	change_direction_of_movement(int keycode, t_player *player)

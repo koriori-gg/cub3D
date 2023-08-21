@@ -6,30 +6,30 @@ void	set_player_direction(t_game *game, char c)
 	{
 		game->player->direction_x = 0.0;
 		game->player->direction_y = -1.0;
-		game->player->plane_x = 0.707;
-		game->player->plane_y = 0.0;
+		game->player->angle_x = 0.707;
+		game->player->angle_y = 0.0;
 
 	}
 	if (c == 'S')
 	{
 		game->player->direction_x = 0.0;
 		game->player->direction_y = 1.0;
-		game->player->plane_x = -0.707;
-		game->player->plane_y = 0.0;
+		game->player->angle_x = -0.707;
+		game->player->angle_y = 0.0;
 	}
 	if (c == 'E')
 	{
 		game->player->direction_x = 1.0;
 		game->player->direction_y = 0.0;
-		game->player->plane_x = 0.0;
-		game->player->plane_y = 0.707;
+		game->player->angle_x = 0.0;
+		game->player->angle_y = 0.707;
 	}
 	if (c == 'W')
 	{
 		game->player->direction_x = -1.0;
 		game->player->direction_y = 0.0;
-		game->player->plane_x = 0.0;
-		game->player->plane_y = -0.707;
+		game->player->angle_x = 0.0;
+		game->player->angle_y = -0.707;
 	}
 }
 

@@ -71,8 +71,8 @@ typedef struct s_player {
 	double	position_y;
 	double	direction_x;//向いている角度
 	double	direction_y;
-	double	plane_x;//カメラ
-	double	plane_y;
+	double	angle_x;//カメラ
+	double	angle_y;
 	double	move_speed;
 	double	rotation_speed;
 }				t_player;
