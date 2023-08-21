@@ -20,9 +20,9 @@ int	calculate_draw_start(int window_height, int line_height)
 	return (draw_start);
 }
 
-void	prepare_map_draw(t_draw	*draw, double perp_wall_dist)
+void	prepare_map_draw(t_draw	*draw, double perpendicular_distance)
 {
-	draw->line_height = (int)(HEIGHT / perp_wall_dist);
+	draw->line_height = (int)(HEIGHT / perpendicular_distance);
 	draw->draw_start = calculate_draw_start(HEIGHT, draw->line_height);
 	draw->draw_end = calculate_draw_end(HEIGHT, draw->line_height);
 }
@@ -34,10 +34,10 @@ int	calculate_texture_x(t_game *game, t_dda *dda)
 
 	if (dda->side == 0)
 		wall_x = game->player->position_y
-			+ dda->perp_wall_dist * dda->ray_direction_y;
+			+ dda->perpendicular_distance * dda->ray_direction_y;
 	else
 		wall_x = game->player->position_x
-			+ dda->perp_wall_dist * dda->ray_direction_x;
+			+ dda->perpendicular_distance * dda->ray_direction_x;
 	wall_x -= floor(wall_x);
 	tex_x = (int)(wall_x * (double)tex_width);
 	if (dda->side == 0 && dda->ray_direction_x > 0)

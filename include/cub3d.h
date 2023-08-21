@@ -106,7 +106,7 @@ typedef struct	s_dda
 	double	side_dist_y;
 	double	delta_dist_x;
 	double	delta_dist_y;
-	double	perp_wall_dist;
+	double	perpendicular_distance;
 	int		side;
 }				t_dda;
 
@@ -149,7 +149,7 @@ void		init_texture(t_game *game);
 void		calculate(t_game *game);
 void		prepare_dda(t_game *game, t_dda *dda, int x);
 int			calculate_dda(t_game *game, t_dda *dda);
-void		prepare_map_draw(t_draw	*draw, double perp_wall_dist);
+void		prepare_map_draw(t_draw	*draw, double perpendicular_distance);
 void		save_color(t_game *game, t_dda *dda, t_draw *draw, int x);
 void		save_ceiling(t_game *game, t_draw *draw, int x);
 void		save_floor(t_game *game, t_draw *draw, int x);
