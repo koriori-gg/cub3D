@@ -7,15 +7,15 @@ void	draw_player_direction(t_game *game, int img_width, int img_height)
 	t_player	*player;
 
 	player = game->player;
-	if (player->direction_x == 0)
+	if (player->direction_x >= -0.5 && player->direction_x <= 0.5)
 		x = game->minimap.img_width / 2;
-	else if (player->direction_x > 0)
+	else if (player->direction_x > 0.5)
 		x = game->minimap.img_width - 1;
 	else
 		x = 0;
-	if (player->direction_y == 0)
+	if (player->direction_y >= -0.5 && player->direction_y <= 0.5)
 		y = game->minimap.img_height / 2;
-	else if (player->direction_y > 0)
+	else if (player->direction_y > 0.5)
 		y = game->minimap.img_height - 1;
 	else
 		y = 0;
