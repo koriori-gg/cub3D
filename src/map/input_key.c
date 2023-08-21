@@ -74,46 +74,48 @@ static void	move_up_and_down(int keycode, t_game *game)
 	}
 }
 
-static void	turn_right(t_player *player)
+static void	turn_right(int keycode, t_game *game)
 {
+	t_player	*player;
 	double		old_direction_x;
 	double		old_angle_x;
 
-	old_direction_x = player->direction_x;
-	player->direction_x = player->direction_x * cos(player->rotation_speed)
-		- player->direction_y * sin(player->rotation_speed);
-	player->direction_y = old_direction_x * sin(player->rotation_speed)
-		+ player->direction_y * cos(player->rotation_speed);
-	old_angle_x = player->angle_x;
-	player->angle_x = player->angle_x * cos(player->rotation_speed)
-		- player->angle_y * sin(player->rotation_speed);
-	player->angle_y = old_angle_x * sin(player->rotation_speed)
-		+ player->angle_y * cos(player->rotation_speed);
-}
-
-static void	turn_left(t_player *player)
-{
-	double		old_direction_x;
-	double		old_angle_x;
-
-	old_direction_x = player->direction_x;
-	player->direction_x = player->direction_x * cos(-player->rotation_speed)
-		- player->direction_y * sin(-player->rotation_speed);
-	player->direction_y = old_direction_x * sin(-player->rotation_speed)
-		+ player->direction_y * cos(-player->rotation_speed);
-	old_angle_x = player->angle_x;
-	player->angle_x = player->angle_x * cos(-player->rotation_speed)
-		- player->angle_y * sin(-player->rotation_speed);
-	player->angle_y = old_angle_x * sin(-player->rotation_speed)
-		+ player->angle_y * cos(-player->rotation_speed);
-}
-
-static void	change_direction_of_movement(int keycode, t_player *player)
-{
+	player = game->player;
 	if (keycode == KEY_RIGHT)
-		turn_right(player);
+	{
+		old_direction_x = player->direction_x;
+		player->direction_x = player->direction_x * cos(player->rotation_speed)
+			- player->direction_y * sin(player->rotation_speed);
+		player->direction_y = old_direction_x * sin(player->rotation_speed)
+			+ player->direction_y * cos(player->rotation_speed);
+		old_angle_x = player->angle_x;
+		player->angle_x = player->angle_x * cos(player->rotation_speed)
+			- player->angle_y * sin(player->rotation_speed);
+		player->angle_y = old_angle_x * sin(player->rotation_speed)
+			+ player->angle_y * cos(player->rotation_speed);
+	}
+}
+
+static void	turn_left(int keycode, t_game *game)
+{
+	t_player	*player;
+	double		old_direction_x;
+	double		old_angle_x;
+
+	player = game->player;
 	if (keycode == KEY_LEFT)
-		turn_left(player);
+	{
+		old_direction_x = player->direction_x;
+		player->direction_x = player->direction_x * cos(-player->rotation_speed)
+			- player->direction_y * sin(-player->rotation_speed);
+		player->direction_y = old_direction_x * sin(-player->rotation_speed)
+			+ player->direction_y * cos(-player->rotation_speed);
+		old_angle_x = player->angle_x;
+		player->angle_x = player->angle_x * cos(-player->rotation_speed)
+			- player->angle_y * sin(-player->rotation_speed);
+		player->angle_y = old_angle_x * sin(-player->rotation_speed)
+			+ player->angle_y * cos(-player->rotation_speed);
+	}
 }
 
 int	input_key(int keycode, t_game *game)
@@ -122,6 +124,7 @@ int	input_key(int keycode, t_game *game)
 		close_game(game);
 	move_up_and_down(keycode, game);
 	move_left_and_right(keycode, game);
-	change_direction_of_movement(keycode, game->player);
+	turn_right(keycode, game);
+	turn_left(keycode, game);
 	return (0);
 }
