@@ -1,6 +1,33 @@
 #include "cub3d.h"
 
-void	move(int keycode, t_game *game)
+static void	move_left_and_right(int keycode, t_game *game)
+{
+	t_player	*player;
+
+	player = game->player;
+	if (keycode == KEY_D)
+	{
+		if (game->map_info.map[(int)(player->position_y)]
+			[(int)(player->position_x
+				+ player->angle_x * player->move_speed)] == '0')
+			player->position_x += player->angle_x * player->move_speed;
+		if (game->map_info.map[(int)(player->position_y + player->angle_y
+				* player->move_speed)][(int)(player->position_x)] == '0')
+			player->position_y += player->angle_y * player->move_speed;
+	}
+	else if (keycode == KEY_A)
+	{
+		if (game->map_info.map[(int)(player->position_y)]
+			[(int)(player->position_x
+				- player->angle_x * player->move_speed)] == '0')
+			player->position_x -= player->angle_x * player->move_speed;
+		if (game->map_info.map[(int)(player->position_y - player->angle_y
+				* player->move_speed)][(int)(player->position_x)] == '0')
+			player->position_y -= player->angle_y * player->move_speed;
+	}
+}
+
+static void	move_up_and_down(int keycode, t_game *game)
 {
 	t_player	*player;
 
@@ -81,7 +108,7 @@ static void	turn_left(t_player *player)
 		+ player->angle_y * cos(-player->rotation_speed);
 }
 
-void	change_direction_of_movement(int keycode, t_player *player)
+static void	change_direction_of_movement(int keycode, t_player *player)
 {
 	if (keycode == KEY_RIGHT)
 		turn_right(player);
@@ -93,7 +120,8 @@ int	input_key(int keycode, t_game *game)
 {
 	if (keycode == KEY_ESC)
 		close_game(game);
-	move(keycode, game);
+	move_up_and_down(keycode, game);
+	move_left_and_right(keycode, game);
 	change_direction_of_movement(keycode, game->player);
 	return (0);
 }
