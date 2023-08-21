@@ -52,26 +52,6 @@ static void	move_up_and_down(int keycode, t_game *game)
 				* player->move_speed)][(int)(player->position_x)] == '0')
 			player->position_y -= player->direction_y * player->move_speed;
 	}
-	else if (keycode == KEY_D)
-	{
-		if (game->map_info.map[(int)(player->position_y)]
-			[(int)(player->position_x
-				+ player->angle_x * player->move_speed)] == '0')
-			player->position_x += player->angle_x * player->move_speed;
-		if (game->map_info.map[(int)(player->position_y + player->angle_y
-				* player->move_speed)][(int)(player->position_x)] == '0')
-			player->position_y += player->angle_y * player->move_speed;
-	}
-	else if (keycode == KEY_A)
-	{
-		if (game->map_info.map[(int)(player->position_y)]
-			[(int)(player->position_x
-				- player->angle_x * player->move_speed)] == '0')
-			player->position_x -= player->angle_x * player->move_speed;
-		if (game->map_info.map[(int)(player->position_y - player->angle_y
-				* player->move_speed)][(int)(player->position_x)] == '0')
-			player->position_y -= player->angle_y * player->move_speed;
-	}
 }
 
 static void	turn_right(int keycode, t_game *game)
