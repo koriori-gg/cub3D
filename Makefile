@@ -16,6 +16,7 @@ SRCS = src/main.c \
 	src/setup/init_struct.c \
 	src/setup/init_minimap.c \
 	src/setup/init_asset.c \
+	src/setup/init_player.c \
 	src/raycasting/calculate.c \
 	src/raycasting/calculate_dda.c \
 	src/raycasting/save_color.c \

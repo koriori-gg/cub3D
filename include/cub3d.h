@@ -145,6 +145,7 @@ void		print_argv(char **argv);
 void		init_game(t_game *game, int fd);
 void		init_minimap(t_game *game);
 void		init_texture(t_game *game);
+void		init_player(t_game *game);
 //calculate
 void		calculate_field_of_vision(t_game *game);
 void		prepare_dda(t_game *game, t_dda *dda, int x);
