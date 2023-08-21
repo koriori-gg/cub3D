@@ -146,7 +146,7 @@ void		init_game(t_game *game, int fd);
 void		init_minimap(t_game *game);
 void		init_texture(t_game *game);
 //calculate
-void		calculate(t_game *game);
+void		calculate_field_of_vision(t_game *game);
 void		prepare_dda(t_game *game, t_dda *dda, int x);
 int			calculate_dda(t_game *game, t_dda *dda);
 void		prepare_map_draw(t_draw	*draw, double perpendicular_distance);

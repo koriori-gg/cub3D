@@ -1,6 +1,6 @@
 #include "cub3d.h"
 
-void	calculate(t_game *game)
+void	calculate_field_of_vision(t_game *game)
 {
 	int		x;
 	t_dda	dda;
