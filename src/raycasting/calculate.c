@@ -9,8 +9,8 @@ void	calculate_field_of_view(t_game *game)
 	x = 0;
 	while (x < WIDTH)
 	{
-		prepare_dda(game, &dda, x);
-		dda.side = calculate_dda(game, &dda);
+		prepare_calculate_collision_point(game, &dda, x);
+		dda.side = calculate_collision_point(game, &dda);
 		if (dda.side == 0)
 			dda.perpendicular_distance = (dda.map_x - game->player->position_x
 					+ (1 - dda.step_x) / 2) / dda.ray_direction_x;
