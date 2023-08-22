@@ -13,26 +13,26 @@ static void	calculate_direction_to_step(t_game *game, t_dda *dda)
 	if (dda->ray_direction_x < 0)
 	{
 		dda->step_x = -1;
-		dda->side_dist_x = (game->player->position_x
-				- dda->collision_grid_x) * dda->delta_dist_x;
+		dda->side_distance_x = (game->player->position_x
+				- dda->collision_grid_x) * dda->delta_distance_x;
 	}
 	else
 	{
 		dda->step_x = 1;
-		dda->side_dist_x = (dda->collision_grid_x + 1.0
-				- game->player->position_x) * dda->delta_dist_x;
+		dda->side_distance_x = (dda->collision_grid_x + 1.0
+				- game->player->position_x) * dda->delta_distance_x;
 	}
 	if (dda->ray_direction_y < 0)
 	{
 		dda->step_y = -1;
-		dda->side_dist_y = (game->player->position_y
-				- dda->collision_grid_y) * dda->delta_dist_y;
+		dda->side_distance_y = (game->player->position_y
+				- dda->collision_grid_y) * dda->delta_distance_y;
 	}
 	else
 	{
 		dda->step_y = 1;
-		dda->side_dist_y = (dda->collision_grid_y + 1.0
-				- game->player->position_y) * dda->delta_dist_y;
+		dda->side_distance_y = (dda->collision_grid_y + 1.0
+				- game->player->position_y) * dda->delta_distance_y;
 	}
 }
 
@@ -44,8 +44,8 @@ void	prepare_calculate_collision_grid(t_game *game, t_dda *dda, int x)
 		+ game->player->angle_y * calculate_camera_location(x, WIDTH);
 	dda->collision_grid_x = (int)game->player->position_x;
 	dda->collision_grid_y = (int)game->player->position_y;
-	dda->delta_dist_x = fabs(1 / dda->ray_direction_x);
-	dda->delta_dist_y = fabs(1 / dda->ray_direction_y);
+	dda->delta_distance_x = fabs(1 / dda->ray_direction_x);
+	dda->delta_distance_y = fabs(1 / dda->ray_direction_y);
 	calculate_direction_to_step(game, dda);
 }
 
@@ -57,15 +57,15 @@ bool	calculate_collision_grid(t_game *game, t_dda *dda)
 	hit = false;
 	while (!hit)
 	{
-		if (dda->side_dist_x < dda->side_dist_y)
+		if (dda->side_distance_x < dda->side_distance_y)
 		{
-			dda->side_dist_x += dda->delta_dist_x;
+			dda->side_distance_x += dda->delta_distance_x;
 			dda->collision_grid_x += dda->step_x;
 			is_y_collision = false;
 		}
 		else
 		{
-			dda->side_dist_y += dda->delta_dist_y;
+			dda->side_distance_y += dda->delta_distance_y;
 			dda->collision_grid_y += dda->step_y;
 			is_y_collision = true;
 		}

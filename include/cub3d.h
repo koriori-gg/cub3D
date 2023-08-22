@@ -67,11 +67,11 @@ typedef struct s_map_info {
 typedef struct s_player {
 	double	pre_position_x;
 	double	pre_position_y;
-	double	position_x;//現在いる座標
+	double	position_x;
 	double	position_y;
-	double	direction_x;//向いている角度
+	double	direction_x;
 	double	direction_y;
-	double	angle_x;//カメラ
+	double	angle_x;
 	double	angle_y;
 	double	move_speed;
 	double	rotation_speed;
@@ -102,10 +102,10 @@ typedef struct	s_dda
 	int		collision_grid_y;
 	int		step_x;
 	int		step_y;
-	double	side_dist_x;
-	double	side_dist_y;
-	double	delta_dist_x;
-	double	delta_dist_y;
+	double	side_distance_x;
+	double	side_distance_y;
+	double	delta_distance_x;
+	double	delta_distance_y;
 	double	perpendicular_distance;
 	bool	is_y_collision;
 }				t_dda;
