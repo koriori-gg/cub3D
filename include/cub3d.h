@@ -98,8 +98,8 @@ typedef struct	s_dda
 {
 	double	ray_direction_x;
 	double	ray_direction_y;
-	int		map_x;
-	int		map_y;
+	int		collision_grid_x;
+	int		collision_grid_y;
 	int		step_x;
 	int		step_y;
 	double	side_dist_x;

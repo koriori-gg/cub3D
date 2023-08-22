@@ -14,25 +14,25 @@ static void	calculate_direction_to_step(t_game *game, t_dda *dda)
 	{
 		dda->step_x = -1;
 		dda->side_dist_x
-			= (game->player->position_x - dda->map_x) * dda->delta_dist_x;
+			= (game->player->position_x - dda->collision_grid_x) * dda->delta_dist_x;
 	}
 	else
 	{
 		dda->step_x = 1;
 		dda->side_dist_x
-			= (dda->map_x + 1.0 - game->player->position_x) * dda->delta_dist_x;
+			= (dda->collision_grid_x + 1.0 - game->player->position_x) * dda->delta_dist_x;
 	}
 	if (dda->ray_direction_y < 0)
 	{
 		dda->step_y = -1;
 		dda->side_dist_y
-			= (game->player->position_y - dda->map_y) * dda->delta_dist_y;
+			= (game->player->position_y - dda->collision_grid_y) * dda->delta_dist_y;
 	}
 	else
 	{
 		dda->step_y = 1;
 		dda->side_dist_y
-			= (dda->map_y + 1.0 - game->player->position_y) * dda->delta_dist_y;
+			= (dda->collision_grid_y + 1.0 - game->player->position_y) * dda->delta_dist_y;
 	}
 }
 
@@ -42,8 +42,8 @@ void	prepare_calculate_collision_grid(t_game *game, t_dda *dda, int x)
 		+ game->player->angle_x * calculate_camera_location(x, WIDTH);
 	dda->ray_direction_y = game->player->direction_y
 		+ game->player->angle_y * calculate_camera_location(x, WIDTH);
-	dda->map_x = (int)game->player->position_x;
-	dda->map_y = (int)game->player->position_y;
+	dda->collision_grid_x = (int)game->player->position_x;
+	dda->collision_grid_y = (int)game->player->position_y;
 	dda->delta_dist_x = fabs(1 / dda->ray_direction_x);
 	dda->delta_dist_y = fabs(1 / dda->ray_direction_y);
 	calculate_direction_to_step(game, dda);
@@ -60,16 +60,16 @@ int	calculate_collision_grid(t_game *game, t_dda *dda)
 		if (dda->side_dist_x < dda->side_dist_y)
 		{
 			dda->side_dist_x += dda->delta_dist_x;
-			dda->map_x += dda->step_x;
+			dda->collision_grid_x += dda->step_x;
 			side = 0;
 		}
 		else
 		{
 			dda->side_dist_y += dda->delta_dist_y;
-			dda->map_y += dda->step_y;
+			dda->collision_grid_y += dda->step_y;
 			side = 1;
 		}
-		if (game->map_info.map[dda->map_y][dda->map_x] != '0')
+		if (game->map_info.map[dda->collision_grid_y][dda->collision_grid_x] != '0')
 			hit = 1;
 	}
 	return (side);
