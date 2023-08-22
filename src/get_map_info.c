@@ -14,7 +14,7 @@ static char	*extract_texture_path(char *line)
 	return (texture_info);
 }
 
-// validated 
+// validated
 static int	*extract_rgb(char *line)
 {
 	int		i;

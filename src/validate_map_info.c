@@ -72,11 +72,9 @@ void	search_reachable_squares(char **map, int i, int j)
 void	check_wall(char **map, int y, int x)
 {
 	char	**map_copy;
-	int		i;
-	int		height;
 
 	map_copy = make_map_copy(map);
-	search_reachable_squares(map_copy, y, x);
+	search_reachable_squares(map, y, x);
 	free_double_pointer(map_copy);
 }
 
