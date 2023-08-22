@@ -53,7 +53,7 @@ void	save_color(t_game *game, t_dda *dda, t_draw *draw, int x)
 	int	color;
 	int	texture_y;
 
-	draw->texture_num = char_to_int(game->map_info.map[dda->collision_grid_y][dda->collision_grid_x]);
+	draw->texture_num = game->map_info.map[dda->collision_grid_y][dda->collision_grid_x] - 48;
 	draw->texture_x = calculate_texture_x(game, dda);
 	draw->step = 1.0 * texture_height / draw->line_height;
 	draw->texture_position = (draw->draw_start - HEIGHT / 2

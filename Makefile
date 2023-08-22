@@ -21,7 +21,6 @@ SRCS = src/main.c \
 	src/raycasting/calculate_dda.c \
 	src/raycasting/save_color.c \
 	src/raycasting/save_floor_and_ceiling.c \
-	src/raycasting/char_to_int.c \
 	src/raycasting/draw.c \
 	src/map/draw_map.c \
 	src/map/get_map_info.c \
