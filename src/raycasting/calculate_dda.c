@@ -51,11 +51,11 @@ void	prepare_calculate_collision_grid(t_game *game, t_dda *dda, int x)
 
 bool	calculate_collision_grid(t_game *game, t_dda *dda)
 {
-	bool	hit;
+	bool	did_ray_hit_wall;
 	bool	is_y_collision;
 
-	hit = false;
-	while (!hit)
+	did_ray_hit_wall = false;
+	while (!did_ray_hit_wall)
 	{
 		if (dda->side_distance_x < dda->side_distance_y)
 		{
@@ -70,8 +70,8 @@ bool	calculate_collision_grid(t_game *game, t_dda *dda)
 			is_y_collision = true;
 		}
 		if (game->map_info.map
-			[dda->collision_grid_y][dda->collision_grid_x] != '0')
-			hit = true;
+			[dda->collision_grid_y][dda->collision_grid_x] == '1')
+			did_ray_hit_wall = true;
 	}
 	return (is_y_collision);
 }
