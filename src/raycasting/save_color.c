@@ -30,7 +30,7 @@ void	prepare_map_draw(t_draw	*draw, double perpendicular_distance)
 int	calculate_texture_x(t_game *game, t_dda *dda)
 {
 	double	wall_x;
-	int		tex_x;
+	int		texture_x;
 
 	if (dda->is_y_collision == 0)
 		wall_x = game->player->position_y
@@ -39,32 +39,32 @@ int	calculate_texture_x(t_game *game, t_dda *dda)
 		wall_x = game->player->position_x
 			+ dda->perpendicular_distance * dda->ray_direction_x;
 	wall_x -= floor(wall_x);
-	tex_x = (int)(wall_x * (double)tex_width);
+	texture_x = (int)(wall_x * (double)texture_width);
 	if (dda->is_y_collision == 0 && dda->ray_direction_x > 0)
-		tex_x = tex_width - tex_x - 1;
+		texture_x = texture_width - texture_x - 1;
 	if (dda->is_y_collision == 1 && dda->ray_direction_y < 0)
-		tex_x = tex_width - tex_x - 1;
-	return (tex_x);
+		texture_x = texture_width - texture_x - 1;
+	return (texture_x);
 }
 
 void	save_color(t_game *game, t_dda *dda, t_draw *draw, int x)
 {
 	int	y;
 	int	color;
-	int	tex_y;
+	int	texture_y;
 
-	draw->tex_num = char_to_int(game->map_info.map[dda->collision_grid_y][dda->collision_grid_x]);
-	draw->tex_x = calculate_texture_x(game, dda);
-	draw->step = 1.0 * tex_height / draw->line_height;
-	draw->tex_position = (draw->draw_start - HEIGHT / 2
+	draw->texture_num = char_to_int(game->map_info.map[dda->collision_grid_y][dda->collision_grid_x]);
+	draw->texture_x = calculate_texture_x(game, dda);
+	draw->step = 1.0 * texture_height / draw->line_height;
+	draw->texture_position = (draw->draw_start - HEIGHT / 2
 			+ draw->line_height / 2) * draw->step;
 	y = draw->draw_start;
 	save_ceiling(game, draw, x);
 	while (y < draw->draw_end)
 	{
-		tex_y = (int)draw->tex_position & (tex_height - 1);
-		draw->tex_position += draw->step;
-		color = game->texture[draw->tex_num][tex_height * tex_y + draw->tex_x];
+		texture_y = (int)draw->texture_position & (texture_height - 1);
+		draw->texture_position += draw->step;
+		color = game->texture[draw->texture_num][texture_height * texture_y + draw->texture_x];
 		if (dda->is_y_collision == 1)
 			color = (color >> 1) & 8355711;
 		game->buf[y][x] = color;

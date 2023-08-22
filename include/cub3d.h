@@ -22,8 +22,8 @@
 # define X_EVENT_KEY_PRESS	2
 
 //temp
-#define tex_width 64
-#define tex_height 64
+#define texture_width 64
+#define texture_height 64
 #define WIDTH 960
 #define HEIGHT 540
 
@@ -115,9 +115,9 @@ typedef struct	s_draw
 	int		line_height;
 	int		draw_start;
 	int		draw_end;
-	int		tex_num;
-	int		tex_x;
-	double	tex_position;
+	int		texture_num;
+	int		texture_x;
+	double	texture_position;
 	double	step;
 }				t_draw;
 
