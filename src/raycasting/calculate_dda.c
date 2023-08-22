@@ -13,26 +13,26 @@ static void	calculate_direction_to_step(t_game *game, t_dda *dda)
 	if (dda->ray_direction_x < 0)
 	{
 		dda->step_x = -1;
-		dda->side_dist_x
-			= (game->player->position_x - dda->collision_grid_x) * dda->delta_dist_x;
+		dda->side_dist_x = (game->player->position_x
+				- dda->collision_grid_x) * dda->delta_dist_x;
 	}
 	else
 	{
 		dda->step_x = 1;
-		dda->side_dist_x
-			= (dda->collision_grid_x + 1.0 - game->player->position_x) * dda->delta_dist_x;
+		dda->side_dist_x = (dda->collision_grid_x + 1.0
+				- game->player->position_x) * dda->delta_dist_x;
 	}
 	if (dda->ray_direction_y < 0)
 	{
 		dda->step_y = -1;
-		dda->side_dist_y
-			= (game->player->position_y - dda->collision_grid_y) * dda->delta_dist_y;
+		dda->side_dist_y = (game->player->position_y
+				- dda->collision_grid_y) * dda->delta_dist_y;
 	}
 	else
 	{
 		dda->step_y = 1;
-		dda->side_dist_y
-			= (dda->collision_grid_y + 1.0 - game->player->position_y) * dda->delta_dist_y;
+		dda->side_dist_y = (dda->collision_grid_y + 1.0
+				- game->player->position_y) * dda->delta_dist_y;
 	}
 }
 
@@ -69,7 +69,8 @@ bool	calculate_collision_grid(t_game *game, t_dda *dda)
 			dda->collision_grid_y += dda->step_y;
 			is_y_collision = true;
 		}
-		if (game->map_info.map[dda->collision_grid_y][dda->collision_grid_x] != '0')
+		if (game->map_info.map
+			[dda->collision_grid_y][dda->collision_grid_x] != '0')
 			hit = true;
 	}
 	return (is_y_collision);
