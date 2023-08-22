@@ -49,10 +49,10 @@ void	prepare_calculate_collision_grid(t_game *game, t_dda *dda, int x)
 	calculate_direction_to_step(game, dda);
 }
 
-int	calculate_collision_grid(t_game *game, t_dda *dda)
+bool	calculate_collision_grid(t_game *game, t_dda *dda)
 {
 	bool	hit;
-	int		side;
+	bool	is_y_collision;
 
 	hit = false;
 	while (!hit)
@@ -61,16 +61,16 @@ int	calculate_collision_grid(t_game *game, t_dda *dda)
 		{
 			dda->side_dist_x += dda->delta_dist_x;
 			dda->collision_grid_x += dda->step_x;
-			side = 0;
+			is_y_collision = false;
 		}
 		else
 		{
 			dda->side_dist_y += dda->delta_dist_y;
 			dda->collision_grid_y += dda->step_y;
-			side = 1;
+			is_y_collision = true;
 		}
 		if (game->map_info.map[dda->collision_grid_y][dda->collision_grid_x] != '0')
 			hit = true;
 	}
-	return (side);
+	return (is_y_collision);
 }

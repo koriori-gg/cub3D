@@ -32,7 +32,7 @@ int	calculate_texture_x(t_game *game, t_dda *dda)
 	double	wall_x;
 	int		tex_x;
 
-	if (dda->side == 0)
+	if (dda->is_y_collision == 0)
 		wall_x = game->player->position_y
 			+ dda->perpendicular_distance * dda->ray_direction_y;
 	else
@@ -40,9 +40,9 @@ int	calculate_texture_x(t_game *game, t_dda *dda)
 			+ dda->perpendicular_distance * dda->ray_direction_x;
 	wall_x -= floor(wall_x);
 	tex_x = (int)(wall_x * (double)tex_width);
-	if (dda->side == 0 && dda->ray_direction_x > 0)
+	if (dda->is_y_collision == 0 && dda->ray_direction_x > 0)
 		tex_x = tex_width - tex_x - 1;
-	if (dda->side == 1 && dda->ray_direction_y < 0)
+	if (dda->is_y_collision == 1 && dda->ray_direction_y < 0)
 		tex_x = tex_width - tex_x - 1;
 	return (tex_x);
 }
@@ -65,7 +65,7 @@ void	save_color(t_game *game, t_dda *dda, t_draw *draw, int x)
 		tex_y = (int)draw->tex_position & (tex_height - 1);
 		draw->tex_position += draw->step;
 		color = game->texture[draw->tex_num][tex_height * tex_y + draw->tex_x];
-		if (dda->side == 1)
+		if (dda->is_y_collision == 1)
 			color = (color >> 1) & 8355711;
 		game->buf[y][x] = color;
 		game->re_buf = 1;

@@ -107,7 +107,7 @@ typedef struct	s_dda
 	double	delta_dist_x;
 	double	delta_dist_y;
 	double	perpendicular_distance;
-	int		side;
+	bool	is_y_collision;
 }				t_dda;
 
 typedef struct	s_draw
@@ -149,7 +149,7 @@ void		init_player(t_game *game);
 //calculate
 void		calculate_field_of_view(t_game *game);
 void		prepare_calculate_collision_grid(t_game *game, t_dda *dda, int x);
-int			calculate_collision_grid(t_game *game, t_dda *dda);
+bool		calculate_collision_grid(t_game *game, t_dda *dda);
 void		prepare_map_draw(t_draw	*draw, double perpendicular_distance);
 void		save_color(t_game *game, t_dda *dda, t_draw *draw, int x);
 void		save_ceiling(t_game *game, t_draw *draw, int x);
