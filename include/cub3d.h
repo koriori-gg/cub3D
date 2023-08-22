@@ -21,17 +21,12 @@
 # define KEY_RIGHT		65363
 # define X_EVENT_KEY_PRESS	2
 
-//temp
-#define texture_width 64
-#define texture_height 64
-#define WIDTH 960
-#define HEIGHT 540
+# define TEXTURE_WIDTH 64
+# define TEXTURE_HEIGHT 64
+# define WIDTH 960
+# define HEIGHT 540
 
 # define RGB_RED 0xFF0000
-# define RGB_GREEN 0x00FF00
-# define RGB_BLUE 0x0000FF
-# define RGB_WHITE 0xFFFFFF
-# define RGB_YELLOW 0xFFFF00
 
 # define DIR_DOWN		0
 # define DIR_UP			1
@@ -77,8 +72,7 @@ typedef struct s_player {
 	double	rotation_speed;
 }				t_player;
 
-typedef struct	s_image
-{
+typedef struct s_image{
 	void	*img;
 	int		*data;
 	int		size_line;
@@ -94,8 +88,7 @@ typedef struct s_minimap {
 	int			img_width;
 }				t_minimap;
 
-typedef struct	s_dda
-{
+typedef struct s_dda{
 	double	ray_direction_x;
 	double	ray_direction_y;
 	int		collision_grid_x;
@@ -110,8 +103,7 @@ typedef struct	s_dda
 	bool	is_y_collision;
 }				t_dda;
 
-typedef struct	s_draw
-{
+typedef struct s_draw{
 	int		line_height;
 	int		draw_start;
 	int		draw_end;
@@ -121,7 +113,7 @@ typedef struct	s_draw
 	double	step;
 }				t_draw;
 
-typedef struct s_game {
+typedef struct s_game{
 	void		*mlx;
 	void		*win;
 	t_player	*player;
@@ -136,16 +128,18 @@ typedef struct s_game {
 //error
 void		error_exit(int signal);
 void		print_error(char *str);
+void		exit_with_error(char *message);
+int			close_game(t_game *game);
 //map
 void		free_map_info(t_map_info map_info);
 void		free_game(t_game *game);
-//utils
-void		print_argv(char **argv);
 //setup
 void		init_game(t_game *game, int fd);
 void		init_minimap(t_game *game);
 void		init_texture(t_game *game);
 void		init_player(t_game *game);
+int			open_cub_file(char *path);
+t_map_info	get_map_info(int fd);
 //calculate
 void		calculate_field_of_view(t_game *game);
 void		prepare_calculate_collision_grid(t_game *game, t_dda *dda, int x);
@@ -156,19 +150,11 @@ void		save_ceiling(t_game *game, t_draw *draw, int x);
 void		save_floor(t_game *game, t_draw *draw, int x);
 //minimap
 void		draw_minimap(t_game *game);
-//temp
+//map
 void		draw_field_of_view(t_game *game);
-//move
 int			input_key(int keycode, t_game *game);
-//close
-int			close_game(t_game *game);
-
-void		exit_with_error(char *message);
-int			open_cub_file(char *path);
-t_map_info	get_map_info(int fd);
-
 // debug
-void	print_info(t_map_info info);
-void	print_two_dimensional_array(char **array);
+void		print_info(t_map_info info);
+void		print_two_dimensional_array(char **array);
 
 #endif

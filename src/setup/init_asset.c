@@ -69,7 +69,7 @@ void	init_texture(t_game *game)
 	while (i < 9)
 	{
 		game->texture[i] = (int *)ft_calloc
-			(texture_height * texture_width, sizeof(int));
+			(TEXTURE_HEIGHT * TEXTURE_WIDTH, sizeof(int));
 		if (!game->texture[i++])
 			return ;
 	}
@@ -77,7 +77,7 @@ void	init_texture(t_game *game)
 	while (i < 9)
 	{
 		j = 0;
-		while (j < texture_height * texture_width)
+		while (j < TEXTURE_HEIGHT * TEXTURE_WIDTH)
 			game->texture[i][j++] = 0;
 		i++;
 	}
