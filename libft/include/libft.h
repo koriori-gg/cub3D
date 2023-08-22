@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sokuno <sokuno@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ihashimo <ihashimo@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 11:00:58 by ihashimo          #+#    #+#             */
-/*   Updated: 2023/08/17 14:59:07 by sokuno           ###   ########.fr       */
+/*   Updated: 2023/08/18 22:42:16 by ihashimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,8 @@ void	ft_lstdelone(t_list *lst, void (*del)(void*));
 void	ft_lstclear(t_list **lst, void (*del)(void*));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
-
 // addition
 int		ft_isspace(char c);
+void	free_double_pointer(char **path);
 
 #endif
