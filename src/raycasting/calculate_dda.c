@@ -36,7 +36,7 @@ static void	calculate_direction_to_step(t_game *game, t_dda *dda)
 	}
 }
 
-void	prepare_calculate_collision_point(t_game *game, t_dda *dda, int x)
+void	prepare_calculate_collision_grid(t_game *game, t_dda *dda, int x)
 {
 	dda->ray_direction_x = game->player->direction_x
 		+ game->player->angle_x * calculate_camera_location(x, WIDTH);
@@ -49,7 +49,7 @@ void	prepare_calculate_collision_point(t_game *game, t_dda *dda, int x)
 	calculate_direction_to_step(game, dda);
 }
 
-int	calculate_collision_point(t_game *game, t_dda *dda)
+int	calculate_collision_grid(t_game *game, t_dda *dda)
 {
 	int	hit;
 	int	side;
