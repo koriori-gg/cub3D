@@ -51,11 +51,11 @@ void	prepare_calculate_collision_grid(t_game *game, t_dda *dda, int x)
 
 int	calculate_collision_grid(t_game *game, t_dda *dda)
 {
-	int	hit;
-	int	side;
+	bool	hit;
+	int		side;
 
-	hit = 0;
-	while (hit == 0)
+	hit = false;
+	while (!hit)
 	{
 		if (dda->side_dist_x < dda->side_dist_y)
 		{
@@ -70,7 +70,7 @@ int	calculate_collision_grid(t_game *game, t_dda *dda)
 			side = 1;
 		}
 		if (game->map_info.map[dda->collision_grid_y][dda->collision_grid_x] != '0')
-			hit = 1;
+			hit = true;
 	}
 	return (side);
 }
