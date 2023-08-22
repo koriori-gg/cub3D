@@ -77,22 +77,6 @@ void	check_wall(char **map, int y, int x)
 
 	map_copy = make_map_copy(map);
 	search_reachable_squares(map_copy, y, x);
-	print_two_dimensional_array(map_copy);
-	i = 0;
-	while (map[i])
-		i++;
-	height = i;
-	i = 0;
-	while (i < height)
-	{
-		if (ft_strchr(map_copy[i], 'C'))
-		{
-			free_double_pointer(map_copy);
-			return ;
-		}
-		i++;
-	}
-	i = 0;
 	free_double_pointer(map_copy);
 }
 
