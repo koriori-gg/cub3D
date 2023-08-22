@@ -147,7 +147,7 @@ void		init_minimap(t_game *game);
 void		init_texture(t_game *game);
 void		init_player(t_game *game);
 //calculate
-void		calculate_field_of_vision(t_game *game);
+void		calculate_field_of_view(t_game *game);
 void		prepare_dda(t_game *game, t_dda *dda, int x);
 int			calculate_dda(t_game *game, t_dda *dda);
 void		prepare_map_draw(t_draw	*draw, double perpendicular_distance);
@@ -158,7 +158,7 @@ int			char_to_int(char s);
 //minimap
 void		draw_minimap(t_game *game);
 //temp
-void		draw_field_of_vision(t_game *game);
+void		draw_field_of_view(t_game *game);
 //move
 int			input_key(int keycode, t_game *game);
 //close
