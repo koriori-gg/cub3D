@@ -47,14 +47,26 @@ int	calculate_texture_x(t_game *game, t_dda *dda)
 	return (texture_x);
 }
 
+int	hit_wall_direction(t_dda *dda)
+{
+	if (dda->is_y_collision && dda->step_y == -1)
+		return (2);// north
+	if (dda->is_y_collision && dda->step_y == 1)
+		return (3);// south
+	if (!dda->is_y_collision && dda->step_x == 1)
+		return (4);// east
+	if (!dda->is_y_collision && dda->step_x == -1)
+		return (5);// west
+	return (1);
+}
+
 void	save_color(t_game *game, t_dda *dda, t_draw *draw, int x)
 {
 	int	y;
 	int	color;
 	int	texture_y;
 
-	draw->texture_num = game->map_info.map
-	[dda->collision_grid_y][dda->collision_grid_x] - 48;
+	draw->texture_num = hit_wall_direction(dda);
 	draw->texture_x = calculate_texture_x(game, dda);
 	draw->step = 1.0 * TEXTURE_HEIGHT / draw->line_height;
 	draw->texture_position = (draw->draw_start - HEIGHT / 2

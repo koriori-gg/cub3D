@@ -30,9 +30,9 @@ void	load_texture(t_game *game)
 	load_image(game, game->texture[0], "textures/eagle.xpm", &img);
 	load_image(game, game->texture[1], "textures/redbrick.xpm", &img);
 	load_image(game, game->texture[2], "textures/wall/north.xpm", &img);
-	load_image(game, game->texture[3], "textures/wall/east.xpm", &img);
-	load_image(game, game->texture[4], "textures/wall/west.xpm", &img);
-	load_image(game, game->texture[5], "textures/wall/south.xpm", &img);
+	load_image(game, game->texture[3], "textures/wall/south.xpm", &img);
+	load_image(game, game->texture[4], "textures/wall/east.xpm", &img);
+	load_image(game, game->texture[5], "textures/wall/west.xpm", &img);
 }
 
 void	init_buf(t_game *game)
