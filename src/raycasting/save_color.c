@@ -1,33 +1,6 @@
 #include "cub3d.h"
 
-int	calculate_draw_end(int window_height, int line_height)
-{
-	int	draw_end;
-
-	draw_end = line_height / 2 + window_height / 2;
-	if (draw_end >= window_height)
-		draw_end = window_height - 1;
-	return (draw_end);
-}
-
-int	calculate_draw_start(int window_height, int line_height)
-{
-	int	draw_start;
-
-	draw_start = window_height / 2 - line_height / 2;
-	if (draw_start < 0)
-		draw_start = 0;
-	return (draw_start);
-}
-
-void	prepare_map_draw(t_draw	*draw, double perpendicular_distance)
-{
-	draw->line_height = (int)(HEIGHT / perpendicular_distance);
-	draw->draw_start = calculate_draw_start(HEIGHT, draw->line_height);
-	draw->draw_end = calculate_draw_end(HEIGHT, draw->line_height);
-}
-
-int	calculate_texture_x(t_game *game, t_dda *dda)
+static int	calculate_texture_x(t_game *game, t_dda *dda)
 {
 	double	wall_x;
 	int		texture_x;
@@ -47,16 +20,16 @@ int	calculate_texture_x(t_game *game, t_dda *dda)
 	return (texture_x);
 }
 
-int	hit_wall_direction(t_dda *dda)
+static int	hit_wall_direction(t_dda *dda)
 {
 	if (dda->is_y_collision && dda->step_y == -1)
-		return (0);// north
+		return (0);
 	if (dda->is_y_collision && dda->step_y == 1)
-		return (1);// south
+		return (1);
 	if (!dda->is_y_collision && dda->step_x == -1)
-		return (2);// west
+		return (2);
 	if (!dda->is_y_collision && dda->step_x == 1)
-		return (3);// east
+		return (3);
 	return (0);
 }
 
