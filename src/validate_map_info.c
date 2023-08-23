@@ -1,13 +1,5 @@
 #include "cub3d.h"
 
-int	check_object(char object)
-{
-	if (object == 'N' || object == 'S' || object == 'E' || object == 'W')
-		return (1);
-	else if(object != '0' && object != '1' && object != ' ')
-		exit_with_error("invalid object\n");
-	return (0);
-}
 
 char	**make_map_copy(char **map)
 {
@@ -46,7 +38,6 @@ void	search_reachable_squares(char **map, int i, int j)
 	search_reachable_squares(map, i - 1, j);
 }
 
-// 0を基準にやる
 void	check_wall(char **map)
 {
 	char	**map_copy;
@@ -69,32 +60,42 @@ void	check_wall(char **map)
 	free_double_pointer(map_copy);
 }
 
-// 0を基準にする
-static void	validate_map(char **map)
+bool	is_player(char c)
 {
-	int	count;
+	if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
+		return (true);
+	return (false);
+}
+
+bool	is_floor_or_wall(char c)
+{
+	if (c == '0' || c == '1' || c == ' ')
+		return (true);
+	return (false);
+}
+
+void	validate_map(char **map)
+{
+	int	player_count;
 	int	i;
 	int	j;
 
-	count = 0;
+	player_count = 0;
 	i = 0;
 	while (map[i])
 	{
 		j = 0;
 		while (map[i][j] != '\0')
 		{
-			if (check_object(map[i][j]))
-				count++;
+			if (is_player(map[i][j]))
+				player_count++;
+			else if (!is_floor_or_wall(map[i][j]))
+				exit_with_error("invalid object in map\n");
 			j++;
 		}
 		i++;
 	}
-	if (count != 1)
+	if (player_count != 1)
 		exit_with_error("too many players\n");
 	check_wall(map);
-}
-
-void	validate_map_info(t_map_info map_info)
-{
-	validate_map(map_info.map);
 }
