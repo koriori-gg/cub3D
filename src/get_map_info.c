@@ -14,13 +14,38 @@ static char	*extract_texture_path(char *line)
 	return (texture_info);
 }
 
-// validated
-static int	*extract_rgb(char *line)
+static int *parse_rgb(char **rgb)
 {
+	int		*color_info;
 	int		i;
 	int		j;
+
+	color_info = ft_calloc(3, sizeof(int));
+	if (!color_info)
+		exit_with_error("calloc error");
+	i = 0;
+	while (rgb[i])
+	{
+		j = 0;
+		while (rgb[i][j] != '\0' && rgb[i][j] != '\n')
+		{
+			if (!ft_isdigit(rgb[i][j]))
+				exit_with_error("not digit\n");
+			j++;
+		}
+		color_info[i] = ft_atoi(rgb[i]);
+		if (color_info[i] < 0 || color_info[i] > 255)
+			exit_with_error("not in range\n");
+		i++;
+	}
+	free_double_pointer(rgb);
+	return (color_info);
+}
+
+static char	**extract_rgb(char *line)
+{
+	int		i;
 	char	**rgb;
-	int		*color_info;
 
 	i = 1;
 	if (line[i] == '\0' || line[i] == '\n')
@@ -35,24 +60,7 @@ static int	*extract_rgb(char *line)
 		i++;
 	if (i != 3)
 		exit_with_error("num of dot error\n");
-	color_info = ft_calloc(i + 1, sizeof(int));
-	if (!color_info)
-		exit_with_error("calloc falied\n");
-	i = 0;
-	while (rgb[i])
-	{
-		j = 0;
-		while (rgb[i][j] != '\0' && rgb[i][j] != '\n')
-		{
-			if (!ft_isdigit(rgb[i][j]))
-				exit_with_error("not digit\n");
-			j++;
-		}
-		color_info[i] = ft_atoi(rgb[i]);
-		i++;
-	}
-	free_double_pointer(rgb);
-	return (color_info);
+	return (rgb);
 }
 
 static char	**extract_map(int fd, char *first_line, int i)
@@ -100,9 +108,9 @@ t_map_info	get_map_info(int fd)
 		else if (ft_strncmp(line, "EA", 2) == 0)
 			map_info.east_texture = extract_texture_path(line);
 		else if (ft_strncmp(line, "F", 1) == 0)
-			map_info.floor_color = extract_rgb(line);
+			map_info.floor_color = parse_rgb(extract_rgb(line));
 		else if (ft_strncmp(line, "C", 1) == 0)
-			map_info.ceiling_color = extract_rgb(line);
+			map_info.ceiling_color = parse_rgb(extract_rgb(line));
 		else if (ft_strncmp(line, "\n", 1) != 0)
 			map_info.map = extract_map(fd, line, 1);
 		free(line);

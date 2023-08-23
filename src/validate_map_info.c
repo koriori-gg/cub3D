@@ -1,27 +1,5 @@
 #include "cub3d.h"
 
-// 全てboolにするか検討
-static void	validate_texture_path(char *texture_path)
-{
-	if (!texture_path)
-		exit_with_error("texture path not found");
-}
-
-static void	validate_rgb(int *rgb)
-{
-	int	i;
-
-	if (!rgb)
-		exit_with_error("invalid RGB");
-	i = 0;
-	while (rgb[i])
-	{
-		if (rgb[i] < 0 || rgb[i] > 255)
-			exit_with_error("invalid RGB");
-		i++;
-	}
-}
-
 int	check_object(char object)
 {
 	if (object == 'N' || object == 'S' || object == 'E' || object == 'W')
@@ -55,7 +33,6 @@ char	**make_map_copy(char **map)
 	return (map_copy);
 }
 
-// 行こうとしてるところのlenとって確保してない領域にアクセスしないようにするのよさそう
 void	search_reachable_squares(char **map, int i, int j)
 {
 	if (j >= (int)ft_strlen(map[i]) || map[i][j] == ' ')
@@ -78,8 +55,7 @@ void	check_wall(char **map, int y, int x)
 	free_double_pointer(map_copy);
 }
 
-// 壁に囲まれているか 斜めもダメにする 0はじまりでかんがえる？？？
-// 01NSEWのみで構成されているか
+// 0を基準にする
 static void	validate_map(char **map)
 {
 	int	count;
