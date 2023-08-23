@@ -17,8 +17,8 @@ SRCS = src/main.c \
 	src/setup/init_minimap.c \
 	src/setup/init_asset.c \
 	src/setup/init_player.c \
-	src/raycasting/calculate.c \
-	src/raycasting/calculate_dda.c \
+	src/raycasting/calculate_field_of_view.c \
+	src/raycasting/calculate_collision_grid.c \
 	src/raycasting/save_color.c \
 	src/raycasting/prepare_map_draw.c \
 	src/raycasting/save_floor_and_ceiling.c \
