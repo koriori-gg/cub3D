@@ -52,8 +52,6 @@ void	save_color(t_game *game, t_dda *dda, t_draw *draw, int x)
 		draw->texture_position += draw->step;
 		color = game->texture
 		[draw->texture_num][TEXTURE_HEIGHT * texture_y - draw->texture_x];
-		if (dda->is_y_collision == 1)
-			color = (color >> 1) & 8355711;
 		game->buf[y][x] = color;
 		game->re_buf = 1;
 		y++;
