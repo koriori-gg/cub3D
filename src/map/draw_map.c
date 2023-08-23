@@ -47,18 +47,6 @@ static void	draw_image(t_game *game, char c, int x, int y)
 	else if (ft_strchr("1", c))
 		mlx_put_image_to_window(game->mlx, game->win,
 			game->minimap.tile_img[1], img_width, img_height);
-	else if (ft_strchr("2", c))
-		mlx_put_image_to_window(game->mlx, game->win,
-			game->minimap.tile_img[2], img_width, img_height);
-	else if (ft_strchr("3", c))
-		mlx_put_image_to_window(game->mlx, game->win,
-			game->minimap.tile_img[3], img_width, img_height);
-	else if (ft_strchr("4", c))
-		mlx_put_image_to_window(game->mlx, game->win,
-			game->minimap.tile_img[4], img_width, img_height);
-	else if (ft_strchr("56789", c))
-		mlx_put_image_to_window(game->mlx, game->win,
-			game->minimap.tile_img[5], img_width, img_height);
 }
 
 void	draw_minimap(t_game *game)
