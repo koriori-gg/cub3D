@@ -29,12 +29,10 @@ void	load_texture(t_game *game)
 
 	load_image(game, game->texture[0], "textures/eagle.xpm", &img);
 	load_image(game, game->texture[1], "textures/redbrick.xpm", &img);
-	load_image(game, game->texture[2], "textures/purplestone.xpm", &img);
-	load_image(game, game->texture[3], "textures/greystone.xpm", &img);
-	load_image(game, game->texture[4], "textures/bluestone.xpm", &img);
-	load_image(game, game->texture[5], "textures/mossy.xpm", &img);
-	load_image(game, game->texture[6], "textures/wood.xpm", &img);
-	load_image(game, game->texture[7], "textures/colorstone.xpm", &img);
+	load_image(game, game->texture[2], "textures/wall/north.xpm", &img);
+	load_image(game, game->texture[3], "textures/wall/east.xpm", &img);
+	load_image(game, game->texture[4], "textures/wall/west.xpm", &img);
+	load_image(game, game->texture[5], "textures/wall/south.xpm", &img);
 }
 
 void	init_buf(t_game *game)
@@ -62,11 +60,11 @@ void	init_texture(t_game *game)
 
 	game->re_buf = 0;
 	init_buf(game);
-	game->texture = (int **)ft_calloc(9, sizeof(int *));
+	game->texture = (int **)ft_calloc(6, sizeof(int *));
 	if (!game->texture)
 		return ;
 	i = 0;
-	while (i < 9)
+	while (i < 7)
 	{
 		game->texture[i] = (int *)ft_calloc
 			(TEXTURE_HEIGHT * TEXTURE_WIDTH, sizeof(int));
@@ -74,7 +72,7 @@ void	init_texture(t_game *game)
 			return ;
 	}
 	i = 0;
-	while (i < 9)
+	while (i < 7)
 	{
 		j = 0;
 		while (j < TEXTURE_HEIGHT * TEXTURE_WIDTH)
