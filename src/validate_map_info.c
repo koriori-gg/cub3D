@@ -46,12 +46,26 @@ void	search_reachable_squares(char **map, int i, int j)
 	search_reachable_squares(map, i - 1, j);
 }
 
-void	check_wall(char **map, int y, int x)
+// 0を基準にやる
+void	check_wall(char **map)
 {
 	char	**map_copy;
+	int		i;
+	int		j;
 
 	map_copy = make_map_copy(map);
-	search_reachable_squares(map, y, x);
+	i = 0;
+	while (map_copy[i])
+	{
+		j = 0;
+		while (map[i][j] != '\0')
+		{
+			if (map[i][j] == '0')
+				search_reachable_squares(map_copy, i, j);
+			j++;
+		}
+		i++;
+	}
 	free_double_pointer(map_copy);
 }
 
@@ -61,7 +75,6 @@ static void	validate_map(char **map)
 	int	count;
 	int	i;
 	int	j;
-	int x, y;
 
 	count = 0;
 	i = 0;
@@ -71,27 +84,17 @@ static void	validate_map(char **map)
 		while (map[i][j] != '\0')
 		{
 			if (check_object(map[i][j]))
-			{
-				x = j;
-				y = i;
 				count++;
-			}
 			j++;
 		}
 		i++;
 	}
 	if (count != 1)
 		exit_with_error("too many players\n");
-	check_wall(map, y, x);
+	check_wall(map);
 }
 
 void	validate_map_info(t_map_info map_info)
 {
-	validate_texture_path(map_info.north_texture);
-	validate_texture_path(map_info.south_texture);
-	validate_texture_path(map_info.west_texture);
-	validate_texture_path(map_info.east_texture);
-	validate_rgb(map_info.floor_color);
-	validate_rgb(map_info.ceiling_color);
 	validate_map(map_info.map);
 }
