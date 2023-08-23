@@ -53,10 +53,10 @@ int	hit_wall_direction(t_dda *dda)
 		return (2);// north
 	if (dda->is_y_collision && dda->step_y == 1)
 		return (3);// south
-	if (!dda->is_y_collision && dda->step_x == 1)
-		return (4);// east
 	if (!dda->is_y_collision && dda->step_x == -1)
-		return (5);// west
+		return (4);// west
+	if (!dda->is_y_collision && dda->step_x == 1)
+		return (5);// east
 	return (1);
 }
 
