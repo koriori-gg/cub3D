@@ -27,12 +27,10 @@ void	load_texture(t_game *game)
 {
 	t_image	img;
 
-	load_image(game, game->texture[0], "textures/eagle.xpm", &img);
-	load_image(game, game->texture[1], "textures/redbrick.xpm", &img);
-	load_image(game, game->texture[2], game->map_info.north_texture, &img);
-	load_image(game, game->texture[3], game->map_info.south_texture, &img);
-	load_image(game, game->texture[4], game->map_info.west_texture, &img);
-	load_image(game, game->texture[5], game->map_info.east_texture, &img);
+	load_image(game, game->texture[0], game->map_info.north_texture, &img);
+	load_image(game, game->texture[1], game->map_info.south_texture, &img);
+	load_image(game, game->texture[2], game->map_info.west_texture, &img);
+	load_image(game, game->texture[3], game->map_info.east_texture, &img);
 }
 
 void	init_buf(t_game *game)
@@ -60,11 +58,11 @@ void	init_texture(t_game *game)
 
 	game->re_buf = 0;
 	init_buf(game);
-	game->texture = (int **)ft_calloc(6, sizeof(int *));
+	game->texture = (int **)ft_calloc(4, sizeof(int *));
 	if (!game->texture)
 		return ;
 	i = 0;
-	while (i < 7)
+	while (i < 4)
 	{
 		game->texture[i] = (int *)ft_calloc
 			(TEXTURE_HEIGHT * TEXTURE_WIDTH, sizeof(int));
@@ -72,7 +70,7 @@ void	init_texture(t_game *game)
 			return ;
 	}
 	i = 0;
-	while (i < 7)
+	while (i < 4)
 	{
 		j = 0;
 		while (j < TEXTURE_HEIGHT * TEXTURE_WIDTH)
