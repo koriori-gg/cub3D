@@ -2,8 +2,8 @@ NO textures/wall/north.xpm
 SO textures/wall/south.xpm
 WE textures/wall/west.xpm
 EA textures/wall/east.xpm
-F 220,100,0
-C 225,30,0
+F 30,135,67
+C 41,135,229
 
         1111111111111111111111111
         1000000000110000000000001
