@@ -1,5 +1,5 @@
 /* XPM */
-static char *_36beda55ae841afc7d667ccf554c31ax1GNt0eA3N2MTtRG[] = {
+static char *west[] = {
 /* columns rows colors chars-per-pixel */
 "64 64 2 2 ",
 "   c #7CC08E",
