@@ -29,10 +29,6 @@ int	main(int argc, char **argv)
 	if (argc != 2)
 		exit_with_error("invalid input");
 	fd = open_cub_file(argv[1]);
-	game.map_info = get_map_info(fd);
-	print_info(game.map_info);
-	validate_map(game.map_info.map);
-	free_map_info(game.map_info);
 	init_game(&game, fd);
 	mlx_hook(game.win, X_EVENT_KEY_PRESS, 1L << 0, &input_key, &game);
 	mlx_hook(game.win, RED_CLOSS, 0, &close_game, &game);
