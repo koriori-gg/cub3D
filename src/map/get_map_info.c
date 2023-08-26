@@ -14,7 +14,7 @@ static char	*extract_texture_path(char *line)
 	return (texture_info);
 }
 
-static int *parse_rgb(char **rgb)
+static int	*parse_rgb(char **rgb)
 {
 	int		*color_info;
 	int		i;
@@ -82,7 +82,7 @@ static char	**extract_map(int fd, char *first_line, int i)
 	}
 	map = extract_map(fd, first_line, i + 1);
 	if (ft_strchr(line, '\n'))
-		map[i] = ft_substr(line, 0, ft_strlen(line) - 1) ;
+		map[i] = ft_substr(line, 0, ft_strlen(line) - 1);
 	else
 		map[i] = ft_strdup(line);
 	free(line);

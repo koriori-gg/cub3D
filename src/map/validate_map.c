@@ -1,6 +1,5 @@
 #include "cub3d.h"
 
-
 void	validate_map(char **map)
 {
 	check_player_count(map);
