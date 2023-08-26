@@ -38,7 +38,7 @@ static void	search_reachable_grids(char **map, int i, int j)
 	search_reachable_grids(map, i - 1, j);
 }
 
-void	check_wall(char **map)
+void	ensure_map_surrounded_by_wall(char **map)
 {
 	char	**map_copy;
 	int		i;
@@ -91,12 +91,12 @@ void	validate_map(char **map)
 			if (is_player(map[i][j]))
 				player_count++;
 			else if (!is_floor_or_wall(map[i][j]))
-				exit_with_error("invalid object on the map\n");
+				exit_with_error("invalid object  map\n");
 			j++;
 		}
 		i++;
 	}
 	if (player_count != 1)
 		exit_with_error("Only one player is allowed on the map\n");
-	check_wall(map);
+	ensure_map_surrounded_by_wall(map);
 }
