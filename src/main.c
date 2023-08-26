@@ -3,7 +3,7 @@
 __attribute__((destructor))
 void	destructor(void)
 {
-	system("leaks -q cub3d");
+	system("leaks -q cub3D");
 }
 
 int	close_game(t_game *game)
