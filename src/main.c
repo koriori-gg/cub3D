@@ -6,40 +6,37 @@ void	destructor(void)
 	system("leaks -q cub3d");
 }
 
-void	free_map_info(t_map_info map_info)
+int	close_game(t_game *game)
 {
-	free(map_info.north_texture);
-	free(map_info.south_texture);
-	free(map_info.west_texture);
-	free(map_info.east_texture);
-	free(map_info.floor_color);
-	free(map_info.ceiling_color);
-	free_double_pointer(map_info.map);
+	mlx_destroy_window(game->mlx, game->win);
+	free_game(game);
+	exit(0);
 }
 
-static void	init_map_info(t_map_info *map_info)
+int	main_loop(t_game *game)
 {
-	map_info->north_texture = NULL;
-	map_info->south_texture = NULL;
-	map_info->west_texture = NULL;
-	map_info->east_texture = NULL;
-	map_info->floor_color = NULL;
-	map_info->ceiling_color = NULL;
-	map_info->map = NULL;
+	draw_minimap(game);
+	calculate_field_of_view(game);
+	draw_field_of_view(game);
+	return (0);
 }
 
-int	main(int argc, char *argv[])
+int	main(int argc, char **argv)
 {
-	t_map_info	map_info;
-	int			fd;
+	t_game	game;
+	int		fd;
 
 	if (argc != 2)
 		exit_with_error("invalid input");
-	init_map_info(&map_info);
 	fd = open_cub_file(argv[1]);
-	map_info = get_map_info(fd);
-	print_info(map_info);
-	validate_map(map_info.map);
-	free_map_info(map_info);
+	game.map_info = get_map_info(fd);
+	print_info(game.map_info);
+	validate_map(game.map_info.map);
+	free_map_info(game.map_info);
+	init_game(&game, fd);
+	mlx_hook(game.win, X_EVENT_KEY_PRESS, 1L << 0, &input_key, &game);
+	mlx_hook(game.win, RED_CLOSS, 0, &close_game, &game);
+	mlx_loop_hook(game.mlx, main_loop, &game);
+	mlx_loop(game.mlx);
 	return (0);
 }
