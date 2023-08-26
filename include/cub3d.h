@@ -141,6 +141,8 @@ void		init_texture(t_game *game);
 void		init_player(t_game *game);
 int			open_cub_file(char *path);
 t_map_info	get_map_info(int fd);
+void		check_player_count(char **map);
+void		ensure_map_enclosed_by_wall(char **map);
 void		validate_map(char **map);
 //calculate
 void		calculate_field_of_view(t_game *game);
