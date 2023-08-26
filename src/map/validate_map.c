@@ -74,13 +74,12 @@ bool	is_floor_or_wall(char c)
 	return (false);
 }
 
-void	validate_map(char **map)
+void	check_player_count(char **map)
 {
 	int	player_count;
 	int	i;
 	int	j;
 
-	print_two_dimensional_array(map);
 	player_count = 0;
 	i = 0;
 	while (map[i])
@@ -98,5 +97,10 @@ void	validate_map(char **map)
 	}
 	if (player_count != 1)
 		exit_with_error("Only one player is allowed on the map\n");
+}
+
+void	validate_map(char **map)
+{
+	check_player_count(map);
 	ensure_map_enclosed_by_wall(map);
 }
