@@ -25,17 +25,17 @@ static char	**copy_map(char **map)
 	return (map_copy);
 }
 
-void	search_reachable_squares(char **map, int i, int j)
+static void	search_reachable_grids(char **map, int i, int j)
 {
 	if (j >= (int)ft_strlen(map[i]) || map[i][j] == ' ')
 		exit_with_error("gomimap\n");
 	if (map[i][j] == '1' || map[i][j] == '2')
 		return ;
 	map[i][j] = '2';
-	search_reachable_squares(map, i, j + 1);
-	search_reachable_squares(map, i + 1, j);
-	search_reachable_squares(map, i, j - 1);
-	search_reachable_squares(map, i - 1, j);
+	search_reachable_grids(map, i, j + 1);
+	search_reachable_grids(map, i + 1, j);
+	search_reachable_grids(map, i, j - 1);
+	search_reachable_grids(map, i - 1, j);
 }
 
 void	check_wall(char **map)
@@ -52,7 +52,7 @@ void	check_wall(char **map)
 		while (map[i][j] != '\0')
 		{
 			if (map[i][j] == '0')
-				search_reachable_squares(map_copy, i, j);
+				search_reachable_grids(map_copy, i, j);
 			j++;
 		}
 		i++;
