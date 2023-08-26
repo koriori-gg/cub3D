@@ -1,7 +1,7 @@
 #include "cub3d.h"
 
 
-char	**make_map_copy(char **map)
+static char	**copy_map(char **map)
 {
 	char	**map_copy;
 	int		i;
@@ -44,7 +44,7 @@ void	check_wall(char **map)
 	int		i;
 	int		j;
 
-	map_copy = make_map_copy(map);
+	map_copy = copy_map(map);
 	i = 0;
 	while (map_copy[i])
 	{
