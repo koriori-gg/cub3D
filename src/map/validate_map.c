@@ -28,7 +28,7 @@ static char	**copy_map(char **map)
 static void	search_reachable_grids(char **map, int i, int j)
 {
 	if (j >= (int)ft_strlen(map[i]) || map[i][j] == ' ')
-		exit_with_error("gomimap\n");
+		exit_with_error("The map is not enclosed by wall\n");
 	if (map[i][j] == '1' || map[i][j] == '2')
 		return ;
 	map[i][j] = '2';
@@ -38,7 +38,7 @@ static void	search_reachable_grids(char **map, int i, int j)
 	search_reachable_grids(map, i - 1, j);
 }
 
-void	ensure_map_surrounded_by_wall(char **map)
+void	ensure_map_enclosed_by_wall(char **map)
 {
 	char	**map_copy;
 	int		i;
@@ -98,5 +98,5 @@ void	validate_map(char **map)
 	}
 	if (player_count != 1)
 		exit_with_error("Only one player is allowed on the map\n");
-	ensure_map_surrounded_by_wall(map);
+	ensure_map_enclosed_by_wall(map);
 }
