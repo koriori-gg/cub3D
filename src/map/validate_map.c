@@ -91,12 +91,12 @@ void	validate_map(char **map)
 			if (is_player(map[i][j]))
 				player_count++;
 			else if (!is_floor_or_wall(map[i][j]))
-				exit_with_error("invalid object in map\n");
+				exit_with_error("invalid object on the map\n");
 			j++;
 		}
 		i++;
 	}
 	if (player_count != 1)
-		exit_with_error("too many players\n");
+		exit_with_error("Only one player is allowed on the map\n");
 	check_wall(map);
 }
