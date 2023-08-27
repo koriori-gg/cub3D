@@ -22,7 +22,7 @@ SRCS = src/main.c \
 	src/raycasting/prepare_map_draw.c \
 	src/raycasting/save_floor_and_ceiling.c \
 	src/raycasting/draw_field_of_view.c \
-	src/map/draw_map.c \
+	src/map/draw_minimap.c \
 	src/map/get_map_info.c \
 	src/map/input_key.c \
 
