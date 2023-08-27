@@ -1,6 +1,6 @@
 #include "cub3d.h"
 
-void	load_image(t_game *game, int *texture, char *path, t_image *img)
+static void	load_image(t_game *game, int *texture, char *path, t_image *img)
 {
 	int	y;
 	int	x;
@@ -25,7 +25,7 @@ void	load_image(t_game *game, int *texture, char *path, t_image *img)
 	mlx_destroy_image(game->mlx, img->img);
 }
 
-void	load_texture(t_game *game)
+static void	load_texture(t_game *game)
 {
 	t_image	img;
 
@@ -35,7 +35,7 @@ void	load_texture(t_game *game)
 	load_image(game, game->texture[EAST], game->map_info.east_texture, &img);
 }
 
-void	init_buf(t_game *game)
+static void	init_buf(t_game *game)
 {
 	int	i;
 	int	j;

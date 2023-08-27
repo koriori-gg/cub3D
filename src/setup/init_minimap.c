@@ -1,6 +1,6 @@
 #include "cub3d.h"
 
-void	*ft_xpm_to_image(t_game *game, char *str)
+static void	*ft_xpm_to_image(t_game *game, char *str)
 {
 	char	*path;
 	void	*img;
