@@ -23,14 +23,14 @@ static int	calculate_texture_x(t_game *game, t_dda *dda)
 static int	hit_wall_direction(t_dda *dda)
 {
 	if (dda->is_y_collision && dda->step_y == -1)
-		return (0);
+		return (NORTH);
 	if (dda->is_y_collision && dda->step_y == 1)
-		return (1);
+		return (SOUTH);
 	if (!dda->is_y_collision && dda->step_x == -1)
-		return (2);
+		return (WEST);
 	if (!dda->is_y_collision && dda->step_x == 1)
-		return (3);
-	return (0);
+		return (EAST);
+	return (NORTH);
 }
 
 void	save_color(t_game *game, t_dda *dda, t_draw *draw, int x)

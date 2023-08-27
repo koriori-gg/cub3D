@@ -49,6 +49,14 @@ enum e_message
 	MALLOC_ERROR
 };
 
+enum e_direction
+{
+	NORTH,
+	SOUTH,
+	WEST,
+	EAST
+};
+
 typedef struct s_map_info {
 	char	*north_texture;
 	char	*south_texture;

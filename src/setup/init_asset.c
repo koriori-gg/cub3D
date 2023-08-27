@@ -27,10 +27,10 @@ void	load_texture(t_game *game)
 {
 	t_image	img;
 
-	load_image(game, game->texture[0], game->map_info.north_texture, &img);
-	load_image(game, game->texture[1], game->map_info.south_texture, &img);
-	load_image(game, game->texture[2], game->map_info.west_texture, &img);
-	load_image(game, game->texture[3], game->map_info.east_texture, &img);
+	load_image(game, game->texture[NORTH], game->map_info.north_texture, &img);
+	load_image(game, game->texture[SOUTH], game->map_info.south_texture, &img);
+	load_image(game, game->texture[WEST], game->map_info.west_texture, &img);
+	load_image(game, game->texture[EAST], game->map_info.east_texture, &img);
 }
 
 void	init_buf(t_game *game)
