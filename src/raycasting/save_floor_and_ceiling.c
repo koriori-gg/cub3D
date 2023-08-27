@@ -4,7 +4,7 @@ void	save_ceiling(t_game *game, t_draw *draw, int x)
 {
 	int		y;
 	int		color;
-	int 	*ceiling_color;
+	int		*ceiling_color;
 
 	ceiling_color = game->map_info.ceiling_color;
 	y = 0;
@@ -20,7 +20,7 @@ void	save_floor(t_game *game, t_draw *draw, int x)
 {
 	int		y;
 	int		color;
-	int 	*floor_color;
+	int		*floor_color;
 
 	floor_color = game->map_info.floor_color;
 	y = draw->draw_end;
