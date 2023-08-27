@@ -21,10 +21,6 @@ void	init_minimap(t_game *game)
 	game->minimap.img_width = 5;
 	game->minimap.img_height = 5;
 	game->minimap.tile_img[0] = ft_xpm_to_image(game, "floor.xpm");
-	game->minimap.tile_img[1] = ft_xpm_to_image(game, "red.xpm");
-	game->minimap.tile_img[2] = ft_xpm_to_image(game, "green.xpm");
-	game->minimap.tile_img[3] = ft_xpm_to_image(game, "blue.xpm");
-	game->minimap.tile_img[4] = ft_xpm_to_image(game, "white.xpm");
-	game->minimap.tile_img[5] = ft_xpm_to_image(game, "yellow.xpm");
-	game->minimap.tile_img[6] = ft_xpm_to_image(game, "player.xpm");
+	game->minimap.tile_img[1] = ft_xpm_to_image(game, "blue.xpm");
+	game->minimap.tile_img[2] = ft_xpm_to_image(game, "player.xpm");
 }

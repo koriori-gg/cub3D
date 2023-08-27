@@ -75,7 +75,7 @@ typedef struct s_image{
 }				t_image;
 
 typedef struct s_minimap {
-	void		*tile_img[7];
+	void		*tile_img[3];
 	int			img_height;
 	int			img_width;
 }				t_minimap;

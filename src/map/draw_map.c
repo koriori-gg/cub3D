@@ -1,6 +1,6 @@
 #include "cub3d.h"
 
-void	draw_player_direction(t_game *game, int img_width, int img_height)
+static void	draw_player_direction(t_game *game, int img_width, int img_height)
 {
 	int			x;
 	int			y;
@@ -30,7 +30,7 @@ static void	draw_player(t_game *game, int x, int y)
 	img_width = WIDTH + x * game->minimap.img_width;
 	img_height = y * game->minimap.img_height;
 	mlx_put_image_to_window(game->mlx, game->win,
-		game->minimap.tile_img[6], img_width, img_height);
+		game->minimap.tile_img[2], img_width, img_height);
 	draw_player_direction(game, img_width, img_height);
 }
 
