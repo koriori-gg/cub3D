@@ -7,6 +7,8 @@ void	load_image(t_game *game, int *texture, char *path, t_image *img)
 
 	img->img = mlx_xpm_file_to_image(game->mlx, path,
 			&img->width, &img->height);
+	if (!img->img)
+		error_exit(READ_ERROR);
 	img->data = (int *)mlx_get_data_addr(img->img, &img->bpp,
 			&img->size_line, &img->endian);
 	y = 0;
