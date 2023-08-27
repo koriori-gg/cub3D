@@ -10,7 +10,6 @@ MLX = $(MLX_DIR)/libmlx.a \
 SRCS = src/main.c \
 	src/error/exit_with_error.c \
 	src/error/open_cub_file.c \
-	src/error/error.c \
 	src/error/free.c \
 	src/utils/print_debug.c \
 	src/setup/init_struct.c \

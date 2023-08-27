@@ -7,12 +7,12 @@ void	*ft_xpm_to_image(t_game *game, char *str)
 
 	path = ft_strjoin("textures/5/", str);
 	if (!path)
-		error_exit(MALLOC_ERROR);
+		exit_with_error("calloc error");
 	img = mlx_xpm_file_to_image(game->mlx, path, &game->minimap.img_width,
 			&game->minimap.img_height);
 	free(path);
 	if (!img)
-		error_exit(IMAGE_ERROR);
+		exit_with_error("Invalid file extension");
 	return (img);
 }
 

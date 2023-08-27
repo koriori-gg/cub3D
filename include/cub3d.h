@@ -33,22 +33,6 @@
 # define DIR_RIGHT		2
 # define DIR_LEFT		3
 
-enum e_message
-{
-	AGUMENT_ERROR,
-	EMPTY_ERROR,
-	EXTENTION_ERROR,
-	READ_ERROR,
-	MINIMUM_ERROR,
-	UNNESSESARY_ERROR,
-	SURROUND_ERROR,
-	RECTANGLE_ERROR,
-	UNABLETOGOAL_ERROR,
-	IMAGE_ERROR,
-	MLX_ERROR,
-	MALLOC_ERROR
-};
-
 enum e_direction
 {
 	NORTH,
@@ -134,7 +118,6 @@ typedef struct s_game{
 }				t_game;
 
 //error
-void		error_exit(int signal);
 void		print_error(char *str);
 void		exit_with_error(char *message);
 int			close_game(t_game *game);
