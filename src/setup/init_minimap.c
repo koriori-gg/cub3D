@@ -8,7 +8,7 @@ static void	*ft_xpm_to_image(t_game *game, char *str)
 	path = ft_strjoin("textures/5/", str);
 	if (!path)
 		exit_with_error("calloc error");
-	img = ft_mlx_xpm_file_to_image(game->mlx, path, &game->minimap.img_width,
+	img = try_mlx_xpm_file_to_image(game->mlx, path, &game->minimap.img_width,
 			&game->minimap.img_height);
 	free(path);
 	if (!img)

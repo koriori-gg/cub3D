@@ -5,11 +5,11 @@ static void	load_image(t_game *game, int *texture, char *path, t_image *img)
 	int	y;
 	int	x;
 
-	img->img = ft_mlx_xpm_file_to_image(game->mlx, path,
+	img->img = try_mlx_xpm_file_to_image(game->mlx, path,
 			&img->width, &img->height);
 	if (!img->img)
 		exit_with_error("Invalid asset file path");
-	img->data = (int *)ft_mlx_get_data_addr(img->img, &img->bpp,
+	img->data = (int *)try_mlx_get_data_addr(img->img, &img->bpp,
 			&img->size_line, &img->endian);
 	y = 0;
 	while (y < img->height)

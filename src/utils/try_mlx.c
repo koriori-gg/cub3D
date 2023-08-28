@@ -1,6 +1,6 @@
 #include "cub3d.h"
 
-void	*ft_mlx_init(void)
+void	*try_mlx_init(void)
 {
 	void	*mlx;
 
@@ -10,7 +10,7 @@ void	*ft_mlx_init(void)
 	return (mlx);
 }
 
-void	*ft_mlx_new_window(void *mlx_ptr, int size_x, int size_y, char *title)
+void	*try_mlx_new_window(void *mlx_ptr, int size_x, int size_y, char *title)
 {
 	void	*win;
 
@@ -20,7 +20,7 @@ void	*ft_mlx_new_window(void *mlx_ptr, int size_x, int size_y, char *title)
 	return (win);
 }
 
-void	*ft_mlx_new_image(void *mlx_ptr, int width, int height)
+void	*try_mlx_new_image(void *mlx_ptr, int width, int height)
 {
 	void	*img;
 
@@ -30,7 +30,7 @@ void	*ft_mlx_new_image(void *mlx_ptr, int width, int height)
 	return (img);
 }
 
-void	*ft_mlx_xpm_file_to_image(void *mlx_ptr, char *filename,
+void	*try_mlx_xpm_file_to_image(void *mlx_ptr, char *filename,
 	int *width, int *height)
 {
 	void	*img;
@@ -41,7 +41,7 @@ void	*ft_mlx_xpm_file_to_image(void *mlx_ptr, char *filename,
 	return (img);
 }
 
-char	*ft_mlx_get_data_addr(void *img_ptr, int *bits_per_pixel,
+char	*try_mlx_get_data_addr(void *img_ptr, int *bits_per_pixel,
 	int *size_line, int *endian)
 {
 	char	*data;

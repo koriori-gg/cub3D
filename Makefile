@@ -12,7 +12,7 @@ SRCS = src/main.c \
 	src/error/open_cub_file.c \
 	src/error/free.c \
 	src/utils/print_debug.c \
-	src/utils/ft_mlx.c \
+	src/utils/try_mlx.c \
 	src/setup/init_struct.c \
 	src/setup/init_minimap.c \
 	src/setup/init_asset.c \

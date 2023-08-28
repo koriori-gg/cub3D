@@ -35,12 +35,12 @@ void	init_game(t_game *game, int fd)
 	game->map_info = get_map_info(fd);
 	print_info(game->map_info);
 	init_player(game);
-	game->mlx = ft_mlx_init();
+	game->mlx = try_mlx_init();
 	init_minimap(game);
 	init_texture(game);
-	game->win = ft_mlx_new_window(game->mlx, WIDTH
+	game->win = try_mlx_new_window(game->mlx, WIDTH
 			+ get_minimap_size(game), HEIGHT, "cub3D");
-	game->img.img = ft_mlx_new_image(game->mlx, WIDTH, HEIGHT);
+	game->img.img = try_mlx_new_image(game->mlx, WIDTH, HEIGHT);
 	game->img.data = (int *)mlx_get_data_addr(game->img.img,
 			&game->img.bpp, &game->img.size_line, &game->img.endian);
 }
