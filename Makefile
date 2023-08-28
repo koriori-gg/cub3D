@@ -23,7 +23,7 @@ SRCS = src/main.c \
 	src/raycasting/save_floor_and_ceiling.c \
 	src/raycasting/draw.c \
 	src/map/validate_map.c \
-	src/map/check_player_count.c \
+	src/map/ensure_valid_object_structure.c \
 	src/map/ensure_map_enclosed_by_wall.c \
 	src/map/draw_map.c \
 	src/map/get_map_info.c \
