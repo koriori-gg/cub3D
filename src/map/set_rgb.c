@@ -6,7 +6,7 @@
 /*   By: ihashimo <ihashimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 19:56:19 by ihashimo          #+#    #+#             */
-/*   Updated: 2023/08/29 19:56:19 by ihashimo         ###   ########.fr       */
+/*   Updated: 2023/08/29 21:05:04 by ihashimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,17 @@ static char	**extract_rgb(char *line)
 
 	i = 1;
 	if (line[i] == '\0' || line[i] == '\n')
-		exit_with_error("no info\n");
+		exit_with_error("The texture paths (NO, SO, WE, EA) must be provided");
 	while (ft_isspace(line[i]))
 		i++;
 	rgb = ft_split(&line[i], ',');
 	if (!rgb)
-		exit_with_error("ft_split failed\n");
+		exit_with_error("Memory allocation error");
 	i = 0;
 	while (rgb[i])
 		i++;
 	if (i != 3)
-		exit_with_error("num of dot error\n");
+		exit_with_error("RGB values should be entered in the format R,G,B");
 	return (rgb);
 }
 
@@ -47,12 +47,12 @@ static int	*parse_rgb(char **rgb)
 		while (rgb[i][j] != '\0' && rgb[i][j] != '\n')
 		{
 			if (!ft_isdigit(rgb[i][j]))
-				exit_with_error("not digit\n");
+				exit_with_error("RGB values must be numeric");
 			j++;
 		}
 		color_info[i] = ft_atoi(rgb[i]);
 		if (color_info[i] < 0 || color_info[i] > 255)
-			exit_with_error("not in range\n");
+			exit_with_error("RGB values must be between 0 and 255");
 		i++;
 	}
 	free_double_pointer(rgb);

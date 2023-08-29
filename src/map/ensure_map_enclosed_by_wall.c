@@ -6,7 +6,7 @@
 /*   By: ihashimo <ihashimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 14:29:12 by ihashimo          #+#    #+#             */
-/*   Updated: 2023/08/29 19:51:49 by ihashimo         ###   ########.fr       */
+/*   Updated: 2023/08/29 21:06:08 by ihashimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static char	**copy_map(char **map)
 	height = 0;
 	while (map[height])
 		height++;
-	map_copy = calloc(height + 1, sizeof(char *));
+	map_copy = try_calloc(height + 1, sizeof(char *));
 	if (!map_copy)
 		return (NULL);
 	i = 0;
@@ -39,7 +39,7 @@ static void	search_reachable_grids(char **map, int height, int i, int j)
 {
 	if (i < 0 || j < 0 || i >= height
 		|| j >= (int)ft_strlen(map[i]) || ft_isspace(map[i][j]))
-		exit_with_error("The map is not enclosed by wall\n");
+		exit_with_error("The map must be surrounded by wall");
 	if (map[i][j] == '1' || map[i][j] == '2')
 		return ;
 	map[i][j] = '2';
