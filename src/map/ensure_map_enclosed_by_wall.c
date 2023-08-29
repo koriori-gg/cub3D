@@ -25,7 +25,8 @@ static char	**copy_map(char **map)
 
 static void	search_reachable_grids(char **map, int height, int i, int j)
 {
-	if (i < 0 || j < 0 || i >= height || j >= (int)ft_strlen(map[i]) || ft_isspace(map[i][j]))
+	if (i < 0 || j < 0 || i >= height
+		|| j >= (int)ft_strlen(map[i]) || ft_isspace(map[i][j]))
 		exit_with_error("The map is not enclosed by wall\n");
 	if (map[i][j] == '1' || map[i][j] == '2')
 		return ;
