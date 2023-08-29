@@ -52,7 +52,7 @@ void	save_color(t_game *game, t_dda *dda, t_draw *draw, int x)
 		draw->texture_start_y += draw->step;
 		color = game->texture[draw->hit_wall_texture]
 		[TEXTURE_HEIGHT * (texture_y + 1) - draw->texture_x - 1];
-		game->buf[y][x] = color;
+		game->field_of_view_pixel_color[y][x] = color;
 		y++;
 	}
 	save_floor(game, draw, x);

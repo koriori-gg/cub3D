@@ -41,6 +41,13 @@ enum e_direction
 	EAST
 };
 
+enum e_minimap_grid
+{
+	FLOOR,
+	WALL,
+	PLAYER
+};
+
 typedef struct s_map_info {
 	char	*north_texture;
 	char	*south_texture;
@@ -76,9 +83,9 @@ typedef struct s_image{
 }				t_image;
 
 typedef struct s_minimap {
-	void		*tile_img[3];
-	int			img_height;
-	int			img_width;
+	void		*grid_img[3];
+	int			height;
+	int			width;
 }				t_minimap;
 
 typedef struct s_dda{
@@ -112,7 +119,7 @@ typedef struct s_game{
 	t_player	*player;
 	t_map_info	map_info;
 	t_minimap	minimap;
-	int			buf[HEIGHT][WIDTH];
+	int			field_of_view_pixel_color[HEIGHT][WIDTH];
 	int			**texture;
 	t_image		img;
 }				t_game;

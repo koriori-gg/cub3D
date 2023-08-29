@@ -11,7 +11,8 @@ void	draw_field_of_view(t_game *game)
 		x = 0;
 		while (x < WIDTH)
 		{
-			game->img.data[y * WIDTH + x] = game->buf[y][x];
+			game->img.data[y * WIDTH + x]
+				= game->field_of_view_pixel_color[y][x];
 			x++;
 		}
 		y++;

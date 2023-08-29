@@ -11,7 +11,7 @@ void	save_ceiling(t_game *game, t_draw *draw, int x)
 	color = ceiling_color[0] << 16 | ceiling_color[1] << 8 | ceiling_color[2];
 	while (y < draw->draw_start)
 	{
-		game->buf[y][x] = color;
+		game->field_of_view_pixel_color[y][x] = color;
 		y++;
 	}
 }
@@ -27,7 +27,7 @@ void	save_floor(t_game *game, t_draw *draw, int x)
 	color = floor_color[0] << 16 | floor_color[1] << 8 | floor_color[2];
 	while (y < HEIGHT)
 	{
-		game->buf[y][x] = color;
+		game->field_of_view_pixel_color[y][x] = color;
 		y++;
 	}
 }

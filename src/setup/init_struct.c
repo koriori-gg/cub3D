@@ -26,7 +26,7 @@ static int	get_minimap_size(t_game *game)
 			max_length = ft_strlen(map[i]) - 1;
 		i++;
 	}
-	return (max_length * game->minimap.img_width);
+	return (max_length * game->minimap.width);
 }
 
 void	init_game(t_game *game, int fd)
