@@ -11,6 +11,8 @@ static char	*extract_texture_path(char *line)
 	while (ft_isspace(line[i]))
 		i++;
 	texture_info = ft_substr(&line[i], 0, ft_strlen(&line[i]) - 1);
+	if (!texture_info)
+		exit_with_error("Memory allocation error");
 	return (texture_info);
 }
 
