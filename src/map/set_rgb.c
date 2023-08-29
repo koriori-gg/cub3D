@@ -27,9 +27,7 @@ static int	*parse_rgb(char **rgb)
 	int		i;
 	int		j;
 
-	color_info = ft_calloc(3, sizeof(int));
-	if (!color_info)
-		exit_with_error("calloc error");
+	color_info = try_calloc(3, sizeof(int));
 	i = 0;
 	while (rgb[i])
 	{
