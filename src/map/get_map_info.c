@@ -29,6 +29,9 @@ static int	*parse_rgb(char **rgb)
 	while (rgb[i])
 	{
 		j = 0;
+
+		if (rgb[i][j] == '\0' || rgb[i][j] == '\n')
+			exit_with_error("RGB error");
 		while (rgb[i][j] != '\0' && rgb[i][j] != '\n')
 		{
 			if (!ft_isdigit(rgb[i][j]))
