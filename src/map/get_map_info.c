@@ -29,7 +29,8 @@ t_map_info	get_map_info(int fd)
 
 	line = get_next_line(fd);
 	if (!line)
-		exit_with_error("Please make sure the file contains the necessary data");
+		exit_with_error
+			("Please make sure the file contains the necessary data");
 	init_map_info(&map_info);
 	while (1)
 	{
