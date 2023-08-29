@@ -189,8 +189,6 @@ t_map_info	get_map_info(int fd)
 	init_map_info(&map_info);
 	while (1)
 	{
-		if (!line)
-			break ;
 		if (is_texture(line))
 			set_texture_path(&map_info, line);
 		else if (is_color(line))
