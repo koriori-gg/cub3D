@@ -89,30 +89,112 @@ static char	**extract_map(int fd, char *first_line, int i)
 	return (map);
 }
 
+bool	are_completed_texture_and_color(t_map_info *map_info)
+{
+	if (!map_info->north_texture)
+		return (false);
+	if (!map_info->south_texture)
+		return (false);
+	if (!map_info->west_texture)
+		return (false);
+	if (!map_info->east_texture)
+		return (false);
+	if (!map_info->floor_color)
+		return (false);
+	if (!map_info->ceiling_color)
+		return (false);
+	return (true);
+}
+
+bool	is_texture(char *line)
+{
+	if (ft_strncmp(line, "NO", 2) == 0)
+		return (true);
+	else if (ft_strncmp(line, "SO", 2) == 0)
+		return (true);
+	else if (ft_strncmp(line, "WE", 2) == 0)
+		return (true);
+	else if (ft_strncmp(line, "EA", 2) == 0)
+		return (true);
+	return (false);
+}
+
+bool	is_color(char *line)
+{
+	if (ft_strncmp(line, "F", 1) == 0)
+		return (true);
+	else if (ft_strncmp(line, "C", 1) == 0)
+		return (true);
+	return (false);
+}
+void	set_texture_path(t_map_info *map_info, char *line)
+{
+		if (ft_strncmp(line, "NO", 2) == 0)
+		{
+			if (map_info->north_texture)
+				free(map_info->north_texture);
+			map_info->north_texture = extract_texture_path(line);
+		}
+		else if (ft_strncmp(line, "SO", 2) == 0)
+		{
+			if (map_info->south_texture)
+				free(map_info->south_texture);
+			map_info->south_texture = extract_texture_path(line);
+		}
+		else if (ft_strncmp(line, "WE", 2) == 0)
+		{
+			if (map_info->west_texture)
+				free(map_info->west_texture);
+			map_info->west_texture = extract_texture_path(line);
+		}
+		else if (ft_strncmp(line, "EA", 2) == 0)
+		{
+			if (map_info->east_texture)
+				free(map_info->east_texture);
+			map_info->east_texture = extract_texture_path(line);
+		}
+}
+
+void	set_rbg(t_map_info *map_info, char *line)
+{
+		if (ft_strncmp(line, "F", 1) == 0)
+		{
+			if (map_info->floor_color)
+				free(map_info->floor_color);
+			map_info->floor_color = parse_rgb(extract_rgb(line));
+		}
+		else if (ft_strncmp(line, "C", 1) == 0)
+		{
+			if (map_info->ceiling_color)
+				free(map_info->ceiling_color);
+			map_info->ceiling_color = parse_rgb(extract_rgb(line));
+		}
+}
+
+void	set_map(t_map_info *map_info, char *line, int fd)
+{
+		if (!are_completed_texture_and_color(map_info))
+			exit_with_error("Please ensure that all required map details are provided");
+		map_info->map = extract_map(fd, line, 1);
+}
+
 t_map_info	get_map_info(int fd)
 {
 	char		*line;
 	t_map_info	map_info;
 
+	init_map_info(&map_info);
 	while (1)
 	{
 		line = get_next_line(fd);
 		if (!line)
 			break ;
-		if (ft_strncmp(line, "NO", 2) == 0)
-			map_info.north_texture = extract_texture_path(line);
-		else if (ft_strncmp(line, "SO", 2) == 0)
-			map_info.south_texture = extract_texture_path(line);
-		else if (ft_strncmp(line, "WE", 2) == 0)
-			map_info.west_texture = extract_texture_path(line);
-		else if (ft_strncmp(line, "EA", 2) == 0)
-			map_info.east_texture = extract_texture_path(line);
-		else if (ft_strncmp(line, "F", 1) == 0)
-			map_info.floor_color = parse_rgb(extract_rgb(line));
-		else if (ft_strncmp(line, "C", 1) == 0)
-			map_info.ceiling_color = parse_rgb(extract_rgb(line));
+		if (is_texture(line))
+			set_texture_path(&map_info, line);
+		else if (is_color(line))
+			set_rbg(&map_info, line);
 		else if (ft_strncmp(line, "\n", 1) != 0)
-			map_info.map = extract_map(fd, line, 1);
+			set_map(&map_info, line, fd);
 		free(line);
 	}
 	return (map_info);

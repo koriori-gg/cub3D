@@ -137,6 +137,7 @@ void		init_minimap(t_game *game);
 void		init_texture(t_game *game);
 void		init_player(t_game *game);
 int			open_cub_file(char *path);
+void		init_map_info(t_map_info *map_info);
 t_map_info	get_map_info(int fd);
 void		ensure_valid_object_structure(char **map);
 void		ensure_map_enclosed_by_wall(char **map);
