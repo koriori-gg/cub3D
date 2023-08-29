@@ -22,14 +22,11 @@ static int	*parse_rgb(char **rgb)
 	int		i;
 	int		j;
 
-	color_info = ft_calloc(3, sizeof(int));
-	if (!color_info)
-		exit_with_error("calloc error");
+	color_info = try_calloc(3, sizeof(int));
 	i = 0;
 	while (rgb[i])
 	{
 		j = 0;
-
 		if (rgb[i][j] == '\0' || rgb[i][j] == '\n')
 			exit_with_error("RGB error");
 		while (rgb[i][j] != '\0' && rgb[i][j] != '\n')
@@ -76,7 +73,7 @@ static char	**extract_map(int fd, char *first_line, int i)
 	line = get_next_line(fd);
 	if (!line)
 	{
-		map = ft_calloc(i + 1, sizeof(char *));
+		map = try_calloc(i + 1, sizeof(char *));
 		if (ft_strchr(first_line, '\0'))
 			map[0] = ft_substr(first_line, 0, ft_strlen(first_line) - 1);
 		else

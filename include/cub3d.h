@@ -157,7 +157,7 @@ int			input_key(int keycode, t_game *game);
 // debug
 void		print_info(t_map_info info);
 void		print_two_dimensional_array(char **array);
-//ft mlx
+// utils
 void		*try_mlx_init(void);
 void		*try_mlx_new_window(void *mlx_ptr, int size_x,
 				int size_y, char *title);
@@ -166,5 +166,6 @@ void		*try_mlx_xpm_file_to_image(void *mlx_ptr, char *filename,
 				int *width, int *height);
 char		*try_mlx_get_data_addr(void *image_ptr, int *bits_per_pixel,
 				int *size_line, int *endian);
+void		*try_calloc(size_t n, size_t size);
 
 #endif
