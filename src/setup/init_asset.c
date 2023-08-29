@@ -75,16 +75,13 @@ void	init_texture(t_game *game)
 	int	j;
 
 	init_field_of_view_pixel_color(game);
-	game->texture = (int **)ft_calloc(4, sizeof(int *));
-	if (!game->texture)
-		return ;
+	game->texture = (int **)try_calloc(4, sizeof(int *));
 	i = 0;
 	while (i < 4)
 	{
-		game->texture[i] = (int *)ft_calloc
+		game->texture[i] = (int *)try_calloc
 			(TEXTURE_HEIGHT * TEXTURE_WIDTH, sizeof(int));
-		if (!game->texture[i++])
-			return ;
+		i++;
 	}
 	i = 0;
 	while (i < 4)

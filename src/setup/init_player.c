@@ -6,7 +6,7 @@
 /*   By: ihashimo <ihashimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 14:29:58 by ihashimo          #+#    #+#             */
-/*   Updated: 2023/08/29 14:29:59 by ihashimo         ###   ########.fr       */
+/*   Updated: 2023/08/29 19:48:52 by ihashimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,7 @@ static void	extract_player_info(t_game *game)
 
 void	init_player(t_game *game)
 {
-	game->player = (t_player *)ft_calloc(1, sizeof(t_player));
-	if (!game->player)
-		exit_with_error("Memory allocation error");
+	game->player = (t_player *)try_calloc(1, sizeof(t_player));
 	extract_player_info(game);
 	game->player->move_speed = 0.05;
 	game->player->rotation_speed = 0.05;

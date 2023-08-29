@@ -24,6 +24,7 @@ SRCS = src/main.c \
 	src/error/open_cub_file.c \
 	src/error/free.c \
 	src/utils/try_mlx.c \
+	src/utils/try_calloc.c \
 	src/setup/init_struct.c \
 	src/setup/init_minimap.c \
 	src/setup/init_asset.c \
@@ -39,6 +40,9 @@ SRCS = src/main.c \
 	src/map/ensure_valid_object_structure.c \
 	src/map/ensure_map_enclosed_by_wall.c \
 	src/map/get_map_info.c \
+	src/map/set_texture_path.c \
+	src/map/set_rgb.c \
+	src/map/set_map.c \
 	src/map/input_key.c \
 
 OBJS = $(SRCS:%.c=%.o)

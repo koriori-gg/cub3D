@@ -1,11 +1,8 @@
-NO ./path_to_the_north_texture
+NO textures/wall/north.xpm
 SO textures/wall/south.xpm
 WE textures/wall/west.xpm
 EA textures/wall/east.xpm
+
 F 220,100,0
 C 225,30,0
 
-11111
-10001
-10N01
-11111
