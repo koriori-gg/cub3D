@@ -57,7 +57,7 @@ void	init_player(t_game *game)
 {
 	game->player = (t_player *)ft_calloc(1, sizeof(t_player));
 	if (!game->player)
-		exit_with_error("calloc error");
+		exit_with_error("Memory allocation error");
 	extract_player_info(game);
 	game->player->move_speed = 0.05;
 	game->player->rotation_speed = 0.05;

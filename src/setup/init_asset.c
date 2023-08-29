@@ -8,7 +8,7 @@ static void	load_image(t_game *game, int *texture, char *path, t_image *image)
 	image->image = try_mlx_xpm_file_to_image(game->mlx, path,
 			&image->width, &image->height);
 	if (!image->image)
-		exit_with_error("Invalid asset file path");
+		exit_with_error("The provided path for the texture image is not valid");
 	image->data = (int *)try_mlx_get_data_addr(image->image, &image->bpp,
 			&image->size_line, &image->endian);
 	y = 0;

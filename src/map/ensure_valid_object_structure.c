@@ -36,7 +36,7 @@ void	ensure_valid_object_structure(char **map)
 	{
 		j = 0;
 		if (!has_valid_object_in_line(map[i]))
-			exit_with_error("Invalid object on the map\n");
+			exit_with_error("The map can only contain 01NSWE");
 		while (map[i][j] != '\0')
 		{
 			if (is_player(map[i][j]))
@@ -46,5 +46,5 @@ void	ensure_valid_object_structure(char **map)
 		i++;
 	}
 	if (player_count != 1)
-		exit_with_error("Only one player is allowed on the map\n");
+		exit_with_error("map contains only one player's starting position(N/S/W/E)");
 }

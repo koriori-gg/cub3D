@@ -27,7 +27,7 @@ int	main(int argc, char **argv)
 	int		fd;
 
 	if (argc != 2)
-		exit_with_error("invalid input");
+		exit_with_error("Usage: ./cub3D maps/OK/subject.cub");
 	fd = open_cub_file(argv[1]);
 	init_game(&game, fd);
 	mlx_hook(game.win, X_EVENT_KEY_PRESS, 1L << 0, &input_key, &game);

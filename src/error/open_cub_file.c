@@ -17,9 +17,9 @@ int	open_cub_file(char *path)
 	int	fd;
 
 	if (!is_valid_filename(path))
-		exit_with_error("invalid filename");
+		exit_with_error("Please use a file with the .cub extension");
 	fd = open(path, O_RDONLY);
 	if (fd == -1)
-		exit_with_error("open file failed");
+		exit_with_error("Please ensure the file exists and the path is valid");
 	return (fd);
 }

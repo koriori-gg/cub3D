@@ -7,7 +7,7 @@ static char	*extract_texture_path(char *line)
 
 	i = 2;
 	if (line[i] == '\0' || line[i] == '\n')
-		exit_with_error("no info\n");
+		exit_with_error("The texture paths (NO, SO, WE, EA) must be provided\n");
 	while (ft_isspace(line[i]))
 		i++;
 	texture_info = ft_substr(&line[i], 0, ft_strlen(&line[i]) - 1);
@@ -22,7 +22,7 @@ static int	*parse_rgb(char **rgb)
 
 	color_info = ft_calloc(3, sizeof(int));
 	if (!color_info)
-		exit_with_error("calloc error");
+		exit_with_error("Memory allocation error");
 	i = 0;
 	while (rgb[i])
 	{
@@ -30,12 +30,12 @@ static int	*parse_rgb(char **rgb)
 		while (rgb[i][j] != '\0' && rgb[i][j] != '\n')
 		{
 			if (!ft_isdigit(rgb[i][j]))
-				exit_with_error("not digit\n");
+				exit_with_error("RGB values must be numeric");
 			j++;
 		}
 		color_info[i] = ft_atoi(rgb[i]);
 		if (color_info[i] < 0 || color_info[i] > 255)
-			exit_with_error("not in range\n");
+			exit_with_error("RGB values must be between 0 and 255");
 		i++;
 	}
 	free_double_pointer(rgb);
@@ -49,17 +49,17 @@ static char	**extract_rgb(char *line)
 
 	i = 1;
 	if (line[i] == '\0' || line[i] == '\n')
-		exit_with_error("no info\n");
+		exit_with_error("Missing RGB Values");
 	while (ft_isspace(line[i]))
 		i++;
 	rgb = ft_split(&line[i], ',');
 	if (!rgb)
-		exit_with_error("ft_split failed\n");
+		exit_with_error("Memory allocation error");
 	i = 0;
 	while (rgb[i])
 		i++;
 	if (i != 3)
-		exit_with_error("num of dot error\n");
+		exit_with_error("RGB values should be entered in the format R,G,B");
 	return (rgb);
 }
 
@@ -77,7 +77,7 @@ static char	**extract_map(int fd, char *first_line, int i)
 		else
 			map[0] = ft_strdup(first_line);
 		if (!map[0])
-			exit_with_error("calloc error");
+			exit_with_error("Memory allocation error");
 		return (map);
 	}
 	map = extract_map(fd, first_line, i + 1);
