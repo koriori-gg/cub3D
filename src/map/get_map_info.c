@@ -87,6 +87,8 @@ static char	**extract_map(int fd, char *first_line, int i)
 		map[i] = ft_substr(line, 0, ft_strlen(line) - 1);
 	else
 		map[i] = ft_strdup(line);
+	if (!map[i])
+		exit_with_error("Memory allocation error");
 	free(line);
 	return (map);
 }
