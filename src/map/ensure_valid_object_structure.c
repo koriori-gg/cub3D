@@ -6,7 +6,7 @@
 /*   By: ihashimo <ihashimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 14:29:15 by ihashimo          #+#    #+#             */
-/*   Updated: 2023/08/29 19:51:47 by ihashimo         ###   ########.fr       */
+/*   Updated: 2023/08/29 19:56:41 by ihashimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,5 +64,6 @@ void	ensure_valid_object_structure(char **map)
 		i++;
 	}
 	if (player_count != 1)
-		exit_with_error("map contains only one player's starting position(N/S/W/E)");
+		exit_with_error
+			("map contains only one player's starting position(N/S/W/E)");
 }
