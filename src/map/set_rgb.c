@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_rgb.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ihashimo <ihashimo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sokuno <sokuno@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 19:56:19 by ihashimo          #+#    #+#             */
-/*   Updated: 2023/08/29 21:05:04 by ihashimo         ###   ########.fr       */
+/*   Updated: 2023/08/29 21:14:12 by sokuno           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ static int	*parse_rgb(char **rgb)
 	while (rgb[i])
 	{
 		j = 0;
+		if (rgb[i][j] != '\0' || rgb[i][j] != '\0')
+			exit_with_error("RGB values must be entered in format R,G,B");
 		while (rgb[i][j] != '\0' && rgb[i][j] != '\n')
 		{
 			if (!ft_isdigit(rgb[i][j]))
