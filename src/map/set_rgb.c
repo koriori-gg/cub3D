@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_rgb.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sokuno <sokuno@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ihashimo <ihashimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 19:56:19 by ihashimo          #+#    #+#             */
-/*   Updated: 2023/08/29 21:14:12 by sokuno           ###   ########.fr       */
+/*   Updated: 2023/08/29 21:40:33 by ihashimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static int	*parse_rgb(char **rgb)
 	while (rgb[i])
 	{
 		j = 0;
-		if (rgb[i][j] != '\0' || rgb[i][j] != '\0')
+		if (rgb[i][j] == '\0' || rgb[i][j] == '\n')
 			exit_with_error("RGB values must be entered in format R,G,B");
 		while (rgb[i][j] != '\0' && rgb[i][j] != '\n')
 		{
@@ -66,13 +66,13 @@ void	set_rbg(t_map_info *map_info, char *line)
 	if (ft_strncmp(line, "F", 1) == 0)
 	{
 		if (map_info->floor_color)
-			free(map_info->floor_color);
+			exit_with_error("Please make sure to avoid duplicate RGB");
 		map_info->floor_color = parse_rgb(extract_rgb(line));
 	}
 	else if (ft_strncmp(line, "C", 1) == 0)
 	{
 		if (map_info->ceiling_color)
-			free(map_info->ceiling_color);
+			exit_with_error("Please make sure to avoid duplicate RGB");
 		map_info->ceiling_color = parse_rgb(extract_rgb(line));
 	}
 }
