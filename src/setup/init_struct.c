@@ -33,7 +33,7 @@ void	init_game(t_game *game, int fd)
 {
 	init_map_info(&game->map_info);
 	game->map_info = get_map_info(fd);
-	print_info(game->map_info);
+	validate_map(game->map_info.map);
 	init_player(game);
 	game->mlx = try_mlx_init();
 	init_minimap(game);
