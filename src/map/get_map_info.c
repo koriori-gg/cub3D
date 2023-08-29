@@ -45,5 +45,7 @@ t_map_info	get_map_info(int fd)
 		if (!line)
 			break ;
 	}
+	if (!map_info.map)
+		exit_with_error("Please ensure that the file contains map");
 	return (map_info);
 }
