@@ -106,7 +106,7 @@ bool	are_completed_texture_and_color(t_map_info *map_info)
 	return (true);
 }
 
-bool	is_texture(char *line)
+bool	is_texture_path(char *line)
 {
 	if (ft_strncmp(line, "NO", 2) == 0)
 		return (true);
@@ -119,7 +119,7 @@ bool	is_texture(char *line)
 	return (false);
 }
 
-bool	is_color(char *line)
+bool	is_rgb(char *line)
 {
 	if (ft_strncmp(line, "F", 1) == 0)
 		return (true);
@@ -189,9 +189,9 @@ t_map_info	get_map_info(int fd)
 	init_map_info(&map_info);
 	while (1)
 	{
-		if (is_texture(line))
+		if (is_texture_path(line))
 			set_texture_path(&map_info, line);
-		else if (is_color(line))
+		else if (is_rgb(line))
 			set_rbg(&map_info, line);
 		else if (ft_strncmp(line, "\n", 1) != 0)
 			set_map(&map_info, line, fd);
