@@ -183,10 +183,12 @@ t_map_info	get_map_info(int fd)
 	char		*line;
 	t_map_info	map_info;
 
+	line = get_next_line(fd);
+	if (!line)
+		exit_with_error("Please make sure the file contains the necessary data");
 	init_map_info(&map_info);
 	while (1)
 	{
-		line = get_next_line(fd);
 		if (!line)
 			break ;
 		if (is_texture(line))
@@ -196,6 +198,9 @@ t_map_info	get_map_info(int fd)
 		else if (ft_strncmp(line, "\n", 1) != 0)
 			set_map(&map_info, line, fd);
 		free(line);
+		line = get_next_line(fd);
+		if (!line)
+			break ;
 	}
 	return (map_info);
 }
