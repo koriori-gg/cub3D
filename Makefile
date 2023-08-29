@@ -6,7 +6,7 @@
 #    By: ihashimo <ihashimo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/29 14:30:24 by ihashimo          #+#    #+#              #
-#    Updated: 2023/08/29 14:30:24 by ihashimo         ###   ########.fr        #
+#    Updated: 2023/08/29 14:31:07 by ihashimo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,6 @@ SRCS = src/main.c \
 	src/error/exit_with_error.c \
 	src/error/open_cub_file.c \
 	src/error/free.c \
-	src/utils/print_debug.c \
 	src/utils/try_mlx.c \
 	src/setup/init_struct.c \
 	src/setup/init_minimap.c \
