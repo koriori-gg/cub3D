@@ -58,7 +58,6 @@ void	init_texture(t_game *game)
 	int	i;
 	int	j;
 
-	game->re_buf = 0;
 	init_buf(game);
 	game->texture = (int **)ft_calloc(4, sizeof(int *));
 	if (!game->texture)

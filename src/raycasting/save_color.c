@@ -5,7 +5,7 @@ static int	calculate_texture_x(t_game *game, t_dda *dda)
 	double	wall_x;
 	int		texture_x;
 
-	if (dda->is_y_collision == 0)
+	if (!dda->is_y_collision)
 		wall_x = game->player->position_y
 			+ dda->perpendicular_distance * dda->ray_direction_y;
 	else
@@ -13,9 +13,9 @@ static int	calculate_texture_x(t_game *game, t_dda *dda)
 			+ dda->perpendicular_distance * dda->ray_direction_x;
 	wall_x -= floor(wall_x);
 	texture_x = (int)(wall_x * (double)TEXTURE_WIDTH);
-	if (dda->is_y_collision == 0 && dda->ray_direction_x > 0)
+	if (!dda->is_y_collision && dda->ray_direction_x > 0)
 		texture_x = TEXTURE_WIDTH - texture_x - 1;
-	if (dda->is_y_collision == 1 && dda->ray_direction_y < 0)
+	if (dda->is_y_collision && dda->ray_direction_y < 0)
 		texture_x = TEXTURE_WIDTH - texture_x - 1;
 	return (texture_x);
 }
@@ -39,21 +39,20 @@ void	save_color(t_game *game, t_dda *dda, t_draw *draw, int x)
 	int	color;
 	int	texture_y;
 
-	draw->texture_num = hit_wall_direction(dda);
+	draw->hit_wall_texture = hit_wall_direction(dda);
 	draw->texture_x = calculate_texture_x(game, dda);
 	draw->step = 1.0 * TEXTURE_HEIGHT / draw->line_height;
-	draw->texture_position = (draw->draw_start - HEIGHT / 2
+	draw->texture_start_y = (draw->draw_start - HEIGHT / 2
 			+ draw->line_height / 2) * draw->step;
-	y = draw->draw_start;
 	save_ceiling(game, draw, x);
+	y = draw->draw_start;
 	while (y < draw->draw_end)
 	{
-		texture_y = (int)draw->texture_position & (TEXTURE_HEIGHT - 1);
-		draw->texture_position += draw->step;
-		color = game->texture[draw->texture_num]
+		texture_y = (int)draw->texture_start_y & (TEXTURE_HEIGHT - 1);
+		draw->texture_start_y += draw->step;
+		color = game->texture[draw->hit_wall_texture]
 		[TEXTURE_HEIGHT * (texture_y + 1) - draw->texture_x - 1];
 		game->buf[y][x] = color;
-		game->re_buf = 1;
 		y++;
 	}
 	save_floor(game, draw, x);

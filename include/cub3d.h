@@ -99,9 +99,9 @@ typedef struct s_draw{
 	int		line_height;
 	int		draw_start;
 	int		draw_end;
-	int		texture_num;
+	int		hit_wall_texture;
 	int		texture_x;
-	double	texture_position;
+	double	texture_start_y;
 	double	step;
 }				t_draw;
 
@@ -114,7 +114,6 @@ typedef struct s_game{
 	int			buf[HEIGHT][WIDTH];
 	int			**texture;
 	t_image		img;
-	int			re_buf;
 }				t_game;
 
 //error
