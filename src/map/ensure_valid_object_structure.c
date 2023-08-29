@@ -6,7 +6,7 @@
 /*   By: ihashimo <ihashimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 14:29:15 by ihashimo          #+#    #+#             */
-/*   Updated: 2023/08/29 19:56:41 by ihashimo         ###   ########.fr       */
+/*   Updated: 2023/08/29 20:44:36 by ihashimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	ensure_valid_object_structure(char **map)
 			if (is_player(map[i][j]))
 				player_count++;
 			else if (!is_floor_or_wall(map[i][j]))
-				exit_with_error("Invalid object on the map\n");
+				exit_with_error("Invalid object on the map");
 			j++;
 		}
 		i++;
