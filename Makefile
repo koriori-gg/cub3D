@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: ihashimo <ihashimo@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2023/08/29 14:30:24 by ihashimo          #+#    #+#              #
+#    Updated: 2023/08/29 14:31:07 by ihashimo         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 NAME = cub3D
 
 LIBFT_DIR = libft
@@ -11,7 +23,6 @@ SRCS = src/main.c \
 	src/error/exit_with_error.c \
 	src/error/open_cub_file.c \
 	src/error/free.c \
-	src/utils/print_debug.c \
 	src/utils/try_mlx.c \
 	src/utils/try_calloc.c \
 	src/setup/init_struct.c \

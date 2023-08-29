@@ -1,10 +1,16 @@
-#include "cub3d.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ihashimo <ihashimo@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/29 14:30:10 by ihashimo          #+#    #+#             */
+/*   Updated: 2023/08/29 14:31:54 by ihashimo         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-__attribute__((destructor))
-void	destructor(void)
-{
-	system("leaks -q cub3D");
-}
+#include "cub3d.h"
 
 int	close_game(t_game *game)
 {
@@ -27,7 +33,7 @@ int	main(int argc, char **argv)
 	int		fd;
 
 	if (argc != 2)
-		exit_with_error("invalid input");
+		exit_with_error("Usage: ./cub3D maps/OK/subject.cub");
 	fd = open_cub_file(argv[1]);
 	init_game(&game, fd);
 	mlx_hook(game.win, X_EVENT_KEY_PRESS, 1L << 0, &input_key, &game);

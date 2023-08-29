@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_struct.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ihashimo <ihashimo@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/29 14:30:01 by ihashimo          #+#    #+#             */
+/*   Updated: 2023/08/29 19:55:09 by ihashimo         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 void	init_map_info(t_map_info *map_info)
@@ -23,7 +35,7 @@ static int	get_minimap_size(t_game *game)
 	while (map[i])
 	{
 		if (max_length < (int)ft_strlen(map[i]))
-			max_length = ft_strlen(map[i]) - 1;
+			max_length = ft_strlen(map[i]);
 		i++;
 	}
 	return (max_length * game->minimap.width);

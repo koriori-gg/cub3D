@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   try_mlx.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ihashimo <ihashimo@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/29 14:30:08 by ihashimo          #+#    #+#             */
+/*   Updated: 2023/08/29 14:30:08 by ihashimo         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 void	*try_mlx_init(void)
@@ -37,7 +49,7 @@ void	*try_mlx_xpm_file_to_image(void *mlx_ptr, char *filename,
 
 	image = mlx_xpm_file_to_image(mlx_ptr, filename, width, height);
 	if (!image)
-		exit_with_error("mlx error");
+		exit_with_error("The path for the .xpm image is incorrect");
 	return (image);
 }
 

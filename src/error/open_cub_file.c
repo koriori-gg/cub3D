@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   open_cub_file.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ihashimo <ihashimo@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/29 14:29:06 by ihashimo          #+#    #+#             */
+/*   Updated: 2023/08/29 14:29:06 by ihashimo         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 static bool	is_valid_filename(char *path)
@@ -17,9 +29,9 @@ int	open_cub_file(char *path)
 	int	fd;
 
 	if (!is_valid_filename(path))
-		exit_with_error("invalid filename");
+		exit_with_error("Please use a file with the .cub extension");
 	fd = open(path, O_RDONLY);
 	if (fd == -1)
-		exit_with_error("open file failed");
+		exit_with_error("Please ensure the file exists and the path is valid");
 	return (fd);
 }
