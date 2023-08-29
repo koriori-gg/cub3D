@@ -73,7 +73,7 @@ typedef struct s_player {
 }				t_player;
 
 typedef struct s_image{
-	void	*img;
+	void	*image;
 	int		*data;
 	int		size_line;
 	int		bpp;
@@ -83,7 +83,7 @@ typedef struct s_image{
 }				t_image;
 
 typedef struct s_minimap {
-	void		*grid_img[3];
+	void		*grid_image[3];
 	int			height;
 	int			width;
 }				t_minimap;
@@ -121,7 +121,7 @@ typedef struct s_game{
 	t_minimap	minimap;
 	int			field_of_view_pixel_color[HEIGHT][WIDTH];
 	int			**texture;
-	t_image		img;
+	t_image		image;
 }				t_game;
 
 //error
@@ -164,7 +164,7 @@ void		*try_mlx_new_window(void *mlx_ptr, int size_x,
 void		*try_mlx_new_image(void *mlx_ptr, int width, int height);
 void		*try_mlx_xpm_file_to_image(void *mlx_ptr, char *filename,
 				int *width, int *height);
-char		*try_mlx_get_data_addr(void *img_ptr, int *bits_per_pixel,
+char		*try_mlx_get_data_addr(void *image_ptr, int *bits_per_pixel,
 				int *size_line, int *endian);
 
 #endif

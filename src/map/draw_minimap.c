@@ -30,7 +30,7 @@ static void	draw_player(t_game *game, int x, int y)
 	width = WIDTH + x * game->minimap.width;
 	height = y * game->minimap.height;
 	mlx_put_image_to_window(game->mlx, game->win,
-		game->minimap.grid_img[PLAYER], width, height);
+		game->minimap.grid_image[PLAYER], width, height);
 	draw_player_direction(game, width, height);
 }
 
@@ -43,10 +43,10 @@ static void	draw_image(t_game *game, char c, int x, int y)
 	height = y * game->minimap.height;
 	if (c == '0')
 		mlx_put_image_to_window(game->mlx, game->win,
-			game->minimap.grid_img[FLOOR], width, height);
+			game->minimap.grid_image[FLOOR], width, height);
 	else if (ft_strchr("1", c))
 		mlx_put_image_to_window(game->mlx, game->win,
-			game->minimap.grid_img[WALL], width, height);
+			game->minimap.grid_image[WALL], width, height);
 }
 
 void	draw_minimap(t_game *game)

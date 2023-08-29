@@ -1,38 +1,42 @@
 #include "cub3d.h"
 
-static void	load_image(t_game *game, int *texture, char *path, t_image *img)
+static void	load_image(t_game *game, int *texture, char *path, t_image *image)
 {
 	int	y;
 	int	x;
 
-	img->img = try_mlx_xpm_file_to_image(game->mlx, path,
-			&img->width, &img->height);
-	if (!img->img)
+	image->image = try_mlx_xpm_file_to_image(game->mlx, path,
+			&image->width, &image->height);
+	if (!image->image)
 		exit_with_error("Invalid asset file path");
-	img->data = (int *)try_mlx_get_data_addr(img->img, &img->bpp,
-			&img->size_line, &img->endian);
+	image->data = (int *)try_mlx_get_data_addr(image->image, &image->bpp,
+			&image->size_line, &image->endian);
 	y = 0;
-	while (y < img->height)
+	while (y < image->height)
 	{
 		x = 0;
-		while (x < img->width)
+		while (x < image->width)
 		{
-			texture[img->width * y + x] = img->data[img->width * y + x];
+			texture[image->width * y + x] = image->data[image->width * y + x];
 			x++;
 		}
 		y++;
 	}
-	mlx_destroy_image(game->mlx, img->img);
+	mlx_destroy_image(game->mlx, image->image);
 }
 
 static void	load_texture(t_game *game)
 {
-	t_image	img;
+	t_image	image;
 
-	load_image(game, game->texture[NORTH], game->map_info.north_texture, &img);
-	load_image(game, game->texture[SOUTH], game->map_info.south_texture, &img);
-	load_image(game, game->texture[WEST], game->map_info.west_texture, &img);
-	load_image(game, game->texture[EAST], game->map_info.east_texture, &img);
+	load_image(game, game->texture[NORTH],
+		game->map_info.north_texture, &image);
+	load_image(game, game->texture[SOUTH],
+		game->map_info.south_texture, &image);
+	load_image(game, game->texture[WEST],
+		game->map_info.west_texture, &image);
+	load_image(game, game->texture[EAST],
+		game->map_info.east_texture, &image);
 }
 
 static void	init_field_of_view_pixel_color(t_game *game)
