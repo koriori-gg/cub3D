@@ -6,7 +6,7 @@
 /*   By: ihashimo <ihashimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 14:30:30 by ihashimo          #+#    #+#             */
-/*   Updated: 2023/08/29 14:30:31 by ihashimo         ###   ########.fr       */
+/*   Updated: 2023/08/29 22:10:10 by ihashimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@
 
 # define TEXTURE_WIDTH 64
 # define TEXTURE_HEIGHT 64
-# define WIDTH 960
-# define HEIGHT 540
+# define WIDTH 1920
+# define HEIGHT 1080
 
 # define RGB_RED 0xFF0000
 
