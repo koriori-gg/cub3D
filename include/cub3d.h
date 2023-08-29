@@ -57,6 +57,7 @@ typedef struct s_map_info {
 	int		*floor_color;
 	int		*ceiling_color;
 	char	**map;
+	int		player_count;
 }	t_map_info;
 
 typedef struct s_player {
@@ -140,6 +141,9 @@ void		init_texture(t_game *game);
 void		init_player(t_game *game);
 int			open_cub_file(char *path);
 t_map_info	get_map_info(int fd);
+void		ensure_valid_object_structure(char **map);
+void		ensure_map_enclosed_by_wall(char **map);
+void		validate_map(char **map);
 //calculate
 void		calculate_field_of_view(t_game *game);
 void		prepare_calculate_collision_grid(t_game *game, t_dda *dda, int x);

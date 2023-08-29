@@ -3,7 +3,7 @@
 __attribute__((destructor))
 void	destructor(void)
 {
-	system("leaks -q cub3d");
+	system("leaks -q cub3D");
 }
 
 int	close_game(t_game *game)
@@ -34,4 +34,5 @@ int	main(int argc, char **argv)
 	mlx_hook(game.win, RED_CLOSS, 0, &close_game, &game);
 	mlx_loop_hook(game.mlx, main_loop, &game);
 	mlx_loop(game.mlx);
+	return (0);
 }
