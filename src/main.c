@@ -6,17 +6,11 @@
 /*   By: ihashimo <ihashimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 14:30:10 by ihashimo          #+#    #+#             */
-/*   Updated: 2023/08/29 14:30:11 by ihashimo         ###   ########.fr       */
+/*   Updated: 2023/08/29 14:31:54 by ihashimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-__attribute__((destructor))
-void	destructor(void)
-{
-	system("leaks -q cub3D");
-}
 
 int	close_game(t_game *game)
 {
