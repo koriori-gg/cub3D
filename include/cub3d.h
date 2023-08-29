@@ -88,7 +88,7 @@ typedef struct s_minimap {
 	int			width;
 }				t_minimap;
 
-typedef struct s_dda{
+typedef struct s_dda {
 	double	ray_direction_x;
 	double	ray_direction_y;
 	int		collision_grid_x;
@@ -103,7 +103,7 @@ typedef struct s_dda{
 	bool	is_y_collision;
 }				t_dda;
 
-typedef struct s_draw{
+typedef struct s_draw {
 	int		line_height;
 	int		draw_start;
 	int		draw_end;
@@ -113,7 +113,7 @@ typedef struct s_draw{
 	double	step;
 }				t_draw;
 
-typedef struct s_game{
+typedef struct s_game {
 	void		*mlx;
 	void		*win;
 	t_player	*player;
