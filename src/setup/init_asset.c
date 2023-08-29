@@ -1,43 +1,45 @@
 #include "cub3d.h"
 
-void	load_image(t_game *game, int *texture, char *path, t_image *img)
+static void	load_image(t_game *game, int *texture, char *path, t_image *image)
 {
 	int	y;
 	int	x;
 
-	img->img = mlx_xpm_file_to_image(game->mlx, path,
-			&img->width, &img->height);
-	img->data = (int *)mlx_get_data_addr(img->img, &img->bpp,
-			&img->size_line, &img->endian);
+	image->image = try_mlx_xpm_file_to_image(game->mlx, path,
+			&image->width, &image->height);
+	if (!image->image)
+		exit_with_error("Invalid asset file path");
+	image->data = (int *)try_mlx_get_data_addr(image->image, &image->bpp,
+			&image->size_line, &image->endian);
 	y = 0;
-	while (y < img->height)
+	while (y < image->height)
 	{
 		x = 0;
-		while (x < img->width)
+		while (x < image->width)
 		{
-			texture[img->width * y + x] = img->data[img->width * y + x];
+			texture[image->width * y + x] = image->data[image->width * y + x];
 			x++;
 		}
 		y++;
 	}
-	mlx_destroy_image(game->mlx, img->img);
+	mlx_destroy_image(game->mlx, image->image);
 }
 
-void	load_texture(t_game *game)
+static void	load_texture(t_game *game)
 {
-	t_image	img;
+	t_image	image;
 
-	load_image(game, game->texture[0], "textures/eagle.xpm", &img);
-	load_image(game, game->texture[1], "textures/redbrick.xpm", &img);
-	load_image(game, game->texture[2], "textures/purplestone.xpm", &img);
-	load_image(game, game->texture[3], "textures/greystone.xpm", &img);
-	load_image(game, game->texture[4], "textures/bluestone.xpm", &img);
-	load_image(game, game->texture[5], "textures/mossy.xpm", &img);
-	load_image(game, game->texture[6], "textures/wood.xpm", &img);
-	load_image(game, game->texture[7], "textures/colorstone.xpm", &img);
+	load_image(game, game->texture[NORTH],
+		game->map_info.north_texture, &image);
+	load_image(game, game->texture[SOUTH],
+		game->map_info.south_texture, &image);
+	load_image(game, game->texture[WEST],
+		game->map_info.west_texture, &image);
+	load_image(game, game->texture[EAST],
+		game->map_info.east_texture, &image);
 }
 
-void	init_buf(t_game *game)
+static void	init_field_of_view_pixel_color(t_game *game)
 {
 	int	i;
 	int	j;
@@ -48,7 +50,7 @@ void	init_buf(t_game *game)
 		j = 0;
 		while (j < WIDTH)
 		{
-			game->buf[i][j] = 0;
+			game->field_of_view_pixel_color[i][j] = 0;
 			j++;
 		}
 		i++;
@@ -60,13 +62,12 @@ void	init_texture(t_game *game)
 	int	i;
 	int	j;
 
-	game->re_buf = 0;
-	init_buf(game);
-	game->texture = (int **)ft_calloc(9, sizeof(int *));
+	init_field_of_view_pixel_color(game);
+	game->texture = (int **)ft_calloc(4, sizeof(int *));
 	if (!game->texture)
 		return ;
 	i = 0;
-	while (i < 9)
+	while (i < 4)
 	{
 		game->texture[i] = (int *)ft_calloc
 			(TEXTURE_HEIGHT * TEXTURE_WIDTH, sizeof(int));
@@ -74,7 +75,7 @@ void	init_texture(t_game *game)
 			return ;
 	}
 	i = 0;
-	while (i < 9)
+	while (i < 4)
 	{
 		j = 0;
 		while (j < TEXTURE_HEIGHT * TEXTURE_WIDTH)

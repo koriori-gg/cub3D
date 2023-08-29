@@ -16,7 +16,7 @@ static void	free_texture(int **texture)
 	int	i;
 
 	i = 0;
-	while (i < 9)
+	while (i < 4)
 	{
 		free(texture[i]);
 		i++;

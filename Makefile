@@ -10,22 +10,23 @@ MLX = $(MLX_DIR)/libmlx.a \
 SRCS = src/main.c \
 	src/error/exit_with_error.c \
 	src/error/open_cub_file.c \
-	src/error/error.c \
 	src/error/free.c \
 	src/utils/print_debug.c \
+	src/utils/try_mlx.c \
 	src/setup/init_struct.c \
 	src/setup/init_minimap.c \
 	src/setup/init_asset.c \
 	src/setup/init_player.c \
-	src/raycasting/calculate.c \
-	src/raycasting/calculate_dda.c \
+	src/raycasting/calculate_field_of_view.c \
+	src/raycasting/calculate_collision_grid.c \
 	src/raycasting/save_color.c \
+	src/raycasting/prepare_map_draw.c \
 	src/raycasting/save_floor_and_ceiling.c \
-	src/raycasting/draw.c \
+	src/raycasting/draw_field_of_view.c \
+	src/map/draw_minimap.c \
 	src/map/validate_map.c \
 	src/map/ensure_valid_object_structure.c \
 	src/map/ensure_map_enclosed_by_wall.c \
-	src/map/draw_map.c \
 	src/map/get_map_info.c \
 	src/map/input_key.c \
 

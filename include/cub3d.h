@@ -33,20 +33,19 @@
 # define DIR_RIGHT		2
 # define DIR_LEFT		3
 
-enum e_message
+enum e_direction
 {
-	AGUMENT_ERROR,
-	EMPTY_ERROR,
-	EXTENTION_ERROR,
-	READ_ERROR,
-	MINIMUM_ERROR,
-	UNNESSESARY_ERROR,
-	SURROUND_ERROR,
-	RECTANGLE_ERROR,
-	UNABLETOGOAL_ERROR,
-	IMAGE_ERROR,
-	MLX_ERROR,
-	MALLOC_ERROR
+	NORTH,
+	SOUTH,
+	WEST,
+	EAST
+};
+
+enum e_minimap_grid
+{
+	FLOOR,
+	WALL,
+	PLAYER
 };
 
 typedef struct s_map_info {
@@ -74,7 +73,7 @@ typedef struct s_player {
 }				t_player;
 
 typedef struct s_image{
-	void	*img;
+	void	*image;
 	int		*data;
 	int		size_line;
 	int		bpp;
@@ -84,9 +83,9 @@ typedef struct s_image{
 }				t_image;
 
 typedef struct s_minimap {
-	void		*tile_img[7];
-	int			img_height;
-	int			img_width;
+	void		*grid_image[3];
+	int			height;
+	int			width;
 }				t_minimap;
 
 typedef struct s_dda{
@@ -108,9 +107,9 @@ typedef struct s_draw{
 	int		line_height;
 	int		draw_start;
 	int		draw_end;
-	int		texture_num;
+	int		hit_wall_texture;
 	int		texture_x;
-	double	texture_position;
+	double	texture_start_y;
 	double	step;
 }				t_draw;
 
@@ -120,14 +119,12 @@ typedef struct s_game{
 	t_player	*player;
 	t_map_info	map_info;
 	t_minimap	minimap;
-	int			buf[HEIGHT][WIDTH];
+	int			field_of_view_pixel_color[HEIGHT][WIDTH];
 	int			**texture;
-	t_image		img;
-	int			re_buf;
+	t_image		image;
 }				t_game;
 
 //error
-void		error_exit(int signal);
 void		print_error(char *str);
 void		exit_with_error(char *message);
 int			close_game(t_game *game);
@@ -160,5 +157,14 @@ int			input_key(int keycode, t_game *game);
 // debug
 void		print_info(t_map_info info);
 void		print_two_dimensional_array(char **array);
+//ft mlx
+void		*try_mlx_init(void);
+void		*try_mlx_new_window(void *mlx_ptr, int size_x,
+				int size_y, char *title);
+void		*try_mlx_new_image(void *mlx_ptr, int width, int height);
+void		*try_mlx_xpm_file_to_image(void *mlx_ptr, char *filename,
+				int *width, int *height);
+char		*try_mlx_get_data_addr(void *image_ptr, int *bits_per_pixel,
+				int *size_line, int *endian);
 
 #endif
