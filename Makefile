@@ -29,6 +29,9 @@ SRCS = src/main.c \
 	src/map/ensure_valid_object_structure.c \
 	src/map/ensure_map_enclosed_by_wall.c \
 	src/map/get_map_info.c \
+	src/map/set_texture_path.c \
+	src/map/set_rgb.c \
+	src/map/set_map.c \
 	src/map/input_key.c \
 
 OBJS = $(SRCS:%.c=%.o)
