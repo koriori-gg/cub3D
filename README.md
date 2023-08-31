@@ -17,8 +17,8 @@
 Creating an FPS game using ray casting.
 ## 🛠️ Usage
 ### Requirements
-Linux
-X Window System
+- Linux
+- X Window System
 
 ### Instructions
 ```
